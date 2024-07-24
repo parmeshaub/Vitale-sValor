@@ -1,11 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Dependencies.NCalc;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
-using UnityEngine.VFX;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,8 +20,8 @@ public class PlayerController : MonoBehaviour
     private bool isMovementPressed;
     private bool isSprintPressed;
     [SerializeField] private float rotationFactorPerFrame = 15.0f;
-    [SerializeField] private float sprintMultiplier = 3.0f;
-    [SerializeField] private float moveSpeed = 5.0f;
+    [SerializeField] private float sprintMultiplier = 2.0f;
+    [SerializeField] private float moveSpeed = 4.0f;
 
     //Gravity
     [SerializeField] private float gravity = -9.8f;
@@ -35,6 +31,7 @@ public class PlayerController : MonoBehaviour
     int isWalkingHash;
     int isSprintHash;
     int isJumpingHash;
+    int isDashingHash;
 
     //Jump
     bool isJumpPressed = false;
@@ -43,6 +40,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxJumpTime = 0.75f;
     private bool isJumping = false;
     private bool isJumpAnimating = false;
+
+    //Dash
+    private bool isDashing = false;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashMultiplier = 6f;
 
     private void Awake()
     {
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
         isWalkingHash = Animator.StringToHash("isWalking");
         isSprintHash = Animator.StringToHash("isRunning");
         isJumpingHash = Animator.StringToHash("isJumping");
+        isDashingHash = Animator.StringToHash("isDashing");
 
         playerInput.Gameplay.Move.started += OnMovementInput;
         playerInput.Gameplay.Move.canceled += OnMovementInput;
@@ -61,6 +64,8 @@ public class PlayerController : MonoBehaviour
         playerInput.Gameplay.Sprint.canceled += OnRun;
         playerInput.Gameplay.Jump.started += OnJump;
         playerInput.Gameplay.Jump.canceled += OnJump;
+        playerInput.Gameplay.Dash.started += OnDash;
+        playerInput.Gameplay.Dash.canceled += OnDash;
 
         SetupJumpVariables();
     }
@@ -148,10 +153,18 @@ public class PlayerController : MonoBehaviour
     private void HandleRotation()
     {
         Vector3 positionToLookAt;
-
-        positionToLookAt.x = cameraRelativeMovement.x;
-        positionToLookAt.y = 0.0f;
-        positionToLookAt.z = cameraRelativeMovement.z;
+        if (isDashing)
+        {
+            positionToLookAt.x = appliedMovement.x;
+            positionToLookAt.y = 0.0f;
+            positionToLookAt.z = appliedMovement.z;
+        }
+        else
+        {
+            positionToLookAt.x = cameraRelativeMovement.x;
+            positionToLookAt.y = 0.0f;
+            positionToLookAt.z = cameraRelativeMovement.z;
+        }
 
         Quaternion currentRotation = transform.rotation;
 
@@ -193,7 +206,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (isSprintPressed)
+        if (isDashing)
+        {
+            appliedMovement = transform.forward * (moveSpeed * dashMultiplier);
+        }
+        else if (isSprintPressed)
         {
             appliedMovement.x = currentMovement.x * sprintMultiplier;
             appliedMovement.z = currentMovement.z * sprintMultiplier;
@@ -204,10 +221,25 @@ public class PlayerController : MonoBehaviour
             appliedMovement.z = currentMovement.z;
         }
 
-        cameraRelativeMovement = ConvertToCameraSpace(appliedMovement);
-        characterController.Move(cameraRelativeMovement * Time.deltaTime);
+        if(isDashing)
+        {
+            characterController.Move(appliedMovement * Time.deltaTime);
+        }
+        else
+        {
+            cameraRelativeMovement = ConvertToCameraSpace(appliedMovement);
+            characterController.Move(cameraRelativeMovement * Time.deltaTime);
+        }
     }
 
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        animator.SetBool(isDashingHash, true);
+        yield return new WaitForSeconds(dashDuration);
+        animator.SetBool(isDashingHash, false);
+        isDashing = false;
+    }
 
     void OnRun(InputAction.CallbackContext context)
     {
@@ -217,6 +249,14 @@ public class PlayerController : MonoBehaviour
     void OnJump(InputAction.CallbackContext context)
     {
         isJumpPressed = context.ReadValueAsButton();
+    }
+
+    void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.started && !isDashing)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     Vector3 ConvertToCameraSpace(Vector3 vectorToRotate)
@@ -241,4 +281,6 @@ public class PlayerController : MonoBehaviour
         return vectorRotatedToCameraSpace;
 
     }
+
+   
 }

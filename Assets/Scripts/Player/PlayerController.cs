@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using SHG.AnimatorCoder;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : AnimatorCoder
 {
-    PlayerInput playerInput;
-    private CharacterController characterController;
-    private Animator animator;
+    private PlayerInputManager playerInputManager;
 
+    private PlayerInput playerInput;
+    private CharacterController characterController;
 
     private Vector2 currentMovementInput;
     private Vector3 currentMovement;
     private Vector3 currentSprintMovement;
     private Vector3 appliedMovement;
     private Vector3 cameraRelativeMovement;
-
 
     private bool isMovementPressed;
     private bool isSprintPressed;
@@ -26,12 +26,6 @@ public class PlayerController : MonoBehaviour
     //Gravity
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float groundedGravity = -.05f;
-
-    // Store optimized setter/getter parameter IDs.
-    int isWalkingHash;
-    int isSprintHash;
-    int isJumpingHash;
-    int isDashingHash;
 
     //Jump
     bool isJumpPressed = false;
@@ -46,16 +40,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashMultiplier = 6f;
 
+    //Combat
+    private PlayerCombat playerCombat;
+    private bool isAttacking = false;
+
     private void Awake()
     {
-        playerInput = new PlayerInput();
-        characterController = GetComponent<CharacterController>();
-        animator = GetComponentInChildren<Animator>();
+        playerInputManager = GetComponent<PlayerInputManager>();
+        playerCombat = GetComponent<PlayerCombat>();
 
-        isWalkingHash = Animator.StringToHash("isWalking");
-        isSprintHash = Animator.StringToHash("isRunning");
-        isJumpingHash = Animator.StringToHash("isJumping");
-        isDashingHash = Animator.StringToHash("isDashing");
+        playerInput = playerInputManager.playerInput;
+        characterController = GetComponent<CharacterController>();
 
         playerInput.Gameplay.Move.started += OnMovementInput;
         playerInput.Gameplay.Move.canceled += OnMovementInput;
@@ -69,25 +64,35 @@ public class PlayerController : MonoBehaviour
 
         SetupJumpVariables();
     }
-
+    private void Start()
+    {
+        Initialize();
+    }
     void Update()
     {
-
-        HandleRotation();
         HandleAnimation();
-        HandleMovement();
-        HandleGravity();
-        HandleJump();
+        if (!isAttacking)
+        {
+            HandleRotation();
+            HandleMovement();
+            HandleGravity();
+            HandleJump();
+        }
     }
 
     private void OnEnable()
     {
         playerInput.Gameplay.Enable();
+        playerCombat.attackStart.AddListener(AttackStart);
+        playerCombat.attackEnd.AddListener(AttackEnd);
+        
     }
 
     private void OnDisable()
     {
         playerInput?.Gameplay.Disable();
+        playerCombat.attackStart.RemoveListener(AttackStart);
+        playerCombat.attackEnd.RemoveListener(AttackEnd);
     }
 
     private void OnMovementInput(InputAction.CallbackContext context)
@@ -148,6 +153,8 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool(isSprintHash, false);
         }
+
+
     }
 
     private void HandleRotation()
@@ -166,14 +173,19 @@ public class PlayerController : MonoBehaviour
             positionToLookAt.z = cameraRelativeMovement.z;
         }
 
-        Quaternion currentRotation = transform.rotation;
-
-        if (isMovementPressed)
+        // Check if the positionToLookAt vector is zero
+        if (positionToLookAt != Vector3.zero)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
+            Quaternion currentRotation = transform.rotation;
+
+            if (isMovementPressed)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+                transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
+            }
         }
     }
+
 
     private void HandleGravity()
     {
@@ -281,6 +293,17 @@ public class PlayerController : MonoBehaviour
         return vectorRotatedToCameraSpace;
 
     }
+   void AttackStart()
+    {
+        isAttacking = true;
+    }
+    void AttackEnd()
+    {
+        isAttacking = false;
+    }
 
-   
+    public override void DefaultAnimation(int layer)
+    {
+        throw new System.NotImplementedException();
+    }
 }

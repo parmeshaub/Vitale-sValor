@@ -62,6 +62,87 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LightAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd4e9af7-9a2e-4979-aeb8-6568a94ab998"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""cb2d5b90-834f-4b27-b8f2-ba3354ab1bb5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Block"",
+                    ""type"": ""Button"",
+                    ""id"": ""f28774f3-5630-4062-a3b3-28b2c138d37d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Magic1"",
+                    ""type"": ""Button"",
+                    ""id"": ""6df84c94-7149-4f2e-8aac-ff72ebe19558"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Magic2"",
+                    ""type"": ""Button"",
+                    ""id"": ""3357cdb5-ca04-47a9-a2ee-b7e390426b0e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Magic3"",
+                    ""type"": ""Button"",
+                    ""id"": ""57b6995f-40a9-46a8-940f-70f7fd748273"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Magic4"",
+                    ""type"": ""Button"",
+                    ""id"": ""faa8d45d-8135-4656-850f-8f2eb81af585"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TargetEnemy"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6669124-9fa8-4e90-8655-ee370c7702f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchMagicSpellSlots"",
+                    ""type"": ""Button"",
+                    ""id"": ""79b717d6-81e5-445a-a3f2-9903f3cb0ff7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +233,133 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""637dd4fa-2547-42c3-8239-d3f183b07de5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a8f81cf-a1d8-4d88-9ca6-4ee4e20b99d0"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeavyAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""971342f6-8147-4675-9853-332977ce583f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Block"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c5c2b0a-7071-4ae0-80b4-69be53137000"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Magic1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e69ec243-607e-4f21-a47f-a8aa1c883641"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Magic2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92881e6d-e196-4c0a-9e13-0777640e9a10"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Magic3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""546e29d9-e010-448a-a50e-ca74562923d7"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Magic4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""721fac2f-8fe3-4941-970c-42d5edd53b5a"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TargetEnemy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43abc20b-50fe-410d-bd66-5ce3e85d2689"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMagicSpellSlots"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""23512479-a02b-4f15-9741-4b9ef7ee6af3"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4ca48e5-63a0-4cbe-b25e-af4347ee9285"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c6d1351d-0999-433e-b8ad-ca88fe0a3485"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +372,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
+        m_Gameplay_LightAttack = m_Gameplay.FindAction("LightAttack", throwIfNotFound: true);
+        m_Gameplay_HeavyAttack = m_Gameplay.FindAction("HeavyAttack", throwIfNotFound: true);
+        m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
+        m_Gameplay_Magic1 = m_Gameplay.FindAction("Magic1", throwIfNotFound: true);
+        m_Gameplay_Magic2 = m_Gameplay.FindAction("Magic2", throwIfNotFound: true);
+        m_Gameplay_Magic3 = m_Gameplay.FindAction("Magic3", throwIfNotFound: true);
+        m_Gameplay_Magic4 = m_Gameplay.FindAction("Magic4", throwIfNotFound: true);
+        m_Gameplay_TargetEnemy = m_Gameplay.FindAction("TargetEnemy", throwIfNotFound: true);
+        m_Gameplay_SwitchMagicSpellSlots = m_Gameplay.FindAction("SwitchMagicSpellSlots", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +449,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Sprint;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Dash;
+    private readonly InputAction m_Gameplay_LightAttack;
+    private readonly InputAction m_Gameplay_HeavyAttack;
+    private readonly InputAction m_Gameplay_Block;
+    private readonly InputAction m_Gameplay_Magic1;
+    private readonly InputAction m_Gameplay_Magic2;
+    private readonly InputAction m_Gameplay_Magic3;
+    private readonly InputAction m_Gameplay_Magic4;
+    private readonly InputAction m_Gameplay_TargetEnemy;
+    private readonly InputAction m_Gameplay_SwitchMagicSpellSlots;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
@@ -237,6 +466,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
+        public InputAction @LightAttack => m_Wrapper.m_Gameplay_LightAttack;
+        public InputAction @HeavyAttack => m_Wrapper.m_Gameplay_HeavyAttack;
+        public InputAction @Block => m_Wrapper.m_Gameplay_Block;
+        public InputAction @Magic1 => m_Wrapper.m_Gameplay_Magic1;
+        public InputAction @Magic2 => m_Wrapper.m_Gameplay_Magic2;
+        public InputAction @Magic3 => m_Wrapper.m_Gameplay_Magic3;
+        public InputAction @Magic4 => m_Wrapper.m_Gameplay_Magic4;
+        public InputAction @TargetEnemy => m_Wrapper.m_Gameplay_TargetEnemy;
+        public InputAction @SwitchMagicSpellSlots => m_Wrapper.m_Gameplay_SwitchMagicSpellSlots;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +496,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @LightAttack.started += instance.OnLightAttack;
+            @LightAttack.performed += instance.OnLightAttack;
+            @LightAttack.canceled += instance.OnLightAttack;
+            @HeavyAttack.started += instance.OnHeavyAttack;
+            @HeavyAttack.performed += instance.OnHeavyAttack;
+            @HeavyAttack.canceled += instance.OnHeavyAttack;
+            @Block.started += instance.OnBlock;
+            @Block.performed += instance.OnBlock;
+            @Block.canceled += instance.OnBlock;
+            @Magic1.started += instance.OnMagic1;
+            @Magic1.performed += instance.OnMagic1;
+            @Magic1.canceled += instance.OnMagic1;
+            @Magic2.started += instance.OnMagic2;
+            @Magic2.performed += instance.OnMagic2;
+            @Magic2.canceled += instance.OnMagic2;
+            @Magic3.started += instance.OnMagic3;
+            @Magic3.performed += instance.OnMagic3;
+            @Magic3.canceled += instance.OnMagic3;
+            @Magic4.started += instance.OnMagic4;
+            @Magic4.performed += instance.OnMagic4;
+            @Magic4.canceled += instance.OnMagic4;
+            @TargetEnemy.started += instance.OnTargetEnemy;
+            @TargetEnemy.performed += instance.OnTargetEnemy;
+            @TargetEnemy.canceled += instance.OnTargetEnemy;
+            @SwitchMagicSpellSlots.started += instance.OnSwitchMagicSpellSlots;
+            @SwitchMagicSpellSlots.performed += instance.OnSwitchMagicSpellSlots;
+            @SwitchMagicSpellSlots.canceled += instance.OnSwitchMagicSpellSlots;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -274,6 +539,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @LightAttack.started -= instance.OnLightAttack;
+            @LightAttack.performed -= instance.OnLightAttack;
+            @LightAttack.canceled -= instance.OnLightAttack;
+            @HeavyAttack.started -= instance.OnHeavyAttack;
+            @HeavyAttack.performed -= instance.OnHeavyAttack;
+            @HeavyAttack.canceled -= instance.OnHeavyAttack;
+            @Block.started -= instance.OnBlock;
+            @Block.performed -= instance.OnBlock;
+            @Block.canceled -= instance.OnBlock;
+            @Magic1.started -= instance.OnMagic1;
+            @Magic1.performed -= instance.OnMagic1;
+            @Magic1.canceled -= instance.OnMagic1;
+            @Magic2.started -= instance.OnMagic2;
+            @Magic2.performed -= instance.OnMagic2;
+            @Magic2.canceled -= instance.OnMagic2;
+            @Magic3.started -= instance.OnMagic3;
+            @Magic3.performed -= instance.OnMagic3;
+            @Magic3.canceled -= instance.OnMagic3;
+            @Magic4.started -= instance.OnMagic4;
+            @Magic4.performed -= instance.OnMagic4;
+            @Magic4.canceled -= instance.OnMagic4;
+            @TargetEnemy.started -= instance.OnTargetEnemy;
+            @TargetEnemy.performed -= instance.OnTargetEnemy;
+            @TargetEnemy.canceled -= instance.OnTargetEnemy;
+            @SwitchMagicSpellSlots.started -= instance.OnSwitchMagicSpellSlots;
+            @SwitchMagicSpellSlots.performed -= instance.OnSwitchMagicSpellSlots;
+            @SwitchMagicSpellSlots.canceled -= instance.OnSwitchMagicSpellSlots;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -291,11 +583,70 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Newaction;
+    public struct UIActions
+    {
+        private @PlayerInput m_Wrapper;
+        public UIActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_UI_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnLightAttack(InputAction.CallbackContext context);
+        void OnHeavyAttack(InputAction.CallbackContext context);
+        void OnBlock(InputAction.CallbackContext context);
+        void OnMagic1(InputAction.CallbackContext context);
+        void OnMagic2(InputAction.CallbackContext context);
+        void OnMagic3(InputAction.CallbackContext context);
+        void OnMagic4(InputAction.CallbackContext context);
+        void OnTargetEnemy(InputAction.CallbackContext context);
+        void OnSwitchMagicSpellSlots(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

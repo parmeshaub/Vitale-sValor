@@ -78,7 +78,8 @@ namespace SHG.AnimatorCoder
         RAZOR_FANGS,
         VOLLEY,
         GELIDITY,
-        NONE
+        NONE,
+        RESET
     }
 
     /// <summary> Complete list of all animator parameters </summary>

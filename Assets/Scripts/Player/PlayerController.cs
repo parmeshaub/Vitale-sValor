@@ -117,7 +117,7 @@ public class PlayerController : AnimatorCoder
     {
         if (isJumpPressed && characterController.isGrounded)
         {
-            animator.SetBool(isJumpingHash, true);
+            //animator.SetBool(isJumpingHash, true);
             isJumpAnimating = true;
             isJumping = true;
             currentMovement.y = initialJumpVelocity;
@@ -132,7 +132,7 @@ public class PlayerController : AnimatorCoder
 
     private void HandleAnimation()
     {
-        bool isWalking = animator.GetBool(isWalkingHash);
+        /*bool isWalking = animator.GetBool(isWalkingHash);
         bool isSprinting = animator.GetBool(isSprintHash);
 
         if(isMovementPressed && !isWalking)
@@ -153,6 +153,7 @@ public class PlayerController : AnimatorCoder
         {
             animator.SetBool(isSprintHash, false);
         }
+        */
 
 
     }
@@ -196,7 +197,7 @@ public class PlayerController : AnimatorCoder
         {
             if(isJumpAnimating)
             {
-                animator.SetBool(isJumpingHash, false);
+                //animator.SetBool(isJumpingHash, false);
                 isJumpAnimating = false;
             }
             currentMovement.y = groundedGravity;
@@ -247,9 +248,9 @@ public class PlayerController : AnimatorCoder
     private IEnumerator Dash()
     {
         isDashing = true;
-        animator.SetBool(isDashingHash, true);
+        //animator.SetBool(isDashingHash, true);
         yield return new WaitForSeconds(dashDuration);
-        animator.SetBool(isDashingHash, false);
+        //animator.SetBool(isDashingHash, false);
         isDashing = false;
     }
 

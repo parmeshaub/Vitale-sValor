@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using SHG.AnimatorCoder;
 
-public class PlayerController : AnimatorCoder
+public class PlayerController : MonoBehaviour
 {
     private PlayerInputManager playerInputManager;
 
     private PlayerInput playerInput;
-    private CharacterController characterController;
+    public CharacterController characterController;
 
     private Vector2 currentMovementInput;
     private Vector3 currentMovement;
@@ -17,17 +16,17 @@ public class PlayerController : AnimatorCoder
     private Vector3 appliedMovement;
     private Vector3 cameraRelativeMovement;
 
-    private bool isMovementPressed;
-    private bool isSprintPressed;
+    public bool isMovementPressed;
+    public bool isSprintPressed;
     [SerializeField] private float rotationFactorPerFrame = 15.0f;
     [SerializeField] private float sprintMultiplier = 2.0f;
     [SerializeField] private float moveSpeed = 4.0f;
 
-    //Gravity
+    // Gravity
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float groundedGravity = -.05f;
 
-    //Jump
+    // Jump
     bool isJumpPressed = false;
     private float initialJumpVelocity;
     [SerializeField] private float maxJumpHeight = 1.0f;
@@ -35,14 +34,29 @@ public class PlayerController : AnimatorCoder
     private bool isJumping = false;
     private bool isJumpAnimating = false;
 
-    //Dash
+    // Dash
     private bool isDashing = false;
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashMultiplier = 6f;
 
-    //Combat
+    // Combat
     private PlayerCombat playerCombat;
     private bool isAttacking = false;
+
+    // For Animation
+    private Animator animator;
+    private float velocityXZ;
+
+    // Animation Hashes
+    private readonly static int velocityXZHash = Animator.StringToHash("VelocityXZ");
+    private readonly static int isMovementHeldHash = Animator.StringToHash("isMovementHeld");
+    private readonly static int isGroundedHash = Animator.StringToHash("isGrounded");
+    private readonly static int jumpHash = Animator.StringToHash("Jump");
+    private readonly static int dodgeHash = Animator.StringToHash("Dodge_Front");
+    private readonly static int sprintHash = Animator.StringToHash("isSprinting");
+
+    private Coroutine exitCoroutine;
+    private bool isWaitingExit = false;
 
     private void Awake()
     {
@@ -51,6 +65,7 @@ public class PlayerController : AnimatorCoder
 
         playerInput = playerInputManager.playerInput;
         characterController = GetComponent<CharacterController>();
+        animator = GetComponentInChildren<Animator>();
 
         playerInput.Gameplay.Move.started += OnMovementInput;
         playerInput.Gameplay.Move.canceled += OnMovementInput;
@@ -64,10 +79,13 @@ public class PlayerController : AnimatorCoder
 
         SetupJumpVariables();
     }
+
     private void Start()
     {
-        Initialize();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
+
     void Update()
     {
         HandleAnimation();
@@ -83,16 +101,15 @@ public class PlayerController : AnimatorCoder
     private void OnEnable()
     {
         playerInput.Gameplay.Enable();
-        playerCombat.attackStart.AddListener(AttackStart);
-        playerCombat.attackEnd.AddListener(AttackEnd);
-        
+        playerCombat.attackStart.AddListener(CombatModeEnter);
+        playerCombat.attackEnd.AddListener(CombatModeExit);
     }
 
     private void OnDisable()
     {
         playerInput?.Gameplay.Disable();
-        playerCombat.attackStart.RemoveListener(AttackStart);
-        playerCombat.attackEnd.RemoveListener(AttackEnd);
+        playerCombat.attackStart.RemoveListener(CombatModeEnter);
+        playerCombat.attackEnd.RemoveListener(CombatModeExit);
     }
 
     private void OnMovementInput(InputAction.CallbackContext context)
@@ -112,12 +129,11 @@ public class PlayerController : AnimatorCoder
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 
-
     private void HandleJump()
     {
         if (isJumpPressed && characterController.isGrounded)
         {
-            //animator.SetBool(isJumpingHash, true);
+            animator.SetTrigger(jumpHash);
             isJumpAnimating = true;
             isJumping = true;
             currentMovement.y = initialJumpVelocity;
@@ -129,33 +145,13 @@ public class PlayerController : AnimatorCoder
         }
     }
 
-
     private void HandleAnimation()
     {
-        /*bool isWalking = animator.GetBool(isWalkingHash);
-        bool isSprinting = animator.GetBool(isSprintHash);
-
-        if(isMovementPressed && !isWalking)
-        {
-            animator.SetBool(isWalkingHash, true);
-        }
-
-        else if(!isMovementPressed && isWalking)
-        {
-            animator.SetBool(isWalkingHash, false);
-        }
-
-        if((isMovementPressed && isSprintPressed) && !isSprinting)
-        {
-            animator.SetBool(isSprintHash, true);
-        }
-        else if ((!isMovementPressed || !isSprintPressed) && isSprinting)
-        {
-            animator.SetBool(isSprintHash, false);
-        }
-        */
-
-
+        velocityXZ = new Vector3(characterController.velocity.x, 0, characterController.velocity.z).magnitude;
+        animator.SetFloat(velocityXZHash, velocityXZ);
+        animator.SetBool(isMovementHeldHash, isMovementPressed);
+        animator.SetBool(isGroundedHash, characterController.isGrounded);
+        animator.SetBool("isSprinting", isSprintPressed);
     }
 
     private void HandleRotation()
@@ -174,7 +170,6 @@ public class PlayerController : AnimatorCoder
             positionToLookAt.z = cameraRelativeMovement.z;
         }
 
-        // Check if the positionToLookAt vector is zero
         if (positionToLookAt != Vector3.zero)
         {
             Quaternion currentRotation = transform.rotation;
@@ -187,7 +182,6 @@ public class PlayerController : AnimatorCoder
         }
     }
 
-
     private void HandleGravity()
     {
         bool isFalling = currentMovement.y <= 0.0f || !isJumpPressed;
@@ -195,9 +189,8 @@ public class PlayerController : AnimatorCoder
 
         if (characterController.isGrounded)
         {
-            if(isJumpAnimating)
+            if (isJumpAnimating)
             {
-                //animator.SetBool(isJumpingHash, false);
                 isJumpAnimating = false;
             }
             currentMovement.y = groundedGravity;
@@ -234,7 +227,7 @@ public class PlayerController : AnimatorCoder
             appliedMovement.z = currentMovement.z;
         }
 
-        if(isDashing)
+        if (isDashing)
         {
             characterController.Move(appliedMovement * Time.deltaTime);
         }
@@ -248,9 +241,8 @@ public class PlayerController : AnimatorCoder
     private IEnumerator Dash()
     {
         isDashing = true;
-        //animator.SetBool(isDashingHash, true);
+        animator.SetTrigger(dodgeHash);
         yield return new WaitForSeconds(dashDuration);
-        //animator.SetBool(isDashingHash, false);
         isDashing = false;
     }
 
@@ -274,7 +266,6 @@ public class PlayerController : AnimatorCoder
 
     Vector3 ConvertToCameraSpace(Vector3 vectorToRotate)
     {
-
         float currentYValue = vectorToRotate.y;
 
         Vector3 cameraForward = Camera.main.transform.forward;
@@ -292,19 +283,16 @@ public class PlayerController : AnimatorCoder
         Vector3 vectorRotatedToCameraSpace = cameraForwardZProduct + cameraRightXProduct;
         vectorRotatedToCameraSpace.y = currentYValue;
         return vectorRotatedToCameraSpace;
-
     }
-   void AttackStart()
+
+    void CombatModeEnter()
     {
         isAttacking = true;
     }
-    void AttackEnd()
-    {
-        isAttacking = false;
-    }
 
-    public override void DefaultAnimation(int layer)
+    void CombatModeExit()
     {
-        throw new System.NotImplementedException();
+
+        isAttacking = false;
     }
 }

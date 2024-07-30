@@ -1,20 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Name: Lee Zhi Hui, Shaun
+/// Description:
+/// This Script will be used to help manage the Parameters needed for animations.
+/// </summary>
 public class PlayerAnimationManager : MonoBehaviour
 {
-    private Animator animator;
-    [SerializeField] private RuntimeAnimatorController normalController;
-    [SerializeField] private RuntimeAnimatorController combatController;
-
-    void SwitchToNormalController()
-    {
-
-    }
-
-    void SwitchToCombatController()
-    {
-
-    }
+   
 }

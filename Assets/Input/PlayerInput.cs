@@ -143,6 +143,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Unsheath"",
+                    ""type"": ""Button"",
+                    ""id"": ""88f313a3-6774-47dc-8dc0-1deb318d3c4e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -332,6 +341,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchMagicSpellSlots"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b06494c-a4a5-4577-a067-8a7ec4dbb2b0"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Unsheath"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -381,6 +401,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Gameplay_Magic4 = m_Gameplay.FindAction("Magic4", throwIfNotFound: true);
         m_Gameplay_TargetEnemy = m_Gameplay.FindAction("TargetEnemy", throwIfNotFound: true);
         m_Gameplay_SwitchMagicSpellSlots = m_Gameplay.FindAction("SwitchMagicSpellSlots", throwIfNotFound: true);
+        m_Gameplay_Unsheath = m_Gameplay.FindAction("Unsheath", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -458,6 +479,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Magic4;
     private readonly InputAction m_Gameplay_TargetEnemy;
     private readonly InputAction m_Gameplay_SwitchMagicSpellSlots;
+    private readonly InputAction m_Gameplay_Unsheath;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
@@ -475,6 +497,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Magic4 => m_Wrapper.m_Gameplay_Magic4;
         public InputAction @TargetEnemy => m_Wrapper.m_Gameplay_TargetEnemy;
         public InputAction @SwitchMagicSpellSlots => m_Wrapper.m_Gameplay_SwitchMagicSpellSlots;
+        public InputAction @Unsheath => m_Wrapper.m_Gameplay_Unsheath;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -523,6 +546,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SwitchMagicSpellSlots.started += instance.OnSwitchMagicSpellSlots;
             @SwitchMagicSpellSlots.performed += instance.OnSwitchMagicSpellSlots;
             @SwitchMagicSpellSlots.canceled += instance.OnSwitchMagicSpellSlots;
+            @Unsheath.started += instance.OnUnsheath;
+            @Unsheath.performed += instance.OnUnsheath;
+            @Unsheath.canceled += instance.OnUnsheath;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -566,6 +592,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SwitchMagicSpellSlots.started -= instance.OnSwitchMagicSpellSlots;
             @SwitchMagicSpellSlots.performed -= instance.OnSwitchMagicSpellSlots;
             @SwitchMagicSpellSlots.canceled -= instance.OnSwitchMagicSpellSlots;
+            @Unsheath.started -= instance.OnUnsheath;
+            @Unsheath.performed -= instance.OnUnsheath;
+            @Unsheath.canceled -= instance.OnUnsheath;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -644,6 +673,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMagic4(InputAction.CallbackContext context);
         void OnTargetEnemy(InputAction.CallbackContext context);
         void OnSwitchMagicSpellSlots(InputAction.CallbackContext context);
+        void OnUnsheath(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

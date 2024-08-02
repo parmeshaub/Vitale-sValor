@@ -336,7 +336,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: VelocityXZ
-    m_EventTreshold: 10
+    m_EventTreshold: 7
   - m_ConditionMode: 1
     m_ConditionEvent: isMovementHeld
     m_EventTreshold: 0
@@ -786,7 +786,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: VelocityXZ
-    m_EventTreshold: 9
+    m_EventTreshold: 7
   - m_ConditionMode: 1
     m_ConditionEvent: isMovementHeld
     m_EventTreshold: 0
@@ -1919,7 +1919,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: VelocityXZ
-    m_EventTreshold: 10
+    m_EventTreshold: 6
   - m_ConditionMode: 1
     m_ConditionEvent: isMovementHeld
     m_EventTreshold: 0
@@ -2348,7 +2348,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: VelocityXZ
-    m_EventTreshold: 9
+    m_EventTreshold: 7
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8088844003946961497}
   m_Solo: 0
@@ -2644,17 +2644,17 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: VelocityXZ
-    m_EventTreshold: 9
+    m_EventTreshold: 7
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5550793782905456709}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.4642858
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

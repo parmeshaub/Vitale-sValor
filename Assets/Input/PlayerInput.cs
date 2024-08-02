@@ -152,6 +152,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa6b4bb8-7c49-4368-8d27-efc27ef0ea28"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -352,6 +361,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Unsheath"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42985315-407f-42a7-98cc-5749a8a22771"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -382,6 +402,56 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Dialogue"",
+            ""id"": ""14c0fb72-645d-443b-aa2c-8c78e5bcc002"",
+            ""actions"": [
+                {
+                    ""name"": ""Proceed Dialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""64c600e6-de91-4c8d-bd38-35585e8be7a9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""699cb1c7-38d5-4dd9-ae26-fbca2bcd8023"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Proceed Dialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""676b5b28-7717-44e7-b899-6669521821b8"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Proceed Dialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f416ad5-841d-4a7c-8252-1529eed87dda"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Proceed Dialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -402,9 +472,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Gameplay_TargetEnemy = m_Gameplay.FindAction("TargetEnemy", throwIfNotFound: true);
         m_Gameplay_SwitchMagicSpellSlots = m_Gameplay.FindAction("SwitchMagicSpellSlots", throwIfNotFound: true);
         m_Gameplay_Unsheath = m_Gameplay.FindAction("Unsheath", throwIfNotFound: true);
+        m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
+        // Dialogue
+        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
+        m_Dialogue_ProceedDialogue = m_Dialogue.FindAction("Proceed Dialogue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -480,6 +554,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_TargetEnemy;
     private readonly InputAction m_Gameplay_SwitchMagicSpellSlots;
     private readonly InputAction m_Gameplay_Unsheath;
+    private readonly InputAction m_Gameplay_Interact;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
@@ -498,6 +573,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @TargetEnemy => m_Wrapper.m_Gameplay_TargetEnemy;
         public InputAction @SwitchMagicSpellSlots => m_Wrapper.m_Gameplay_SwitchMagicSpellSlots;
         public InputAction @Unsheath => m_Wrapper.m_Gameplay_Unsheath;
+        public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -549,6 +625,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Unsheath.started += instance.OnUnsheath;
             @Unsheath.performed += instance.OnUnsheath;
             @Unsheath.canceled += instance.OnUnsheath;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -595,6 +674,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Unsheath.started -= instance.OnUnsheath;
             @Unsheath.performed -= instance.OnUnsheath;
             @Unsheath.canceled -= instance.OnUnsheath;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -658,6 +740,52 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Dialogue
+    private readonly InputActionMap m_Dialogue;
+    private List<IDialogueActions> m_DialogueActionsCallbackInterfaces = new List<IDialogueActions>();
+    private readonly InputAction m_Dialogue_ProceedDialogue;
+    public struct DialogueActions
+    {
+        private @PlayerInput m_Wrapper;
+        public DialogueActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ProceedDialogue => m_Wrapper.m_Dialogue_ProceedDialogue;
+        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
+        public void AddCallbacks(IDialogueActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DialogueActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DialogueActionsCallbackInterfaces.Add(instance);
+            @ProceedDialogue.started += instance.OnProceedDialogue;
+            @ProceedDialogue.performed += instance.OnProceedDialogue;
+            @ProceedDialogue.canceled += instance.OnProceedDialogue;
+        }
+
+        private void UnregisterCallbacks(IDialogueActions instance)
+        {
+            @ProceedDialogue.started -= instance.OnProceedDialogue;
+            @ProceedDialogue.performed -= instance.OnProceedDialogue;
+            @ProceedDialogue.canceled -= instance.OnProceedDialogue;
+        }
+
+        public void RemoveCallbacks(IDialogueActions instance)
+        {
+            if (m_Wrapper.m_DialogueActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDialogueActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DialogueActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DialogueActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DialogueActions @Dialogue => new DialogueActions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -674,9 +802,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnTargetEnemy(InputAction.CallbackContext context);
         void OnSwitchMagicSpellSlots(InputAction.CallbackContext context);
         void OnUnsheath(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnNewaction(InputAction.CallbackContext context);
+    }
+    public interface IDialogueActions
+    {
+        void OnProceedDialogue(InputAction.CallbackContext context);
     }
 }

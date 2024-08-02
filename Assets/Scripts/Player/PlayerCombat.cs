@@ -18,7 +18,7 @@ public class PlayerCombat : MonoBehaviour
     private BattleSphereDetection battleSphereDetection;
     private SwordManager swordManager;
 
-    PlayerInput playerInput;
+    private PlayerInput playerInput;
     private CharacterController characterController;
     private Animator animator;
 

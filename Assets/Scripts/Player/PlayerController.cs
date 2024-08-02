@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
         playerInput.Gameplay.Dash.started += OnDash;
         playerInput.Gameplay.Dash.canceled += OnDash;
 
+
         SetupJumpVariables();
     }
 
@@ -87,6 +88,8 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        playerInputManager.SwitchToGameplayActionMap();
     }
 
     void Update()

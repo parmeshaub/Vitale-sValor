@@ -26,6 +26,9 @@ public class SwordManager : MonoBehaviour
 
         swordRenderer.enabled = false;
         vfx.Stop();
+        
+        SetVFXSpeed(3.0f);
+
     }
 
     public void UnsheathSword()
@@ -47,6 +50,20 @@ public class SwordManager : MonoBehaviour
         {
             swordRenderer.enabled = true;
             vfx.Play();
+        }
+    }
+    public void SetVFXSpeed(float speed)
+    {
+        // Adjust the speed of the VFX
+        if (vfx.HasFloat("Effect Speed"))
+        {
+            vfx.SetFloat("Effect Speed", speed);
+        }
+
+        // If you have other parameters like spawn rate, adjust them similarly
+        if (vfx.HasFloat("Spawn Rate"))
+        {
+            vfx.SetFloat("Spawn Rate", speed);
         }
     }
 }

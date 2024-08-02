@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashMultiplier = 6f;
+    [SerializeField] private float dashCoolDown = 1f;
+    private bool isDashOnCoolDown = false;
 
     // Combat
     private PlayerCombat playerCombat;
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private readonly static int jumpHash = Animator.StringToHash("Jump");
     private readonly static int dodgeHash = Animator.StringToHash("Dodge_Front");
     private readonly static int sprintHash = Animator.StringToHash("isSprinting");
+    private readonly static int blockHash = Animator.StringToHash("isBlocking");
 
     private Coroutine exitCoroutine;
     private bool isWaitingExit = false;
@@ -77,6 +80,7 @@ public class PlayerController : MonoBehaviour
         playerInput.Gameplay.Dash.started += OnDash;
         playerInput.Gameplay.Dash.canceled += OnDash;
 
+
         SetupJumpVariables();
     }
 
@@ -84,6 +88,8 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        playerInputManager.SwitchToGameplayActionMap();
     }
 
     void Update()
@@ -91,10 +97,19 @@ public class PlayerController : MonoBehaviour
         HandleAnimation();
         if (!isAttacking)
         {
-            HandleRotation();
-            HandleMovement();
+            if (!playerCombat.isBlocking)
+            {
+                HandleRotation();
+                HandleMovement();
+            }
+
             HandleGravity();
-            HandleJump();
+
+            if (!playerCombat.isBlocking)
+            {
+                HandleJump();
+            }
+
         }
     }
 
@@ -151,7 +166,8 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat(velocityXZHash, velocityXZ);
         animator.SetBool(isMovementHeldHash, isMovementPressed);
         animator.SetBool(isGroundedHash, characterController.isGrounded);
-        animator.SetBool("isSprinting", isSprintPressed);
+        animator.SetBool(sprintHash, isSprintPressed);
+        animator.SetBool(blockHash, playerCombat.isBlocking);
     }
 
     private void HandleRotation()
@@ -244,6 +260,15 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger(dodgeHash);
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
+
+        StartCoroutine(DashCoolDown());
+    }
+
+    private IEnumerator DashCoolDown()
+    {
+        isDashOnCoolDown = true;
+        yield return new WaitForSeconds(dashCoolDown);
+        isDashOnCoolDown = false;
     }
 
     void OnRun(InputAction.CallbackContext context)
@@ -260,7 +285,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started && !isDashing)
         {
-            StartCoroutine(Dash());
+            if (!isDashOnCoolDown)
+            {
+                StartCoroutine(Dash());
+            }
         }
     }
 

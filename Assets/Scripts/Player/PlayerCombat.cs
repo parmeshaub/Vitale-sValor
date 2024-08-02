@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -15,40 +16,53 @@ public class PlayerCombat : MonoBehaviour
 {
     private PlayerInputManager playerInputManager;
     private BattleSphereDetection battleSphereDetection;
+    private SwordManager swordManager;
 
-    PlayerInput playerInput;
+    private PlayerInput playerInput;
     private CharacterController characterController;
     private Animator animator;
 
-    //Combat
-    private bool inCombatMode = false;
+    //Combat Editables
     [SerializeField] private float timeToTarget = 0.3f;
     [SerializeField] private float timeToLookTarget = 0.1f;
     [SerializeField] private float stoppingDistance = 1.5f; //Stopping Distance from player to target when moving`
     [SerializeField] private float detectionRadius = 6.0f; // How close the player can be to enemy before moving.
-    [SerializeField] private float lightAttackCoolDown = 1f;
-    private bool isLightAttackOnCooldown = false;
-    private int lightAttackComboStep = 0;
 
-    private Coroutine resetComboCoroutine;
+    //Combat Variables
+    private bool inCombatMode = false;
+    private float lightAttackCoolDown = 1f;
+    private float heavyAttackCoolDown = 1f;
+    private bool isLightAttackOnCooldown = false;
+    private bool isHeavyAttackOnCooldown = false;
+    private bool isParryOnCoolDown = false;
+    public bool isBlocking = false;
+    private int lightAttackComboStep = 0;
+    private int heavyAttackComboStep = 0;
+    private Coroutine resetLightAttackComboCoroutine;
+    private Coroutine resetHeavyAttackComboCoroutine;
 
     //Combat Cooldown
     [SerializeField] private float lightAttack1CoolDown;
     [SerializeField] private float lightAttack2CoolDown;
     [SerializeField] private float lightAttack3CoolDown;
     [SerializeField] private float lightAttack4CoolDown;
+    [SerializeField] private float heavyAttack1CoolDown;
+    [SerializeField] private float heavyAttack2CoolDown;
+    [SerializeField] private float heavyAttack3CoolDown;
+    [SerializeField] private float heavyAttack4CoolDown;
+    [SerializeField] private float parryCoolDown = 1f;
 
     //Unity Events
     [HideInInspector] public UnityEvent attackStart;
     [HideInInspector] public UnityEvent attackEnd;
 
-    //public delegate void playerAttackStartEvent();
-    //public static event playerAttackStartEvent OnPlayerAttackStartEvent;
-
+    #region Variables // Animation Hashes
     //Animation Hashes
     private readonly static int drawSwordHash = Animator.StringToHash("Draw_Sword");
     private readonly static int keepSwordHash = Animator.StringToHash("Keep_Sword");
     private readonly static int inCombatHash = Animator.StringToHash("InCombat");
+    private readonly static int parryHash = Animator.StringToHash("Parry");
+    private readonly static int blockStartHash = Animator.StringToHash("Block_Start");
 
     //----COMBAT HASHES-----
 
@@ -59,10 +73,15 @@ public class PlayerCombat : MonoBehaviour
     private readonly static int lightAtk4Hash = Animator.StringToHash("Light_Attack_04");
     //Light Attack 02 Hash
     //Heavy Attack Hash
+    private readonly static int heavyAtk1Hash = Animator.StringToHash("Heavy_Attack_01");
+    private readonly static int heavyAtk2Hash = Animator.StringToHash("Heavy_Attack_02");
+    private readonly static int heavyAtk3Hash = Animator.StringToHash("Heavy_Attack_03");
+    private readonly static int heavyAtk4Hash = Animator.StringToHash("Heavy_Attack_04");
 
+    #endregion
     private void Update()
     {
-        Debug.Log(isLightAttackOnCooldown);
+
     }
 
     private void Awake()
@@ -70,13 +89,16 @@ public class PlayerCombat : MonoBehaviour
         playerInputManager = GetComponent<PlayerInputManager>();
         battleSphereDetection = GetComponentInChildren<BattleSphereDetection>();
         animator = GetComponentInChildren<Animator>();
+        swordManager = SwordManager.instance;
 
         playerInput = playerInputManager.playerInput;
         characterController = GetComponent<CharacterController>();
 
-        playerInput.Gameplay.LightAttack.started += PerformLightAttack;
-        playerInput.Gameplay.LightAttack.canceled += PerformLightAttack;
-        playerInput.Gameplay.HeavyAttack.started += PerformHeavyAttack;
+        playerInput.Gameplay.LightAttack.performed += PerformLightAttack;
+        playerInput.Gameplay.HeavyAttack.performed += PerformHeavyAttack;
+        playerInput.Gameplay.Unsheath.performed += TurnOffCombatMode;
+        playerInput.Gameplay.Block.started += PerformBlock;
+        playerInput.Gameplay.Block.canceled += TurnOffBlock;
     }
 
     private void Start()
@@ -84,34 +106,50 @@ public class PlayerCombat : MonoBehaviour
         if (attackStart == null) attackStart = new UnityEvent();
         if (attackEnd == null) attackEnd = new UnityEvent();
     }
-
+    #region Attacks
     private void PerformLightAttack(InputAction.CallbackContext context)
     {
-        if (!context.started) return;
+        if (!context.performed) return;
 
-        CheckCombatMode();
-        if (!inCombatMode) return;
-
-        //If Cooldown is off
-        if (!isLightAttackOnCooldown)
+        //Perform Parry if blocking
+        if (isBlocking)
         {
-            if (CheckDistanceFromEnemy())
+            if (!isParryOnCoolDown)
             {
-                LookAtTarget();
+                PerformParry();
+                return;
             }
-            else
-            {
-                MoveToTarget();
-            }
-
-            LightAttackCombo();
-            StartCoroutine(LightAttackCooldown());
         }
-        else return;
+        else
+        {
+            CheckCombatMode();
+            if (!inCombatMode) return;
+
+            //If Cooldown is off
+            if (!isLightAttackOnCooldown)
+            {
+                if (CheckDistanceFromEnemy())
+                {
+                    LookAtTarget();
+                }
+                else
+                {
+                    MoveToTarget();
+                }
+
+                LightAttackCombo();
+                StartCoroutine(LightAttackCooldown());
+            }
+            else return;
+        }
     }
 
     private void LightAttackCombo()
     {
+        //Check if theres any previous Coroutine (Combo Reset), Cancel it.
+        if(resetLightAttackComboCoroutine != null) StopCoroutine(resetLightAttackComboCoroutine);
+
+        //Perform Combo according to Animation
         switch (lightAttackComboStep)
         {
             //Attack 1
@@ -139,7 +177,8 @@ public class PlayerCombat : MonoBehaviour
             default:
                 break;
         }
-
+        
+        //Add Combo Step
         lightAttackComboStep++;
 
         //Reset Combo
@@ -147,16 +186,85 @@ public class PlayerCombat : MonoBehaviour
         {
             lightAttackComboStep = 0;
         }
+
+        //Start Timer to reset Combo to zero automatically.
+        resetLightAttackComboCoroutine = StartCoroutine(ResetLightAttackComboAfterDelay());
     }
 
     private void PerformHeavyAttack(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!context.performed) return;
+        if (isBlocking) return;
+
+        CheckCombatMode();
+        if (!inCombatMode) return;
+
+        //If Cooldown is off
+        if (!isHeavyAttackOnCooldown)
         {
-            if (CheckDistanceFromEnemy()) LookAtTarget();
-            else MoveToTarget();
+            if (CheckDistanceFromEnemy())
+            {
+                LookAtTarget();
+            }
+            else
+            {
+                MoveToTarget();
+            }
+
+            HeavyAttackCombo();
+            StartCoroutine(HeavyAttackCoolDown());
         }
+        else return;
     }
+
+    private void HeavyAttackCombo()
+    {
+        //Check if theres any previous Coroutine (Combo Reset), Cancel it.
+        if (resetHeavyAttackComboCoroutine != null) StopCoroutine(resetHeavyAttackComboCoroutine);
+
+        //Perform Combo according to Animation
+        switch (heavyAttackComboStep)
+        {
+            //Attack 1
+            case 0:
+                animator.SetTrigger(heavyAtk1Hash);
+                heavyAttackCoolDown = heavyAttack1CoolDown;
+                break;
+
+            //Attack 2
+            case 1:
+                animator.SetTrigger(heavyAtk2Hash);
+                heavyAttackCoolDown = heavyAttack2CoolDown;
+                break;
+
+            //Attack 3
+            case 2:
+                animator.SetTrigger(heavyAtk3Hash);
+                heavyAttackCoolDown = heavyAttack3CoolDown;
+                break;
+
+            case 3:
+                animator.SetTrigger(heavyAtk4Hash);
+                heavyAttackCoolDown = heavyAttack4CoolDown;
+                break;
+            default:
+                break;
+        }
+
+        //Add Combo Step
+        heavyAttackComboStep++;
+
+        //Reset Combo
+        if (heavyAttackComboStep > 3)
+        {
+            heavyAttackComboStep = 0;
+        }
+
+        //Start Timer to reset Combo to zero automatically.
+        resetHeavyAttackComboCoroutine = StartCoroutine(ResetHeavyAttackComboAfterDelay());
+    }
+
+    #endregion
 
     private void MoveToTarget()
     {
@@ -230,13 +338,58 @@ public class PlayerCombat : MonoBehaviour
             animator.SetBool(inCombatHash, true);
         }
     }
-
-    private void TurnOffCombatMode()
+    private void CheckCombatMode2()
     {
-        inCombatMode = false;
-        animator.SetTrigger(keepSwordHash);
-        animator.SetBool(inCombatHash, false);
+        //Turn on Combat mode if False.
+        if (!inCombatMode)
+        {
+            inCombatMode = true;
+            animator.SetBool(inCombatHash, true);
+        }
     }
+
+    private void TurnOffCombatMode(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            if(inCombatMode)
+            {
+                inCombatMode = false;
+                animator.SetTrigger(keepSwordHash);
+                animator.SetBool(inCombatHash, false);
+            }
+        }
+    }
+
+    #region Blocking
+    private void PerformBlock(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            CheckCombatMode2();
+            LookAtTarget();
+            animator.SetTrigger(blockStartHash);
+            isBlocking = true;
+        }
+    }
+
+    private void TurnOffBlock(InputAction.CallbackContext context)
+    {
+        if(context.canceled)
+        {
+            CheckCombatMode2();
+            LookAtTarget();
+            isBlocking = false;
+        }
+    }
+
+    private void PerformParry()
+    {
+        animator.SetTrigger(parryHash);
+        StartCoroutine(ParryCoolDown());
+    }
+
+    #endregion
 
     private IEnumerator LightAttackCooldown()
     {
@@ -245,9 +398,32 @@ public class PlayerCombat : MonoBehaviour
         isLightAttackOnCooldown = false;
     }
 
-    private IEnumerator ResetComboAfterDelay(float delay)
+    private IEnumerator HeavyAttackCoolDown()
     {
-        yield return new WaitForSeconds(delay);
+        isHeavyAttackOnCooldown = true;
+        yield return new WaitForSeconds(heavyAttackCoolDown);
+        isHeavyAttackOnCooldown = false;
+    }
+
+    private IEnumerator ResetLightAttackComboAfterDelay()
+    {
+        yield return new WaitForSeconds(lightAttackCoolDown + 1f);
         lightAttackComboStep = 0;
     }
+
+    private IEnumerator ResetHeavyAttackComboAfterDelay()
+    {
+        yield return new WaitForSeconds(heavyAttackCoolDown + 1f);
+        heavyAttackComboStep = 0;
+    }
+
+    private IEnumerator ParryCoolDown()
+    {
+        isParryOnCoolDown = true;
+        yield return new WaitForSeconds(parryCoolDown);
+        isParryOnCoolDown = false;
+    }
+
+    public bool GetInCombatBool() => inCombatMode;
+
 }

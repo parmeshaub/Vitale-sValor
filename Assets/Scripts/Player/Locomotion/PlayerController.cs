@@ -58,9 +58,6 @@ public class PlayerController : MonoBehaviour
     private readonly static int sprintHash = Animator.StringToHash("isSprinting");
     private readonly static int blockHash = Animator.StringToHash("isBlocking");
 
-    private Coroutine exitCoroutine;
-    private bool isWaitingExit = false;
-
     private void Awake()
     {
         playerInputManager = GetComponent<PlayerInputManager>();
@@ -86,9 +83,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         playerInputManager.SwitchToGameplayActionMap();
     }
 

@@ -40,10 +40,6 @@ public class PlayerCombat : MonoBehaviour
     private Coroutine resetLightAttackComboCoroutine;
     private Coroutine resetHeavyAttackComboCoroutine;
 
-    //For Combat Damaging
-    private bool isLightAttack = false;
-    private bool isHeavyAttack = false;
-
     //Combat Cooldown
     [SerializeField] private float lightAttack1CoolDown;
     [SerializeField] private float lightAttack2CoolDown;
@@ -155,8 +151,6 @@ public class PlayerCombat : MonoBehaviour
         //Check if theres any previous Coroutine (Combo Reset), Cancel it.
         if(resetLightAttackComboCoroutine != null) StopCoroutine(resetLightAttackComboCoroutine);
 
-        isLightAttack = true;
-
         //Perform Combo according to Animation
         switch (lightAttackComboStep)
         {
@@ -195,7 +189,6 @@ public class PlayerCombat : MonoBehaviour
             lightAttackComboStep = 0;
         }
 
-        isLightAttack = false;
         //Start Timer to reset Combo to zero automatically.
         resetLightAttackComboCoroutine = StartCoroutine(ResetLightAttackComboAfterDelay());
     }
@@ -230,8 +223,6 @@ public class PlayerCombat : MonoBehaviour
     {
         //Check if theres any previous Coroutine (Combo Reset), Cancel it.
         if (resetHeavyAttackComboCoroutine != null) StopCoroutine(resetHeavyAttackComboCoroutine);
-
-        isHeavyAttack = true;
 
         //Perform Combo according to Animation
         switch (heavyAttackComboStep)
@@ -270,8 +261,6 @@ public class PlayerCombat : MonoBehaviour
         {
             heavyAttackComboStep = 0;
         }
-
-        isHeavyAttack = false;
 
         //Start Timer to reset Combo to zero automatically.
         resetHeavyAttackComboCoroutine = StartCoroutine(ResetHeavyAttackComboAfterDelay());

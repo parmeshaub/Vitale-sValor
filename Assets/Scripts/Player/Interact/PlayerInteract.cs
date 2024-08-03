@@ -7,7 +7,7 @@ public class PlayerInteract : MonoBehaviour
 {
     private PlayerInputManager playerInputManager;
     private PlayerInput playerInput;
-    public GameObject currentInteractable;
+    [HideInInspector] public GameObject currentInteractable;
     private InteractSphere interactSphere;
     private void Awake()
     {

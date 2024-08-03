@@ -7,7 +7,7 @@ public class EnemyClass : MonoBehaviour
 {
     public float maxHealth = 10;
     public float health = 10f;
-    public float damamage = 10f;
+    public float damage = 10f;
     public float walkSpeed = 2f;
 
     private void Start()

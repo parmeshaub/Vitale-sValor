@@ -161,6 +161,60 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f4e7671-5799-4fe1-928a-e43ece52af78"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActivateRune"",
+                    ""type"": ""Button"",
+                    ""id"": ""86f8bfe3-278e-4a63-a12a-52d9ec272c17"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ArmorPage"",
+                    ""type"": ""Button"",
+                    ""id"": ""aefc9ffc-e355-4f05-8a12-98ef015028fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Map"",
+                    ""type"": ""Button"",
+                    ""id"": ""3cf2fa77-8699-4df3-bff3-32fb2756a8fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MagicSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ba45359-c97d-497c-b998-e20cf6c5e7f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillTree"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b60a36d-5125-4852-9f63-c7add31abdf6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -372,6 +426,72 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""957396e4-3ac9-4e9d-8928-9d2696b73761"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5c790cb-f8be-4867-a0e7-02cc8faf6770"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateRune"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48f5e3fa-dbc4-4991-b356-883a534da7f3"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArmorPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5fef8ea7-b4d0-40f2-b90b-ba9159ce424d"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Map"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40ba1ea2-3ff1-42a0-a1f7-65adc33589ed"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MagicSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""343da56f-1985-4edd-b3d6-e472671881af"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillTree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -380,9 +500,27 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ""id"": ""23512479-a02b-4f15-9741-4b9ef7ee6af3"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Unpause"",
                     ""type"": ""Button"",
                     ""id"": ""a4ca48e5-63a0-4cbe-b25e-af4347ee9285"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextRightPage"",
+                    ""type"": ""Button"",
+                    ""id"": ""a266fffa-8f2c-4b33-a95c-a9f6bf3118fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextLeftPage"",
+                    ""type"": ""Button"",
+                    ""id"": ""9860caad-99d4-485c-af15-5e3377c4c09e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -393,11 +531,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c6d1351d-0999-433e-b8ad-ca88fe0a3485"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Unpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8458542-9020-489b-971c-9ea3da61d184"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextRightPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6f8f4de-75c8-4cd1-bb43-7dc8085fdd95"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLeftPage"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -473,9 +633,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Gameplay_SwitchMagicSpellSlots = m_Gameplay.FindAction("SwitchMagicSpellSlots", throwIfNotFound: true);
         m_Gameplay_Unsheath = m_Gameplay.FindAction("Unsheath", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_ActivateRune = m_Gameplay.FindAction("ActivateRune", throwIfNotFound: true);
+        m_Gameplay_ArmorPage = m_Gameplay.FindAction("ArmorPage", throwIfNotFound: true);
+        m_Gameplay_Map = m_Gameplay.FindAction("Map", throwIfNotFound: true);
+        m_Gameplay_MagicSelection = m_Gameplay.FindAction("MagicSelection", throwIfNotFound: true);
+        m_Gameplay_SkillTree = m_Gameplay.FindAction("SkillTree", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
+        m_UI_Unpause = m_UI.FindAction("Unpause", throwIfNotFound: true);
+        m_UI_NextRightPage = m_UI.FindAction("NextRightPage", throwIfNotFound: true);
+        m_UI_NextLeftPage = m_UI.FindAction("NextLeftPage", throwIfNotFound: true);
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_ProceedDialogue = m_Dialogue.FindAction("Proceed Dialogue", throwIfNotFound: true);
@@ -555,6 +723,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_SwitchMagicSpellSlots;
     private readonly InputAction m_Gameplay_Unsheath;
     private readonly InputAction m_Gameplay_Interact;
+    private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_ActivateRune;
+    private readonly InputAction m_Gameplay_ArmorPage;
+    private readonly InputAction m_Gameplay_Map;
+    private readonly InputAction m_Gameplay_MagicSelection;
+    private readonly InputAction m_Gameplay_SkillTree;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
@@ -574,6 +748,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @SwitchMagicSpellSlots => m_Wrapper.m_Gameplay_SwitchMagicSpellSlots;
         public InputAction @Unsheath => m_Wrapper.m_Gameplay_Unsheath;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @ActivateRune => m_Wrapper.m_Gameplay_ActivateRune;
+        public InputAction @ArmorPage => m_Wrapper.m_Gameplay_ArmorPage;
+        public InputAction @Map => m_Wrapper.m_Gameplay_Map;
+        public InputAction @MagicSelection => m_Wrapper.m_Gameplay_MagicSelection;
+        public InputAction @SkillTree => m_Wrapper.m_Gameplay_SkillTree;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -628,6 +808,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @ActivateRune.started += instance.OnActivateRune;
+            @ActivateRune.performed += instance.OnActivateRune;
+            @ActivateRune.canceled += instance.OnActivateRune;
+            @ArmorPage.started += instance.OnArmorPage;
+            @ArmorPage.performed += instance.OnArmorPage;
+            @ArmorPage.canceled += instance.OnArmorPage;
+            @Map.started += instance.OnMap;
+            @Map.performed += instance.OnMap;
+            @Map.canceled += instance.OnMap;
+            @MagicSelection.started += instance.OnMagicSelection;
+            @MagicSelection.performed += instance.OnMagicSelection;
+            @MagicSelection.canceled += instance.OnMagicSelection;
+            @SkillTree.started += instance.OnSkillTree;
+            @SkillTree.performed += instance.OnSkillTree;
+            @SkillTree.canceled += instance.OnSkillTree;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -677,6 +875,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @ActivateRune.started -= instance.OnActivateRune;
+            @ActivateRune.performed -= instance.OnActivateRune;
+            @ActivateRune.canceled -= instance.OnActivateRune;
+            @ArmorPage.started -= instance.OnArmorPage;
+            @ArmorPage.performed -= instance.OnArmorPage;
+            @ArmorPage.canceled -= instance.OnArmorPage;
+            @Map.started -= instance.OnMap;
+            @Map.performed -= instance.OnMap;
+            @Map.canceled -= instance.OnMap;
+            @MagicSelection.started -= instance.OnMagicSelection;
+            @MagicSelection.performed -= instance.OnMagicSelection;
+            @MagicSelection.canceled -= instance.OnMagicSelection;
+            @SkillTree.started -= instance.OnSkillTree;
+            @SkillTree.performed -= instance.OnSkillTree;
+            @SkillTree.canceled -= instance.OnSkillTree;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -698,12 +914,16 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Newaction;
+    private readonly InputAction m_UI_Unpause;
+    private readonly InputAction m_UI_NextRightPage;
+    private readonly InputAction m_UI_NextLeftPage;
     public struct UIActions
     {
         private @PlayerInput m_Wrapper;
         public UIActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_UI_Newaction;
+        public InputAction @Unpause => m_Wrapper.m_UI_Unpause;
+        public InputAction @NextRightPage => m_Wrapper.m_UI_NextRightPage;
+        public InputAction @NextLeftPage => m_Wrapper.m_UI_NextLeftPage;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -713,16 +933,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @Unpause.started += instance.OnUnpause;
+            @Unpause.performed += instance.OnUnpause;
+            @Unpause.canceled += instance.OnUnpause;
+            @NextRightPage.started += instance.OnNextRightPage;
+            @NextRightPage.performed += instance.OnNextRightPage;
+            @NextRightPage.canceled += instance.OnNextRightPage;
+            @NextLeftPage.started += instance.OnNextLeftPage;
+            @NextLeftPage.performed += instance.OnNextLeftPage;
+            @NextLeftPage.canceled += instance.OnNextLeftPage;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @Unpause.started -= instance.OnUnpause;
+            @Unpause.performed -= instance.OnUnpause;
+            @Unpause.canceled -= instance.OnUnpause;
+            @NextRightPage.started -= instance.OnNextRightPage;
+            @NextRightPage.performed -= instance.OnNextRightPage;
+            @NextRightPage.canceled -= instance.OnNextRightPage;
+            @NextLeftPage.started -= instance.OnNextLeftPage;
+            @NextLeftPage.performed -= instance.OnNextLeftPage;
+            @NextLeftPage.canceled -= instance.OnNextLeftPage;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -803,10 +1035,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSwitchMagicSpellSlots(InputAction.CallbackContext context);
         void OnUnsheath(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnActivateRune(InputAction.CallbackContext context);
+        void OnArmorPage(InputAction.CallbackContext context);
+        void OnMap(InputAction.CallbackContext context);
+        void OnMagicSelection(InputAction.CallbackContext context);
+        void OnSkillTree(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnUnpause(InputAction.CallbackContext context);
+        void OnNextRightPage(InputAction.CallbackContext context);
+        void OnNextLeftPage(InputAction.CallbackContext context);
     }
     public interface IDialogueActions
     {

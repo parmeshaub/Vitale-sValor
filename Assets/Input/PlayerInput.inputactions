@@ -139,6 +139,60 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "4f4e7671-5799-4fe1-928a-e43ece52af78",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateRune",
+                    "type": "Button",
+                    "id": "86f8bfe3-278e-4a63-a12a-52d9ec272c17",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ArmorPage",
+                    "type": "Button",
+                    "id": "aefc9ffc-e355-4f05-8a12-98ef015028fe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Map",
+                    "type": "Button",
+                    "id": "3cf2fa77-8699-4df3-bff3-32fb2756a8fe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MagicSelection",
+                    "type": "Button",
+                    "id": "2ba45359-c97d-497c-b998-e20cf6c5e7f9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SkillTree",
+                    "type": "Button",
+                    "id": "5b60a36d-5125-4852-9f63-c7add31abdf6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -350,6 +404,72 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "957396e4-3ac9-4e9d-8928-9d2696b73761",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5c790cb-f8be-4867-a0e7-02cc8faf6770",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateRune",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "48f5e3fa-dbc4-4991-b356-883a534da7f3",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ArmorPage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5fef8ea7-b4d0-40f2-b90b-ba9159ce424d",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Map",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40ba1ea2-3ff1-42a0-a1f7-65adc33589ed",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MagicSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "343da56f-1985-4edd-b3d6-e472671881af",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkillTree",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -358,9 +478,27 @@
             "id": "23512479-a02b-4f15-9741-4b9ef7ee6af3",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Unpause",
                     "type": "Button",
                     "id": "a4ca48e5-63a0-4cbe-b25e-af4347ee9285",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextRightPage",
+                    "type": "Button",
+                    "id": "a266fffa-8f2c-4b33-a95c-a9f6bf3118fa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextLeftPage",
+                    "type": "Button",
+                    "id": "9860caad-99d4-485c-af15-5e3377c4c09e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -371,11 +509,33 @@
                 {
                     "name": "",
                     "id": "c6d1351d-0999-433e-b8ad-ca88fe0a3485",
-                    "path": "",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Unpause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b8458542-9020-489b-971c-9ea3da61d184",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextRightPage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6f8f4de-75c8-4cd1-bb43-7dc8085fdd95",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextLeftPage",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

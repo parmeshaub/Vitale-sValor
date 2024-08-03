@@ -1,7 +1,5 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.TerrainTools;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -21,6 +19,7 @@ public class PlayerCombat : MonoBehaviour
     private PlayerInput playerInput;
     private CharacterController characterController;
     private Animator animator;
+    [SerializeField] private PlayerStatsManager playerStatsManager;
 
     //Combat Editables
     [SerializeField] private float timeToTarget = 0.3f;
@@ -41,6 +40,10 @@ public class PlayerCombat : MonoBehaviour
     private Coroutine resetLightAttackComboCoroutine;
     private Coroutine resetHeavyAttackComboCoroutine;
 
+    //For Combat Damaging
+    private bool isLightAttack = false;
+    private bool isHeavyAttack = false;
+
     //Combat Cooldown
     [SerializeField] private float lightAttack1CoolDown;
     [SerializeField] private float lightAttack2CoolDown;
@@ -51,6 +54,9 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float heavyAttack3CoolDown;
     [SerializeField] private float heavyAttack4CoolDown;
     [SerializeField] private float parryCoolDown = 1f;
+
+    //Combat to pass.
+    public float attackDamage;
 
     //Unity Events
     [HideInInspector] public UnityEvent attackStart;
@@ -149,6 +155,8 @@ public class PlayerCombat : MonoBehaviour
         //Check if theres any previous Coroutine (Combo Reset), Cancel it.
         if(resetLightAttackComboCoroutine != null) StopCoroutine(resetLightAttackComboCoroutine);
 
+        isLightAttack = true;
+
         //Perform Combo according to Animation
         switch (lightAttackComboStep)
         {
@@ -187,6 +195,7 @@ public class PlayerCombat : MonoBehaviour
             lightAttackComboStep = 0;
         }
 
+        isLightAttack = false;
         //Start Timer to reset Combo to zero automatically.
         resetLightAttackComboCoroutine = StartCoroutine(ResetLightAttackComboAfterDelay());
     }
@@ -221,6 +230,8 @@ public class PlayerCombat : MonoBehaviour
     {
         //Check if theres any previous Coroutine (Combo Reset), Cancel it.
         if (resetHeavyAttackComboCoroutine != null) StopCoroutine(resetHeavyAttackComboCoroutine);
+
+        isHeavyAttack = true;
 
         //Perform Combo according to Animation
         switch (heavyAttackComboStep)
@@ -259,6 +270,8 @@ public class PlayerCombat : MonoBehaviour
         {
             heavyAttackComboStep = 0;
         }
+
+        isHeavyAttack = false;
 
         //Start Timer to reset Combo to zero automatically.
         resetHeavyAttackComboCoroutine = StartCoroutine(ResetHeavyAttackComboAfterDelay());
@@ -424,6 +437,41 @@ public class PlayerCombat : MonoBehaviour
         isParryOnCoolDown = false;
     }
 
-    public bool GetInCombatBool() => inCombatMode;
+    public float LightRandomizeDamage()
+    {
+        if (PlayerStatsManager.instance != null)
+        {
+            float minDamage = PlayerStatsManager.instance.minLightAttackDamage;
+            float maxDamage = PlayerStatsManager.instance.maxLightAttackDamage;
 
+            float attackDamage = Random.Range(minDamage, maxDamage);
+            return attackDamage;
+        }
+        else
+        {
+            Debug.LogError("PlayerStatsManager instance is not assigned!");
+            return 0f;
+        }
+
+    }
+
+    public float HeavyRandomizeDamage()
+    {
+        if (PlayerStatsManager.instance != null)
+        {
+            float minDamage = PlayerStatsManager.instance.minHeavyAttackDamage;
+            float maxDamage = PlayerStatsManager.instance.maxHeavyAttackDamage;
+
+            float attackDamage = Random.Range(minDamage, maxDamage);
+            return attackDamage;
+        }
+        else
+        {
+            Debug.LogError("PlayerStatsManager instance is not assigned!");
+            return 0f;
+        }
+
+    }
+
+    public bool GetInCombatBool() => inCombatMode;
 }

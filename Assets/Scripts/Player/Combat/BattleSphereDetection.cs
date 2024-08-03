@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -29,13 +30,17 @@ public class BattleSphereDetection : MonoBehaviour
 
         foreach (GameObject enemy in enemiesInRange)
         {
-            Vector3 directionToEnemy = enemy.transform.position - currentPosition;
-            float dSqrToEnemy = directionToEnemy.sqrMagnitude;
-            if (dSqrToEnemy < closestDistanceSqr)
+            if (!enemy.IsDestroyed())
             {
-                closestDistanceSqr = dSqrToEnemy;
-                closestEnemy = enemy.transform;
+                Vector3 directionToEnemy = enemy.transform.position - currentPosition;
+                float dSqrToEnemy = directionToEnemy.sqrMagnitude;
+                if (dSqrToEnemy < closestDistanceSqr)
+                {
+                    closestDistanceSqr = dSqrToEnemy;
+                    closestEnemy = enemy.transform;
+                }
             }
+           
         }
 
         return closestEnemy;

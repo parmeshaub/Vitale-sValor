@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff4045c11c854f4fbc0f1ad2581ceec, type: 3}
   m_Name: Gelidity
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Gelidity
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 57e2c60b9ec435f4fa81f7dcf27f16fb, type: 3}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fbba8b853e88347968a5f70acb158f, type: 3}
   m_Name: Blistfulness
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Blistfulness
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 1ccd137631ef30247947d6c63ae43a72, type: 3}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf52423a03d4bd34cab582e70de26873, type: 3}
   m_Name: Santuary
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Santuary
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d07ef3d00b074c847b135c1c293a15ee, type: 3}

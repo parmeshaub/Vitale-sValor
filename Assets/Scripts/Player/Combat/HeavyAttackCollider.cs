@@ -7,6 +7,8 @@ public class HeavyAttackCollider : MonoBehaviour
     [SerializeField] private BoxCollider heavyAttackCollider;
     [SerializeField] private PlayerCombat playerCombat;
 
+    [SerializeField] private GameObject normalHitVFXPrefab;
+
     private void Start()
     {
         heavyAttackCollider.enabled = false; //Make sure that collider is off.
@@ -17,12 +19,17 @@ public class HeavyAttackCollider : MonoBehaviour
         EnemyClass enemyClass = other.GetComponent<EnemyClass>();
         if (enemyClass != null)
         {
+            Vector3 contactPoint = other.ClosestPointOnBounds(transform.position);
+            Instantiate(normalHitVFXPrefab, contactPoint, Quaternion.identity);
+
             float damage = 0;
 
             Debug.Log("Heavy attack triggered");
-            damage = playerCombat.HeavyRandomizeDamage(); // Adjust the damage calculation as needed
+            damage = playerCombat.HeavyRandomizeDamage();
 
             enemyClass.TakeDamage(damage);
+
+            
         }
     }
 

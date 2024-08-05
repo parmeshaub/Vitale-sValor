@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec79d804235e6754f8197a942899936c, type: 3}
   m_Name: Razor Fangs
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Razor Fangs
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a8338b219d64ca04d8552a7c5cfa7775, type: 3}

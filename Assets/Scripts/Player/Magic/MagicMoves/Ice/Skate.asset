@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c5cec0ec174494fa51c058c255392c, type: 3}
   m_Name: Skate
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Skate
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a47436553ca91634797e9d8efefe335f, type: 3}

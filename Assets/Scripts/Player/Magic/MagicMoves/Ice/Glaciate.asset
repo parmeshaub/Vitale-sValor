@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b6654d1591aed478f8960e5f0f7844, type: 3}
   m_Name: Glaciate
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Glaciate
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 8834f4c01464e6147b3e4c11ba6a5674, type: 3}

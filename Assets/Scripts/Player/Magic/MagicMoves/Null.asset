@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveName: Null
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 116187713ae116945ba2f34720abc5e5, type: 3}

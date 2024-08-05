@@ -90,6 +90,8 @@ public class UIManager : MonoBehaviour
         optionsUI.SetActive(false);
 
         magicSelectUI.SetActive(true);
+
+        pageCount = 1;
     }
 
     public void OpenMapUI(InputAction.CallbackContext context){
@@ -107,6 +109,7 @@ public class UIManager : MonoBehaviour
         optionsUI.SetActive(false);
 
         mapUI.SetActive(true);
+        pageCount = 2;
     }
 
     public void OpenArmorUI(InputAction.CallbackContext context) { 
@@ -124,6 +127,7 @@ public class UIManager : MonoBehaviour
         skillTreeUI.SetActive(false);
 
         armourUI.SetActive(true);
+        pageCount = 4;
     }
 
     public void OpenSkillTree(InputAction.CallbackContext context) {
@@ -140,6 +144,7 @@ public class UIManager : MonoBehaviour
         armourUI.SetActive(false);
 
         skillTreeUI.SetActive(true);
+        pageCount = 3;
     }
 
     public void PauseGame2() {
@@ -156,6 +161,8 @@ public class UIManager : MonoBehaviour
 
         //Set Pause Menu as True.
         pauseMenuUI.SetActive(true);
+
+        pageCount = 0;
     }
 
     //public void 
@@ -177,6 +184,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1.0f;
         gameplayUIElements.SetActive(true) ;
         menuUIElements.SetActive(false) ;
+        pageCount = 0;
     }
 
     private void UnpauseCalled(InputAction.CallbackContext context)
@@ -194,6 +202,7 @@ public class UIManager : MonoBehaviour
 
     public void SetOptionsBoolTrue() {
         isInOptions = true;
+        pageCount = 0;
     }
 
     private void NextLeftPageButton(InputAction.CallbackContext context) {

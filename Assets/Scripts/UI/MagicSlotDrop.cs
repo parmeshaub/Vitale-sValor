@@ -26,6 +26,7 @@ public class MagicSlotDrop : MonoBehaviour, IDropHandler
             
             Debug.Log("Item dropped in slot.");
             SkillDroppedIntoSlot(draggableItem.magicMove);
+            manager.UpdateUI();
         }
     }
 
@@ -36,5 +37,6 @@ public class MagicSlotDrop : MonoBehaviour, IDropHandler
 
     public void SkillOutOfSlot() {
         manager.magicMoves[moveNumber] = manager.nullMagic;
+        manager.UpdateUI();
     }
 }

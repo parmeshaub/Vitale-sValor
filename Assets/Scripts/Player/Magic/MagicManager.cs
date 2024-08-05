@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MagicManager : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class MagicManager : MonoBehaviour
     private PlayerInput playerInput;
     public MagicMoveSO[] magicMoves = new MagicMoveSO[4];
     public MagicMoveSO nullMagic;
+
+    [SerializeField] private Image slot1Image;
+    [SerializeField] private Image slot2Image;
+    [SerializeField] private Image slot3Image;
+    [SerializeField] private Image slot4Image;
 
     private void Awake() {
         instance = this;
@@ -21,6 +27,10 @@ public class MagicManager : MonoBehaviour
         playerInput.Gameplay.Magic3.started += ActivateMagic3;
         playerInput.Gameplay.Magic4.started += ActivateMagic4;
 
+    }
+
+    private void Start() {
+        UpdateUI();
     }
 
     private void ActivateMagic1(InputAction.CallbackContext context) {
@@ -60,7 +70,10 @@ public class MagicManager : MonoBehaviour
         }
     }
 
-    private void UpdateUI() {
-
+    public void UpdateUI() {
+        slot1Image.sprite = magicMoves[0].icon;
+        slot2Image.sprite = magicMoves[1].icon;
+        slot3Image.sprite = magicMoves[2].icon;
+        slot4Image.sprite = magicMoves[3].icon;
     }
 }

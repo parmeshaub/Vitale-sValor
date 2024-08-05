@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a476f83609d614399299ca7adc1480, type: 3}
   m_Name: Combustion
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Combustion
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b8142766eee482b4d926118bb6bea866, type: 3}

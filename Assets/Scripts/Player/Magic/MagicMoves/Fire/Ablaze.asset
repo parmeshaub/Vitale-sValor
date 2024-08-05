@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b8d78316de0724795f503510f66de0, type: 3}
   m_Name: Ablaze
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Ablaze
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 382cb8e439fff024aa6ff0b32abc6452, type: 3}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e606bc0b4daca5643bf0b65aed2a98fd, type: 3}
   m_Name: Wings Of Comfort
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Wings Of Comfort
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e28be6dd2cd502242a84577975da411f, type: 3}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c49208817c889849979172020765515, type: 3}
   m_Name: Judgement
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Judgement
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 481d0e1cd79551a4eab04a9594d6bd23, type: 3}

@@ -20,6 +20,7 @@ public class PlayerHealthAndDamage : MonoBehaviour
     private PlayerInputManager playerInputManager;
     private SwordManager swordManager;
     private CameraManager cameraManager;
+    [SerializeField] private ShieldScript shieldManager;
 
     private bool deathDoOnce = false;
 
@@ -64,10 +65,12 @@ public class PlayerHealthAndDamage : MonoBehaviour
         //if player is alive
         if (currentPlayerHealth > 0) return;
 
+        //Death
         playerInputManager.playerInput.Gameplay.Disable();
         if (!deathDoOnce) {
             animator.SetTrigger(deathHash);
             swordManager.SheathSword();
+            shieldManager.TakeInShield();
 
             StartCoroutine(DestroyPlayerAfterWait());
             deathDoOnce=true;

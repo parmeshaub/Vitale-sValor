@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
 
     public bool isInOptions = false;
 
+    private int pageCount = 0;
+
     private void Awake()
     {
         Instance = this;
@@ -35,6 +37,8 @@ public class UIManager : MonoBehaviour
         playerInput = playerInputManager.playerInput;
 
         playerInput.UI.Unpause.started += UnpauseCalled;
+        playerInput.UI.NextLeftPage.started += NextLeftPageButton;
+        playerInput.UI.NextRightPage.started += NextRightPageButton;
 
         playerInput.Gameplay.Pause.started += PauseGame;
         playerInput.Gameplay.MagicSelection.started += OpenMagicSelect;
@@ -191,4 +195,60 @@ public class UIManager : MonoBehaviour
     public void SetOptionsBoolTrue() {
         isInOptions = true;
     }
+
+    private void NextLeftPageButton(InputAction.CallbackContext context) {
+        if (context.started) PreviousPage();
+    }
+    private void NextRightPageButton(InputAction.CallbackContext context) {
+        if (context.started) NextPage();
+    }
+
+    public void NextPage() {
+        if (isInOptions) return;
+        pageCount++;
+        if (pageCount > 4) pageCount = 0;
+
+        SwitchPage();
+    }
+    public void PreviousPage() {
+        if (isInOptions) return;
+        pageCount--;
+        if (pageCount < 0) pageCount = 4;
+
+        SwitchPage();
+    }
+
+    private void SwitchPage() {
+        // Deactivate all UI elements first
+        pauseMenuUI.SetActive(false);
+        magicSelectUI.SetActive(false);
+        armourUI.SetActive(false);
+        skillTreeUI.SetActive(false);
+        optionsUI.SetActive(false);
+        mapUI.SetActive(false);
+
+        // Activate the correct UI based on the pageCount
+        switch (pageCount) {
+            case 0:
+                pauseMenuUI.SetActive(true);
+                break;
+            case 1:
+                magicSelectUI.SetActive(true);
+                break;
+            case 2:
+                mapUI.SetActive(true);
+                break;
+            case 3:
+                skillTreeUI.SetActive(true);
+                break;
+            case 4:
+                armourUI.SetActive(true);
+                break;
+            default:
+                // Optional: Handle invalid pageCount values or log an error
+                Debug.LogWarning("Invalid pageCount value: " + pageCount);
+                break;
+        }
+    }
+
 }

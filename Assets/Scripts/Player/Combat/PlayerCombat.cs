@@ -15,6 +15,7 @@ public class PlayerCombat : MonoBehaviour
     private PlayerInputManager playerInputManager;
     private BattleSphereDetection battleSphereDetection;
     private SwordManager swordManager;
+    private PlayerController playerController;
 
     private PlayerInput playerInput;
     private CharacterController characterController;
@@ -39,6 +40,7 @@ public class PlayerCombat : MonoBehaviour
     private int heavyAttackComboStep = 0;
     private Coroutine resetLightAttackComboCoroutine;
     private Coroutine resetHeavyAttackComboCoroutine;
+    public bool isAttacking = false;
 
     //Combat Cooldown
     [SerializeField] private float lightAttack1CoolDown;
@@ -83,7 +85,6 @@ public class PlayerCombat : MonoBehaviour
     #endregion
     private void Update()
     {
-
     }
 
     private void Awake()
@@ -92,6 +93,7 @@ public class PlayerCombat : MonoBehaviour
         battleSphereDetection = GetComponentInChildren<BattleSphereDetection>();
         animator = GetComponentInChildren<Animator>();
         swordManager = SwordManager.instance;
+        playerController = GetComponent<PlayerController>();
 
         playerInput = playerInputManager.playerInput;
         characterController = GetComponent<CharacterController>();
@@ -128,7 +130,7 @@ public class PlayerCombat : MonoBehaviour
             if (!inCombatMode) return;
 
             //If Cooldown is off
-            if (!isLightAttackOnCooldown)
+            if (!isLightAttackOnCooldown && !isHeavyAttackOnCooldown)
             {
                 if (CheckDistanceFromEnemy())
                 {
@@ -202,7 +204,7 @@ public class PlayerCombat : MonoBehaviour
         if (!inCombatMode) return;
 
         //If Cooldown is off
-        if (!isHeavyAttackOnCooldown)
+        if (!isHeavyAttackOnCooldown && !isLightAttackOnCooldown)
         {
             if (CheckDistanceFromEnemy())
             {
@@ -368,10 +370,12 @@ public class PlayerCombat : MonoBehaviour
     {
         if (context.started)
         {
-            CheckCombatMode2();
-            LookAtTarget();
-            animator.SetTrigger(blockStartHash);
-            isBlocking = true;
+            if (characterController.isGrounded) {
+                CheckCombatMode2();
+                LookAtTarget();
+                animator.SetTrigger(blockStartHash);
+                isBlocking = true;
+            }
         }
     }
 
@@ -460,6 +464,13 @@ public class PlayerCombat : MonoBehaviour
             return 0f;
         }
 
+    }
+    
+    public void SetIsAttackingTrue() {
+        isAttacking = true;
+    }
+    public void SetIsAttackingFalse() {
+        isAttacking = false;
     }
 
     public bool GetInCombatBool() => inCombatMode;

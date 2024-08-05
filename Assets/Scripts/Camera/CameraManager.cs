@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Name: Lee Zhi Hui, Shaun
+/// Description: This class holds methods I can use to manage the ingame Camera.
+/// </summary>
+
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager instance;
@@ -26,5 +31,10 @@ public class CameraManager : MonoBehaviour
 
     public void TurnOnThirdPersonCamera(){
         thirdPersonCamera.SetActive(true);
+    }
+
+    //TODO - Flip FLop Function
+    public void SwitchToMagicCamera() {
+
     }
 }

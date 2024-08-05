@@ -7,6 +7,6 @@ public class BlistfulnessScript : MagicMoveSO
 {
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("test");
     }
 }

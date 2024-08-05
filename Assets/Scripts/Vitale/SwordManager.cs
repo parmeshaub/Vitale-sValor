@@ -13,8 +13,6 @@ public class SwordManager : MonoBehaviour
     [SerializeField] private PlayerCombat playerCombat;
     private Renderer swordRenderer;
 
-    private static int swordSheathHash = Animator.StringToHash("Sheath");
-
     private void Awake()
     {
         instance = this;

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf16a669ff44ca44bb9c1bf1cc3eabf, type: 3}
   m_Name: Ice Berg
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Ice Berg
   moveDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ff9935e85b6e82e4b9fdd24d9bfb362f, type: 3}

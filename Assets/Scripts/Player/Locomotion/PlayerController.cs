@@ -86,26 +86,20 @@ public class PlayerController : MonoBehaviour
         playerInputManager.SwitchToGameplayActionMap();
     }
 
-    void Update()
-    {
+    void Update() {
         HandleAnimation();
-        if (!isAttacking)
-        {
-            if (!playerCombat.isBlocking)
-            {
-                HandleRotation();
-                HandleMovement();
-            }
-
+        if (!isAttacking) {
             HandleGravity();
-
-            if (!playerCombat.isBlocking)
-            {
-                HandleJump();
+            if (!playerCombat.isAttacking) {
+                if (!playerCombat.isBlocking) {
+                    HandleJump();
+                    HandleRotation();
+                    HandleMovement();
+                }
             }
-
         }
     }
+
 
     private void OnEnable()
     {
@@ -277,7 +271,7 @@ public class PlayerController : MonoBehaviour
 
     void OnDash(InputAction.CallbackContext context)
     {
-        if (context.started && !isDashing)
+        if (context.started && !isDashing && !playerCombat.isBlocking)
         {
             if (!isDashOnCoolDown)
             {

@@ -10,18 +10,18 @@ public class BorilBossScript : EnemyBase
 
     private PlayerCombat playerCombat;
     private GameObject playerObject;
-    private float distanceThresholdToPlayer = 2;
-
+    private float distanceThresholdToPlayer = 3;
     [SerializeField] private float chargeSpeed;
     [SerializeField] private float chargeDuration;
     private int swipeCount = 0;
+    private bool isCharging = false;
 
     private static readonly int isMovingHash = Animator.StringToHash("isMoving");
 
 
     private void Awake() {
         rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         
     }
 
@@ -37,7 +37,7 @@ public class BorilBossScript : EnemyBase
     }
 
     private void StartIceBoss() {
-        currentPhase = IceBossPhases.Phase_One;
+        currentPhase = IceBossPhases.Phase_Two;
         currentState = IceBossStates.Find_Player;
         SetState(currentState);
     }
@@ -69,6 +69,9 @@ public class BorilBossScript : EnemyBase
             case IceBossStates.Ground_Smash:
                 Debug.Log("smash");
                 StartCoroutine(GroundSmash());
+                break;
+            case IceBossStates.Stunned:
+                StartCoroutine(Stunned());
                 break;
             case IceBossStates.Death:
                 Debug.Log("death");
@@ -107,6 +110,19 @@ public class BorilBossScript : EnemyBase
             yield return null;
         }
     }
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.CompareTag("Pillar")) {
+            animator.SetTrigger("Charge_Hurt");
+            currentState = IceBossStates.Stunned;
+            StopAllCoroutines();
+            SetState(currentState);
+        }
+        else if (collision.gameObject.CompareTag("BossWall")) {
+            currentState = IceBossStates.Find_Player;
+            StopAllCoroutines();
+            SetState(currentState);
+        }
+    }
 
 
     private IEnumerator Idle() {
@@ -115,24 +131,89 @@ public class BorilBossScript : EnemyBase
     }
 
     private IEnumerator IceBreath() {
-        //animator.SetTrigger();
+        animator.SetTrigger("Ice_Breath");
+        yield return new WaitForSeconds(4);
         currentState = IceBossStates.Swipe_Attack;
         SetState(currentState);
         yield return null;
     }
 
     private IEnumerator Charge() {
-        yield return null;
+        Debug.Log("Charge");
+        Vector3 targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        yield return new WaitForSeconds(3);
+        isCharging = true;
+        animator.SetBool("isCharging", isCharging);
+        animator.SetTrigger("Charge");
+
+        transform.DOLookAt(targetPosition, 0.5f);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < chargeDuration) {
+            rb.MovePosition(rb.position + direction * chargeSpeed * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        animator.SetBool("isCharging", false);
+        isCharging = false;
+        rb.velocity = Vector3.zero;
+        SetState(IceBossStates.Find_Player);
     }
 
     private IEnumerator SwipeAttack() {
-        // Implement Swipe Attack logic
+        
+        for (int iq = 0; iq < 3; iq++) {
+            Vector3 targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
+            animator.SetTrigger("Swipe");
+            transform.DOLookAt(targetPosition, 0.2f);
+            yield return new WaitForSeconds(2f);
+        }
+        if(currentPhase == IceBossPhases.Phase_One) {
+            currentState = IceBossStates.Find_Player;
+            SetState(currentState);
+        }
+        else {
+            currentState = IceBossStates.Ground_Smash;
+            SetState(currentState);
+        }
         yield return null;
     }
 
     private IEnumerator GroundSmash() {
-        // Implement Ground Smash logic
-        yield return null;
+        while (true) {
+            isMoving = true;
+            // Calculate the direction towards the player, ignoring the Y-axis
+            Vector3 targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
+
+            // Rotate to face the player without changing the Y-axis
+            transform.DOLookAt(targetPosition, 0.2f);
+
+            // Calculate the direction towards the player
+            Vector3 direction = (targetPosition - transform.position).normalized;
+
+            // Move towards the player
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
+
+            // Check the distance to the player
+            float distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
+            if (distanceToPlayer <= distanceThresholdToPlayer) {
+                animator.SetTrigger("Smash");
+                rb.AddForce(0, 5000, 0, ForceMode.Impulse);
+                SetState(IceBossStates.Charge);
+                isMoving = false;
+                yield break; // Exit the coroutine
+            }
+
+            yield return null;
+        }
+    }
+    private IEnumerator Stunned() {
+        yield return new WaitForSeconds(4);
+        currentState = IceBossStates.Find_Player;
+        SetState(currentState);
     }
 
     private IEnumerator DeathRoutine() {
@@ -167,6 +248,7 @@ public enum IceBossStates
     Charge,
     Swipe_Attack,
     Ground_Smash,
+    Stunned,
     Death
 }
 

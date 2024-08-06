@@ -125,7 +125,7 @@ public class GoblinEnemy : EnemyBase
     }
 
     protected override void Attack() {
-        if (attackCoroutine == null) {
+        if (attackCoroutine == null && !isDeath) {
             rb.angularVelocity = Vector3.zero;
             attackCoroutine = StartCoroutine(PerformAttack());
         }

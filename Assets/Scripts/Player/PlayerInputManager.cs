@@ -40,6 +40,28 @@ public class PlayerInputManager : MonoBehaviour
         cameraManager.FreezeCamera();
     }
 
+    public void SwitchToUIActionMapKeepCamera() {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        playerInput.UI.Enable();
+        playerInput.Dialogue.Disable();
+        playerInput.Gameplay.Disable();
+
+        cameraManager.CantMoveCamera();
+    }
+
+    public void SwitchToGameplayActionMapFixCamera() {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        playerInput.UI.Disable();
+        playerInput.Dialogue.Disable();
+        playerInput.Gameplay.Enable();
+
+        cameraManager.EnableCameraMovement();
+    }
+
     public void SwitchToDialogueActionMap()
     {
         playerInput.Dialogue.Enable();

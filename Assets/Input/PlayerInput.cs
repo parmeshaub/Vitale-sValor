@@ -525,6 +525,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rune"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d690c40-15eb-4453-910e-b187dc318191"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -558,6 +567,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""NextLeftPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce57de5d-3335-4419-aae1-b27d61b4ef01"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rune"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -644,6 +664,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_UI_Unpause = m_UI.FindAction("Unpause", throwIfNotFound: true);
         m_UI_NextRightPage = m_UI.FindAction("NextRightPage", throwIfNotFound: true);
         m_UI_NextLeftPage = m_UI.FindAction("NextLeftPage", throwIfNotFound: true);
+        m_UI_Rune = m_UI.FindAction("Rune", throwIfNotFound: true);
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_ProceedDialogue = m_Dialogue.FindAction("Proceed Dialogue", throwIfNotFound: true);
@@ -917,6 +938,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Unpause;
     private readonly InputAction m_UI_NextRightPage;
     private readonly InputAction m_UI_NextLeftPage;
+    private readonly InputAction m_UI_Rune;
     public struct UIActions
     {
         private @PlayerInput m_Wrapper;
@@ -924,6 +946,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Unpause => m_Wrapper.m_UI_Unpause;
         public InputAction @NextRightPage => m_Wrapper.m_UI_NextRightPage;
         public InputAction @NextLeftPage => m_Wrapper.m_UI_NextLeftPage;
+        public InputAction @Rune => m_Wrapper.m_UI_Rune;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -942,6 +965,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @NextLeftPage.started += instance.OnNextLeftPage;
             @NextLeftPage.performed += instance.OnNextLeftPage;
             @NextLeftPage.canceled += instance.OnNextLeftPage;
+            @Rune.started += instance.OnRune;
+            @Rune.performed += instance.OnRune;
+            @Rune.canceled += instance.OnRune;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -955,6 +981,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @NextLeftPage.started -= instance.OnNextLeftPage;
             @NextLeftPage.performed -= instance.OnNextLeftPage;
             @NextLeftPage.canceled -= instance.OnNextLeftPage;
+            @Rune.started -= instance.OnRune;
+            @Rune.performed -= instance.OnRune;
+            @Rune.canceled -= instance.OnRune;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1047,6 +1076,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnUnpause(InputAction.CallbackContext context);
         void OnNextRightPage(InputAction.CallbackContext context);
         void OnNextLeftPage(InputAction.CallbackContext context);
+        void OnRune(InputAction.CallbackContext context);
     }
     public interface IDialogueActions
     {

@@ -14,6 +14,7 @@ public class MagicSlotDrop : MonoBehaviour, IDropHandler
     }
 
     public void OnDrop(PointerEventData eventData) {
+        if (transform.childCount != 0) return;
         Debug.Log("ran");
         GameObject droppedSkill = eventData.pointerDrag;
         DraggableSkill draggableItem = droppedSkill.GetComponent<DraggableSkill>();

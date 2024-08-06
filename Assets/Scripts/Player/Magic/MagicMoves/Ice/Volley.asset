@@ -15,3 +15,5 @@ MonoBehaviour:
   moveName: Volley
   moveDescription: 
   icon: {fileID: 21300000, guid: e0d627793fc4b884398cc548afe0448f, type: 3}
+  isUnlocked: 0
+  lockedIcon: {fileID: 21300000, guid: 12aaf862d03f35e4982c292413a266fc, type: 3}

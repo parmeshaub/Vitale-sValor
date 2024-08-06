@@ -310,6 +310,7 @@ public class PlayerCombat : MonoBehaviour
     }
 
     private void MoveWhileAttack(float movementAmount, float duration) {
+        if (!playerController.characterController.isGrounded) return;
         Transform enemyTransform = battleSphereDetection.FindClosestEnemy();
 
         // Calculate the initial target position

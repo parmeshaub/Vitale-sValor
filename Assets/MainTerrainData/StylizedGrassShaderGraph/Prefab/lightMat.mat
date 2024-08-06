@@ -121,7 +121,7 @@ Material:
     m_Floats:
     - _BOOLEAN_1: 0
     - _BumpScale: 1
-    - _Cutoff: 0.5
+    - _Cutoff: 0.508
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
@@ -131,7 +131,7 @@ Material:
     - _MaxTiltPercent: 41.1
     - _Metallic: 0
     - _Mode: 0
-    - _NoiseSpeed: 4
+    - _NoiseSpeed: 10
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 0
@@ -155,13 +155,13 @@ Material:
     - _UseTex: 0
     - _UseWindMask: 1
     - _UseWindNoiseTex: 1
-    - _WindIntensity: 0.1
-    - _WindSpeed: 0.3
-    - _WindWeight: 0.3
+    - _WindIntensity: 0.15
+    - _WindSpeed: 0.36
+    - _WindWeight: 0.27
     - _ZWrite: 1
     m_Colors:
     - _AdditionalWPO: {r: 1, g: 0, b: 0.5, a: 0}
-    - _BottomColor: {r: 0.36977154, g: 0.5566038, b: 0.16015485, a: 1}
+    - _BottomColor: {r: 0.36095157, g: 0.6226415, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NearFarRange: {r: 199.2, g: 514.6, b: 0, a: 0}
@@ -169,11 +169,11 @@ Material:
     - _SSSColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0.31038624, g: 0.60303116, b: 0.7075472, a: 1}
     - _TopColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColorNear: {r: 0.16509432, g: 1, b: 0.3473625, a: 1}
+    - _TopColorNear: {r: 0.3712543, g: 1, b: 0.2216981, a: 1}
     - _TopColorNear_1: {r: 0, g: 0, b: 0, a: 0}
     - _TopColorNear_2: {r: 0, g: 0, b: 0, a: 0}
     - _TopColorNear_3: {r: 0, g: 0, b: 0, a: 0}
     - _UVContrast: {r: 0, g: 0, b: -0.56, a: 6.07}
     - _WindNoiseColor: {r: 0.52156866, g: 0.86666673, b: 0.43529415, a: 1}
-    - _WindNoiseTexScale: {r: 100, g: 400, b: 0, a: 0}
+    - _WindNoiseTexScale: {r: 400, g: 1600, b: 0, a: 0}
   m_BuildTextureStacks: []

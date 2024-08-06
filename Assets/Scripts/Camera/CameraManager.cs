@@ -12,10 +12,19 @@ public class CameraManager : MonoBehaviour
     public static CameraManager instance;
     [SerializeField] private GameObject thirdPersonCamera;
     [SerializeField] private Cinemachine.CinemachineBrain cinemachineBrain;
+    [SerializeField] private GameObject magicCamera;
+
+    private bool magicCameraBool = false;
 
     private void Awake(){
         cinemachineBrain = Camera.main.GetComponent<Cinemachine.CinemachineBrain>();
         instance = this;
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.V)) {
+            SwitchToMagicCamera();
+        }
     }
 
     public void FreezeCamera() {
@@ -35,6 +44,16 @@ public class CameraManager : MonoBehaviour
 
     //TODO - Flip FLop Function
     public void SwitchToMagicCamera() {
+        magicCameraBool = !magicCameraBool;
+
+        if (magicCameraBool) {
+            magicCamera.SetActive(false);
+            TurnOnThirdPersonCamera();
+        }
+        else {
+            TurnOffThirdPersonCamera();
+            magicCamera.SetActive(true);
+        }
 
     }
 }

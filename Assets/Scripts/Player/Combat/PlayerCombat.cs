@@ -12,8 +12,10 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class PlayerCombat : MonoBehaviour
 {
+    public static PlayerCombat Instance;
+
     private PlayerInputManager playerInputManager;
-    private BattleSphereDetection battleSphereDetection;
+    public BattleSphereDetection battleSphereDetection;
     private SwordManager swordManager;
     private PlayerController playerController;
 
@@ -89,6 +91,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         playerInputManager = GetComponent<PlayerInputManager>();
         battleSphereDetection = GetComponentInChildren<BattleSphereDetection>();
         animator = GetComponentInChildren<Animator>();
@@ -126,6 +129,7 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
+            if (!playerController.characterController.isGrounded) return;
             CheckCombatMode();
             if (!inCombatMode) return;
 
@@ -158,23 +162,27 @@ public class PlayerCombat : MonoBehaviour
         {
             //Attack 1
             case 0:
+                MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(lightAtk1Hash);
                 lightAttackCoolDown = lightAttack1CoolDown;
                 break;
 
             //Attack 2
             case 1:
+                MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(lightAtk2Hash);
                 lightAttackCoolDown = lightAttack2CoolDown;
                 break;
 
             //Attack 3
             case 2:
+                MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(lightAtk3Hash);
                 lightAttackCoolDown = lightAttack3CoolDown;
                 break;
 
             case 3:
+                MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(lightAtk4Hash);
                 lightAttackCoolDown = lightAttack4CoolDown;
                 break;
@@ -199,7 +207,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (!context.performed) return;
         if (isBlocking) return;
-
+        if (!playerController.characterController.isGrounded) return;
         CheckCombatMode();
         if (!inCombatMode) return;
 
@@ -231,23 +239,27 @@ public class PlayerCombat : MonoBehaviour
         {
             //Attack 1
             case 0:
+                MoveWhileAttack(2f,0.4f);
                 animator.SetTrigger(heavyAtk1Hash);
                 heavyAttackCoolDown = heavyAttack1CoolDown;
                 break;
 
             //Attack 2
             case 1:
+                MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(heavyAtk2Hash);
                 heavyAttackCoolDown = heavyAttack2CoolDown;
                 break;
 
             //Attack 3
             case 2:
+                MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(heavyAtk3Hash);
                 heavyAttackCoolDown = heavyAttack3CoolDown;
                 break;
 
             case 3:
+                MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(heavyAtk4Hash);
                 heavyAttackCoolDown = heavyAttack4CoolDown;
                 break;
@@ -296,6 +308,33 @@ public class PlayerCombat : MonoBehaviour
             });
         }
     }
+
+    private void MoveWhileAttack(float movementAmount, float duration) {
+        Transform enemyTransform = battleSphereDetection.FindClosestEnemy();
+
+        // Calculate the initial target position
+        Vector3 targetPosition = transform.position + transform.forward * movementAmount;
+
+        // Check if the path to the target position is clear
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, movementAmount)) {
+            // If the raycast hits something, adjust the target position to stop before the obstacle
+            targetPosition = hit.point - transform.forward * 0.5f; // Adjust this value as needed to stop the player before the obstacle
+        }
+
+        if (enemyTransform != null) {
+            float distance = Vector3.Distance(transform.position, enemyTransform.position);
+            if (distance > 3f) {
+                // Move the character using DOTween
+                transform.DOMove(targetPosition, duration);
+            }
+        }
+        else {
+            // Move the character using DOTween
+            transform.DOMove(targetPosition, duration);
+        }
+    }
+
 
     private void LookAtTarget()
     {
@@ -358,6 +397,7 @@ public class PlayerCombat : MonoBehaviour
         {
             if(inCombatMode)
             {
+                if (!playerController.characterController.isGrounded) return;
                 inCombatMode = false;
                 animator.SetTrigger(keepSwordHash);
                 animator.SetBool(inCombatHash, false);
@@ -375,6 +415,7 @@ public class PlayerCombat : MonoBehaviour
                 LookAtTarget();
                 animator.SetTrigger(blockStartHash);
                 isBlocking = true;
+                isAttacking = false;
             }
         }
     }

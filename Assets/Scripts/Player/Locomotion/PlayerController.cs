@@ -275,6 +275,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!isDashOnCoolDown)
             {
+                playerCombat.isAttacking = false;
                 StartCoroutine(Dash());
             }
         }

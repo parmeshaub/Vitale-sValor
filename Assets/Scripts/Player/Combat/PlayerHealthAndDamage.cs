@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class PlayerHealthAndDamage : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerHealthAndDamage : MonoBehaviour
     private SwordManager swordManager;
     private CameraManager cameraManager;
     [SerializeField] private ShieldScript shieldManager;
+    [SerializeField] private CinemachineImpulseSource impulseSource;
+    private Vector3 impulseDirection = new Vector3(0,-0.5f,0);
 
     private bool deathDoOnce = false;
 
@@ -50,9 +53,10 @@ public class PlayerHealthAndDamage : MonoBehaviour
         }
     }
 
-    private void TakeDamage(int damageDealt){
+    public void TakeDamage(float damageDealt){
         //Deal Damage
         currentPlayerHealth -= damageDealt;
+        impulseSource.GenerateImpulse(impulseDirection);
 
         //Check if Death
         CheckDeath();

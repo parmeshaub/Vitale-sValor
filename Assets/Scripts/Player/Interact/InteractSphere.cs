@@ -45,7 +45,7 @@ public class InteractSphere : MonoBehaviour
                 closestInteractable = interactable;
             }
         }
-
+        Debug.Log(closestInteractable);
         return closestInteractable;
     }
 }

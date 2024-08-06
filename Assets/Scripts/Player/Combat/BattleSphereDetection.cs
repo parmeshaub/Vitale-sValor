@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class BattleSphereDetection : MonoBehaviour
 {
     private List<GameObject> enemiesInRange = new List<GameObject>();
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
@@ -44,5 +45,15 @@ public class BattleSphereDetection : MonoBehaviour
         }
 
         return closestEnemy;
+    }
+
+    public void RemoveEnemy(GameObject enemyToRemove) {
+        if (enemiesInRange.Contains(enemyToRemove)) {
+            enemiesInRange.Remove(enemyToRemove);
+            Debug.Log("Enemy successfully removed: " + enemyToRemove.name);
+        }
+        else {
+            Debug.LogWarning("Attempted to remove enemy not in list: " + enemyToRemove.name);
+        }
     }
 }

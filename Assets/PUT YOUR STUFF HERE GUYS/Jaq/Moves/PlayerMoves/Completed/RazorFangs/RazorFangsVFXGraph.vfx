@@ -2712,7 +2712,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614646}
   m_ExposedName: GroundSize
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 3
   m_Category: MoveProperties
   m_Min:
     m_Type:
@@ -3152,7 +3152,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614658}
   m_ExposedName: GroundColor
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 6
   m_Category: MoveProperties
   m_Min:
     m_Type:
@@ -5800,7 +5800,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614792}
   m_ExposedName: SpikesAnimation
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 9
   m_Category: MoveProperties
   m_Min:
     m_Type:
@@ -7968,7 +7968,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614857}
   m_ExposedName: GroundCount
   m_Exposed: 1
-  m_Order: 8
+  m_Order: 10
   m_Category: MoveProperties
   m_Min:
     m_Type:
@@ -8227,7 +8227,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614864}
   m_ExposedName: Delay
   m_Exposed: 1
-  m_Order: 9
+  m_Order: 11
   m_Category: MoveProperties
   m_Min:
     m_Type:
@@ -8379,7 +8379,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614866}
   m_ExposedName: Distance
   m_Exposed: 1
-  m_Order: 10
+  m_Order: 12
   m_Category: MoveProperties
   m_Min:
     m_Type:
@@ -26262,7 +26262,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615725}
   m_ExposedName: SpikeColor
   m_Exposed: 1
-  m_Order: 11
+  m_Order: 13
   m_Category: MoveProperties
   m_Min:
     m_Type:
@@ -26518,7 +26518,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615731}
   m_ExposedName: SpikeDissolveColor
   m_Exposed: 1
-  m_Order: 12
+  m_Order: 14
   m_Category: MoveProperties
   m_Min:
     m_Type:
@@ -29604,7 +29604,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615848}
   m_ExposedName: ShardsAmount
   m_Exposed: 1
-  m_Order: 13
+  m_Order: 15
   m_Category: MoveProperties
   m_Min:
     m_Type:
@@ -36571,7 +36571,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616080}
   m_ExposedName: ShardsLifetime
   m_Exposed: 1
-  m_Order: 14
+  m_Order: 16
   m_Category: 
   m_Min:
     m_Type:
@@ -36643,7 +36643,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616148}
   m_ExposedName: IceColor
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 8
   m_Category: IceShardProperties
   m_Min:
     m_Type:
@@ -36851,7 +36851,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616154}
   m_ExposedName: FresnalStrength
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 5
   m_Category: IceShardProperties
   m_Min:
     m_Type:
@@ -36935,7 +36935,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616156}
   m_ExposedName: RefractionStrength
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 4
   m_Category: IceShardProperties
   m_Min:
     m_Type:
@@ -37009,7 +37009,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616158}
   m_ExposedName: Icetiling
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 7
   m_Category: IceShardProperties
   m_Min:
     m_Type:
@@ -39432,7 +39432,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616255}
   m_ExposedName: SpikesApperance
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 2
   m_Category: IceShardProperties
   m_Min:
     m_Type:
@@ -39528,7 +39528,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616257}
   m_ExposedName: OutlineColor
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 1
   m_Category: IceShardProperties
   m_Min:
     m_Type:

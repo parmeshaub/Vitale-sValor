@@ -20,8 +20,8 @@ public class PlayerCombat : MonoBehaviour
     private PlayerController playerController;
 
     private PlayerInput playerInput;
-    private CharacterController characterController;
-    private Animator animator;
+    public CharacterController characterController;
+    public Animator animator;
     [SerializeField] private PlayerStatsManager playerStatsManager;
 
     //Combat Editables
@@ -309,7 +309,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    private void MoveWhileAttack(float movementAmount, float duration) {
+    public void MoveWhileAttack(float movementAmount, float duration) {
         if (!playerController.characterController.isGrounded) return;
         Transform enemyTransform = battleSphereDetection.FindClosestEnemy();
 

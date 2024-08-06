@@ -7,10 +7,10 @@ using Cinemachine;
 
 public class PlayerHealthAndDamage : MonoBehaviour
 {
-    [SerializeField] private float currentPlayerHealth = 100;
-    [SerializeField] private float maxPlayerHealth = 100;
+    [SerializeField] private float currentPlayerHealth;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider manaSlider;
+    private float maxPlayerHealth;
 
     [Header("Heart Break UI")]
     [SerializeField] private GameObject heartbreakSmall;
@@ -23,6 +23,7 @@ public class PlayerHealthAndDamage : MonoBehaviour
     private CameraManager cameraManager;
     [SerializeField] private ShieldScript shieldManager;
     [SerializeField] private CinemachineImpulseSource impulseSource;
+    private PlayerStatsManager playerStatsManager;
     private Vector3 impulseDirection = new Vector3(0,-0.5f,0);
 
     private bool deathDoOnce = false;
@@ -38,9 +39,12 @@ public class PlayerHealthAndDamage : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         playerInputManager = PlayerInputManager.instance;
         swordManager = SwordManager.instance;
+        playerStatsManager = PlayerStatsManager.instance;
 
+        maxPlayerHealth = playerStatsManager.maxHealth;
         currentPlayerHealth = maxPlayerHealth;
-        
+
+
         SetMaxToHealth();
         InitializeHeartBreak();
         deathDoOnce = false;
@@ -89,7 +93,7 @@ public class PlayerHealthAndDamage : MonoBehaviour
     }
 
     private void SetMaxToHealth(){
-        currentPlayerHealth = maxPlayerHealth;
+        currentPlayerHealth = playerStatsManager.maxHealth;;
         healthSlider.value = currentPlayerHealth;
     }
 

@@ -14,17 +14,34 @@ public class DraggableSkill : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     [HideInInspector] public Transform parentAfterMove;
     public bool isUsedMagicSlot = false;
     [SerializeField] private TMP_Text skillTitle;
+    private bool isUnlocked;
+    private MagicLockManager magicLockManager;
+
+    private void Awake() {
+        magicLockManager = MagicLockManager.instance;
+    }
 
     void Start() {
-        uiDisplayImage.sprite = magicMove.icon;
+        if (magicMove.isUnlocked) {
+            isUnlocked = true;
+            uiDisplayImage.sprite = magicMove.icon;
+        }
+        else {
+            isUnlocked = false;
+            uiDisplayImage.sprite = magicMove.lockedIcon;
+        }
         skillTitle.text = magicMove.moveName;
     }
 
-    private void Update() {
-
+    private void OnEnable() {
+        magicLockManager.onMagicUnlocked.AddListener(UpdateUnlock);
+    }
+    private void OnDisable() {
+        magicLockManager.onMagicUnlocked.RemoveListener(UpdateUnlock);
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
+        if (!isUnlocked) return;
         parentAfterMove = transform.parent; // To save the current parent.
         transform.SetParent(parentDuringMove.transform); // Set the Canvas as Parent DURING Drag.
         transform.SetAsLastSibling(); // Make sure the Image is at the top of the view.
@@ -38,17 +55,30 @@ public class DraggableSkill : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
 
     public void OnDrag(PointerEventData eventData) {
+        if (!isUnlocked) return;
         transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        if(isUsedMagicSlot) {
+        if (!isUnlocked) return;
+        if (isUsedMagicSlot) {
             transform.SetParent(parentAfterMove);
             uiDisplayImage.raycastTarget = true;
         }
         else {
             transform.SetParent(originalTransform);
             uiDisplayImage.raycastTarget = true;
+        }
+    }
+
+    public void UpdateUnlock() {
+        if (magicMove.isUnlocked) {
+            isUnlocked = true;
+            uiDisplayImage.sprite = magicMove.icon;
+        }
+        else {
+            isUnlocked = false;
+            uiDisplayImage.sprite = magicMove.lockedIcon;
         }
     }
 }

@@ -15,3 +15,5 @@ MonoBehaviour:
   moveName: Glaciate
   moveDescription: 
   icon: {fileID: 21300000, guid: 8834f4c01464e6147b3e4c11ba6a5674, type: 3}
+  isUnlocked: 0
+  lockedIcon: {fileID: 21300000, guid: 12aaf862d03f35e4982c292413a266fc, type: 3}

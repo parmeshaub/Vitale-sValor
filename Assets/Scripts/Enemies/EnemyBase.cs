@@ -1,3 +1,4 @@
+using Guirao.UltimateTextDamage;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] public float minDamage;
     [SerializeField] public float maxDamage;
     [SerializeField] protected float moveSpeed;
+    [SerializeField] public UltimateTextDamageManager damageNumberManager;
+    [SerializeField] public Transform damageNumPosition;
 
     protected float currentHealth;
 
@@ -26,9 +29,10 @@ public abstract class EnemyBase : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
     }
-
     public virtual void TakeDamage(float damage) {
         currentHealth -= damage;
+        string roundedDamage = Mathf.Round(damage).ToString(); // Rounds to the nearest integer
+        damageNumberManager.Add(roundedDamage, damageNumPosition, "default");
         Debug.Log(currentHealth);
         if (currentHealth <= 0) {
             currentHealth = 0;
@@ -38,6 +42,7 @@ public abstract class EnemyBase : MonoBehaviour
             animator.SetTrigger(hurtHash);
         }
     }
+
 
     protected virtual void Death() {
         if (animator != null) {

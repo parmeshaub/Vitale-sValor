@@ -11,6 +11,10 @@ public class RuneManager : MonoBehaviour
     [SerializeField] private CurrentWorld worldEnum;
     [SerializeField] private GameObject runeUIObject;
     [SerializeField] private CanvasGroup runeCanvasGroup;
+    private bool isRuneOnCoolDown = false;
+    [SerializeField] private float cooldownSeconds;
+    [SerializeField] private GameObject coolDownText;
+    private Coroutine coolDownCoroutine;
 
     private float fadeInTime = 0.1f;
     private float fadeOutTime = 0.1f;
@@ -29,6 +33,7 @@ public class RuneManager : MonoBehaviour
         worldEnum = CurrentWorld.Flora; //Assuming we start in Flora, idk change it later
         runeCanvasGroup.alpha = 0; // makes sure the alpha is invisible.
         runeUIObject.SetActive(false);
+        coolDownText.SetActive(false);
     }
 
     private void OpenRuneMenu(InputAction.CallbackContext context) {
@@ -40,7 +45,7 @@ public class RuneManager : MonoBehaviour
             runeUIObject.SetActive(true);
             StartCoroutine(FadeIn(runeCanvasGroup));
             playerInputManager.SwitchToUIActionMapKeepCamera();
-            Time.timeScale = 0.2f;
+            Time.timeScale = 1f; //Might want to make slower.
         }
         else { // Rune Closed
             StartCoroutine(FadeOut(runeCanvasGroup));
@@ -51,26 +56,32 @@ public class RuneManager : MonoBehaviour
     }
     //JAQ PLS PLACE HERE----------------------------------------------------------------------------------------------------------------------
     public void ChangeToFlora() {
+        if (isRuneOnCoolDown  || coolDownCoroutine != null) return;
         //Check if already in Flora.
         if (worldEnum == CurrentWorld.Flora) return;
         worldEnum = CurrentWorld.Flora;
         Debug.Log("Changing to Flora");
+        coolDownCoroutine = StartCoroutine(StartCoolDown());
 
     }
 
     public void ChangeToFyre() {
+        if (isRuneOnCoolDown || coolDownCoroutine != null) return;
         //Check if already in Fyre.
         if (worldEnum == CurrentWorld.Fyre) return;
         worldEnum = CurrentWorld.Fyre;
         Debug.Log("Changing to Fyre");
+        coolDownCoroutine = StartCoroutine(StartCoolDown());
 
     }
 
     public void ChangeToFlurry() {
+        if (isRuneOnCoolDown || coolDownCoroutine != null) return;
         //Check if already in Flurry.
         if (worldEnum == CurrentWorld.Flurry) return;
         worldEnum = CurrentWorld.Flurry;
         Debug.Log("Changing to Flurry");
+        coolDownCoroutine = StartCoroutine(StartCoolDown());
 
     }
     //JAQ PLS PLACE HERE----------------------------------------------------------------------------------------------------------------------
@@ -97,6 +108,15 @@ public class RuneManager : MonoBehaviour
         canvasGroup.alpha = 0f; // ensure its fully transparent at the end
 
         runeUIObject.SetActive(false);
+    }
+
+    private IEnumerator StartCoolDown() {
+        isRuneOnCoolDown = true;
+        coolDownText.SetActive(true);
+        yield return new WaitForSeconds(cooldownSeconds);
+        isRuneOnCoolDown = false;
+        coolDownText.SetActive(false);
+        coolDownCoroutine = null;
     }
 }
 

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,37 +10,35 @@ public class HeavyAttackCollider : MonoBehaviour
 
     [SerializeField] private GameObject normalHitVFXPrefab;
 
-    private void Start()
-    {
+    [SerializeField] private CinemachineImpulseSource impulseSource;
+    private Vector3 impulseVelocity = new Vector3(0f, -0.3f, 0f);
+
+    private void Start() {
         heavyAttackCollider.enabled = false; //Make sure that collider is off.
+        //impulseSource = GetComponent<CinemachineImpulseSource>();
     }
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
         // Get the EnemyClass component from the collided object.
-        EnemyClass enemyClass = other.GetComponent<EnemyClass>();
-        if (enemyClass != null)
-        {
+        EnemyBase enemyClass = other.GetComponent<EnemyBase>();
+        if (enemyClass != null) {
             Vector3 contactPoint = other.ClosestPointOnBounds(transform.position);
             Instantiate(normalHitVFXPrefab, contactPoint, Quaternion.identity);
 
             float damage = 0;
 
-            Debug.Log("Heavy attack triggered");
             damage = playerCombat.HeavyRandomizeDamage();
 
             enemyClass.TakeDamage(damage);
 
-            
+            impulseSource.GenerateImpulse(impulseVelocity);
         }
     }
 
-    public void TurnHeavyAttackColliderOn()
-    {
+    public void TurnHeavyAttackColliderOn() {
         heavyAttackCollider.enabled = true;
     }
 
-    public void TurnHeavyAttackColliderOff()
-    {
+    public void TurnHeavyAttackColliderOff() {
         heavyAttackCollider.enabled = false;
     }
 }

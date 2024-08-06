@@ -6,7 +6,7 @@ TagManager:
   tags:
   - PlayerAttack
   - BossWall
-  - Tag
+  - Tree
   layers:
   - Default
   - TransparentFX

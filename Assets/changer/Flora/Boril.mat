@@ -76,21 +76,21 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO: 1
-    - _EdgeWidth: 0.3
+    - _EdgeWidth: 0
     - _Metallic: 0
-    - _NoiseScale: 1.11
-    - _NoiseStrength: 0
+    - _NoiseScale: 0.17
+    - _NoiseStrength: 0.07
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RadiusCutOff: 0.38
-    - _RadiusNoiseCutoff: 0.18
+    - _RadiusCutOff: 0.48
+    - _RadiusNoiseCutoff: 0.53
     - _Smoothness: 0
-    - _Speed: 1
+    - _Speed: 0.5
     - _edg1: 3.16
     - _edg2: 0.46
     - _transitionThreshold: 0
     m_Colors:
-    - _EdgeColor: {r: 5.239553, g: 0.1235744, b: 0.1235744, a: 0}
+    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
     - _InfluencingObjectPos: {r: 0, g: 0, b: 0, a: 0}
     - _InfluencingObjectScale: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

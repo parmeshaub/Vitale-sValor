@@ -32,8 +32,11 @@ public class Interactor : MonoBehaviour
     private Texture currentTex;
     private Texture targetTex;
 
+    public Color flurryBoundColor;
+    public Color fyreBoundColor;
+    public Color floraBoundColor;
 
-
+    public float normalDecreaseRate = 1.0f; // Rate at which the float value decreases
 
     public void Start()
     {
@@ -58,8 +61,6 @@ public class Interactor : MonoBehaviour
 
         // Used for growing
         initialScale = transform.localScale; // Store the initial scale
-
-        NodeTextureSwap("flurry", "set");
     }
 
     /// <summary>
@@ -104,21 +105,30 @@ public class Interactor : MonoBehaviour
         controller.transform.localScale = initialScale;
     }
 
-
-
-
-    /// <summary>
-    /// Finding out what the current and target textures are
-    /// </summary>
-    public void SetTextureTarget()
+    public IEnumerator ChangeNormalStrength(string state)
     {
+        var minValue = 0f;
+
         for (int i = 0; i < materialInstances.Length; i++)
         {
             Material material = materialInstances[i];
 
-        }
- 
+            if (state == "decrease")
+            {
+                float currentValue = material.GetFloat("_NoiseStrength");
+                currentValue -= normalDecreaseRate * Time.deltaTime;
+                currentValue = Mathf.Max(currentValue, minValue);
+                material.SetFloat("_NoiseStrength", currentValue);
+                yield return null;
+            }
+
+            else if (state == "reset")
+            {
+                material.SetFloat("_NoiseStrength", 0.53f);
+            }          
+        }    
     }
+
 
     /// <summary>
     /// When done swapping texture
@@ -149,7 +159,7 @@ public class Interactor : MonoBehaviour
         {
             // After completing texture swap
             StartCoroutine(ShrinkController());
-            ControllerDetails("hide");
+            ControllerDetails("hide", "none");
         }      
     }
 
@@ -222,7 +232,7 @@ public class Interactor : MonoBehaviour
     /// When shrinking back, make sure can't see the border effect of it going back
     /// </summary>
     /// <returns></returns>
-    public void ControllerDetails(string state)
+    public void ControllerDetails(string state, string goingWhere)
     {     
         for (int i = 0; i < materialInstances.Length; i++)
         {
@@ -234,7 +244,22 @@ public class Interactor : MonoBehaviour
 
             else if (state == "show")
             {
-                material.SetFloat("_RadiusNoiseCutoff", 0.18f); // Hides the noise effect
+                material.SetFloat("_RadiusNoiseCutoff", 0.53f); // Show noise
+            }
+
+
+            // Sets color for boundaries
+            if (goingWhere == "flurry")
+            {
+                material.SetColor("_EdgeColor", flurryBoundColor); 
+            }
+            else if (goingWhere == "flora")
+            {
+                material.SetColor("_EdgeColor", floraBoundColor);
+            }
+            else if (goingWhere == "fyre")
+            {
+                material.SetColor("_EdgeColor", fyreBoundColor);
             }
         }
     }
@@ -258,13 +283,15 @@ public class Interactor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(GrowController("flurry"));
-            ControllerDetails("show");
+            ControllerDetails("show", "flurry");
+            StartCoroutine(ChangeNormalStrength("decrease"));
         }
 
         if (Input.GetKeyDown(KeyCode.O))
         {
-            StartCoroutine(GrowController("flora"));
-            ControllerDetails("show");
+            StartCoroutine(GrowController("fyre"));
+            ControllerDetails("show", "fyre");
+            StartCoroutine(ChangeNormalStrength("decrease"));
         }
     }
 }

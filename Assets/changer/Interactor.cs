@@ -8,6 +8,8 @@ using UnityEngine.Rendering;
 public class Interactor : MonoBehaviour
 {
     public GameObject controller; // The sphere controller in charge of lerping textures
+    public GameObject lightingManager;
+
 
     public Transform influencingObject; // Assign Object A in the inspector
     public Renderer objectRenderer; // Renderer of Object B
@@ -37,6 +39,7 @@ public class Interactor : MonoBehaviour
     public Color floraBoundColor;
 
     public float normalDecreaseRate = 1.0f; // Rate at which the float value decreases
+    private TargetInteractor myScript;
 
     public void Start()
     {
@@ -61,6 +64,9 @@ public class Interactor : MonoBehaviour
 
         // Used for growing
         initialScale = transform.localScale; // Store the initial scale
+
+
+        myScript = controller.GetComponent<TargetInteractor>();
     }
 
     /// <summary>
@@ -285,13 +291,25 @@ public class Interactor : MonoBehaviour
             StartCoroutine(GrowController("flurry"));
             ControllerDetails("show", "flurry");
             StartCoroutine(ChangeNormalStrength("decrease"));
+            myScript.GoingWhere("flurry");
+            lightingManager.GetComponent<LightingManager>().FloraToFlurry();
         }
 
         if (Input.GetKeyDown(KeyCode.O))
         {
+            StartCoroutine(GrowController("flora"));
+            ControllerDetails("show", "flora");
+            StartCoroutine(ChangeNormalStrength("decrease"));
+            myScript.GoingWhere("flora");
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
             StartCoroutine(GrowController("fyre"));
             ControllerDetails("show", "fyre");
             StartCoroutine(ChangeNormalStrength("decrease"));
+            myScript.GoingWhere("fyre");
         }
+
     }
 }

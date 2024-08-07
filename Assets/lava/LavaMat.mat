@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3589331738456849973
+--- !u!114 &-1508695190297546319
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,14 +20,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NatureWater
-  m_Shader: {fileID: -6465566751694194690, guid: 4ae3b203ce5de1b45a3545fe15ceda21,
+  m_Name: LavaMat
+  m_Shader: {fileID: -6465566751694194690, guid: 608ab1650ff8e8642b3cc00fb0c3a328,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -37,16 +37,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainNorm:
-        m_Texture: {fileID: 2800000, guid: da42076a6b1a3404c87d195f488ea0dd, type: 3}
+    - Texture2D_132C60F8:
+        m_Texture: {fileID: 2800000, guid: 31d05cf463e2a934bb23d519da9b2754, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Refraction:
-        m_Texture: {fileID: 2800000, guid: a7c43003ce6344b4cb20617ed467a704, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SecondNorm:
-        m_Texture: {fileID: 2800000, guid: a7c43003ce6344b4cb20617ed467a704, type: 3}
+    - Texture2D_64F7E809:
+        m_Texture: {fileID: 2800000, guid: f7c77085803c00a4ea1ac97da99b12df, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -63,25 +59,29 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Depth: 8
-    - _Displacement: 0
-    - _FoamAmt: 0.5
-    - _FoamCutoff: 10
-    - _FoamScale: 0
-    - _FoamSpeed: 0.4
-    - _NormalStrength: 0.84
+    - Vector1_2560D906: 0.771
+    - Vector1_2E6661E6: 10
+    - Vector1_3ED71A56: 0.43
+    - Vector1_5214E2BE: 0.02
+    - Vector1_7B9C2379: 0.713
+    - Vector1_88114E4A: 0.05
+    - Vector1_A0F0BBF5: 0.504
+    - Vector1_B70459B8: 0.15
+    - Vector1_BDCBE303: 0
+    - Vector1_C11943F1: 0.22
+    - Vector1_DEBF9F77: 0.07
+    - Vector1_E512B7AC: 1.89
+    - Vector1_E8E0DC8: 3.26
+    - Vector1_E97BF845: 0.501
+    - Vector1_ECBD0369: 0
+    - Vector1_EEB61C8: 0.07
+    - Vector1_F2179F34: 0.1
+    - Vector1_F4FD793F: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RefractionSpeed: 50
-    - _RefractionStrength: 0
-    - _Smoothnes: 0.257
-    - _Strength: 0.1
     m_Colors:
-    - _DeepColor: {r: 0.24563885, g: 0.58812803, b: 0.75471693, a: 0.6745098}
-    - _FoamColor: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 1}
-    - _MainNormScale: {r: 25, g: 25, b: 0, a: 0}
-    - _RefractionScale: {r: 1, g: 1, b: 0, a: 0}
-    - _SecondNormScale: {r: 25, g: 25, b: 0, a: 0}
-    - _ShallowColor: {r: 0.25698635, g: 0.66017365, b: 0.7075471, a: 0.7019608}
-    - _WavesTiling: {r: 1, g: 1, b: 0, a: 0}
+    - Color_6D41895: {r: 0.5566037, g: 0.03938234, b: 0.03938234, a: 1}
+    - Color_B8D925A3: {r: 0.6981132, g: 0.1754782, b: 0.07573871, a: 1}
+    - Color_C0AA5855: {r: 0.8773585, g: 0.7104708, b: 0.19037014, a: 1}
+    - Color_D89EBD41: {r: 0.25471696, g: 0.083175175, b: 0.06127622, a: 1}
   m_BuildTextureStacks: []

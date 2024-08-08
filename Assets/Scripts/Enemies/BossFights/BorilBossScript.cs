@@ -13,12 +13,10 @@ public class BorilBossScript : EnemyBase
     private float distanceThresholdToPlayer = 3;
     [SerializeField] private float chargeSpeed;
     [SerializeField] private float chargeDuration;
+    private int swipeCount = 0;
     private bool isCharging = false;
 
     private static readonly int isMovingHash = Animator.StringToHash("isMoving");
-
-    [SerializeField] private GameObject projectileVFX;
-    [SerializeField] private GameObject groundSmashVFX;
 
 
     private void Awake() {
@@ -36,9 +34,6 @@ public class BorilBossScript : EnemyBase
         playerObject = playerCombat.gameObject;
         currentPhase = IceBossPhases.Waiting;
         StartIceBoss();
-
-        currentHealth = maxHealth;
-        Debug.Log(currentHealth);
     }
 
     private void StartIceBoss() {
@@ -166,7 +161,6 @@ public class BorilBossScript : EnemyBase
     }
 
     private IEnumerator Charge() {
-        Instantiate(groundSmashVFX, transform.position, Quaternion.identity);
         Debug.Log("Charge");
         Vector3 targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
         Vector3 direction = (targetPosition - transform.position).normalized;
@@ -199,7 +193,6 @@ public class BorilBossScript : EnemyBase
             Vector3 targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
             animator.SetTrigger("Swipe");
             transform.DOLookAt(targetPosition, 0.2f);
-            Instantiate(projectileVFX, transform.forward, Quaternion.identity);
             yield return new WaitForSeconds(2f);
         }
         if(currentPhase == IceBossPhases.Phase_One) {

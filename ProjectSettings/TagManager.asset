@@ -7,7 +7,6 @@ TagManager:
   - PlayerAttack
   - BossWall
   - Tree
-  - Pillar
   layers:
   - Default
   - TransparentFX

@@ -27,6 +27,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _SWAYING
+  - _TERRAINBLEND
   - _USEWINDNOISETEX
   m_InvalidKeywords:
   - _GRASSTILT_ON
@@ -90,7 +91,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TerrainRT:
-        m_Texture: {fileID: 8400000, guid: 7b463af085dbadb4cbf5fc30f50ec707, type: 2}
+        m_Texture: {fileID: 8400000, guid: 0413ae8b06344f34b85153139ff5d895, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TerrainShadowMask:
@@ -145,10 +146,10 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Swaying: 1
-    - _TERRAINBLEND: 0
+    - _TERRAINBLEND: 1
     - _TerrainBlend: 1
-    - _TerrainOffset: 0.01
-    - _TerrainSize: 100
+    - _TerrainOffset: 655.3
+    - _TerrainSize: 300
     - _TiltFactor: 1
     - _USETEX: 0
     - _USEWINDNOISETEX: 1

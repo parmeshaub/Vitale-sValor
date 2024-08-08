@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _currentTex:
-        m_Texture: {fileID: 2800000, guid: 80b3d924b1d4f6447bc150db33c13ae4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 81dec7e28ebeca34fa676f6f03b4affa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _floraTex:

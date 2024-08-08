@@ -27,7 +27,6 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _SWAYING
-  - _TERRAINBLEND
   - _USEWINDNOISETEX
   m_InvalidKeywords:
   - _GRASSTILT_ON
@@ -122,7 +121,7 @@ Material:
     m_Floats:
     - _BOOLEAN_1: 0
     - _BumpScale: 1
-    - _Cutoff: 0.421
+    - _Cutoff: 0.504
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
@@ -146,7 +145,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Swaying: 1
-    - _TERRAINBLEND: 1
+    - _TERRAINBLEND: 0
     - _TerrainBlend: 1
     - _TerrainOffset: 655.3
     - _TerrainSize: 300
@@ -159,23 +158,23 @@ Material:
     - _UseWindNoiseTex: 1
     - _WindIntensity: 0.15
     - _WindSpeed: 0.5
-    - _WindWeight: 0.5
+    - _WindWeight: 1.42
     - _ZWrite: 1
     m_Colors:
     - _AdditionalWPO: {r: 1, g: 0, b: 0.5, a: 0}
-    - _BottomColor: {r: 0.1240938, g: 0.14150941, b: 0.11414203, a: 1}
+    - _BottomColor: {r: 0.26144558, g: 0.5, b: 0.0731132, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NearFarRange: {r: 400, g: 25, b: 0, a: 0}
     - _NoiseContrast: {r: 241.67, g: -160.12, b: 0.37, a: 1}
     - _SSSColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColorNear: {r: 0.2285004, g: 0.4716981, b: 0.12682448, a: 1}
+    - _TopColor: {r: 2.9960783, g: 2.9960783, b: 2.9960783, a: 1}
+    - _TopColorNear: {r: 0.030114725, g: 0.20754719, b: 0, a: 1}
     - _TopColorNear_1: {r: 0, g: 0, b: 0, a: 0}
     - _TopColorNear_2: {r: 0, g: 0, b: 0, a: 0}
     - _TopColorNear_3: {r: 0, g: 0, b: 0, a: 0}
     - _UVContrast: {r: 0, g: 0, b: 0.96, a: 0.37}
     - _WindNoiseColor: {r: 0.52156866, g: 0.86666673, b: 0.43529415, a: 1}
-    - _WindNoiseTexScale: {r: 100, g: 400, b: 0, a: 0}
+    - _WindNoiseTexScale: {r: 50, g: 200, b: 0, a: 0}
   m_BuildTextureStacks: []

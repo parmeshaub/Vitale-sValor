@@ -4,16 +4,36 @@ using UnityEngine;
 
 public class RecalculateBounds : MonoBehaviour
 {
+    public Color[] greenColors;
+    private Material leaveMat;
+
+
     private void Start()
     {
-        foreach (Transform treeChild in this.transform)
+        Mesh mesh = this.GetComponent<MeshFilter>().mesh;
+        mesh.bounds = new Bounds(Vector3.zero, Vector3.one * 10000);
+
+        Renderer renderer = GetComponent<Renderer>();
+        Material[] materials = renderer.materials;
+
+        for (int i = 0; i < materials.Length; i++)
         {
-            if (treeChild.name == "bush")
+            if (materials[i].name == "diffleavesUpdated (Instance)")
             {
-                Mesh mesh = treeChild.GetComponent<MeshFilter>().mesh;
-                mesh.bounds = new Bounds(Vector3.zero, Vector3.one * 10000);
+                leaveMat = renderer.materials[1];
+                ColorRandomizer();
             }
-        }   
+        }
+    }
+
+
+
+
+    public void ColorRandomizer()
+    {
+        int randomIndex = Random.Range(0, greenColors.Length);
+        leaveMat.SetColor("_LeafColor", greenColors[randomIndex]);
+        Debug.Log("set");
     }
 
 }

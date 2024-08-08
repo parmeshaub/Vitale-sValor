@@ -11,32 +11,33 @@ public class TargetInteractor : MonoBehaviour
 
     public float treeDuration = 5.0f; // Duration of the lerp
 
-    private int hard = 0;
     public string goingWhere;
 
+    private void Start()
+    {
+        goingWhere = "flurry";
+    }
+
+    
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
 
         // Check if the object entering the trigger zone has the specified tag
-        if (other.gameObject.name == "bush")
+        if (other.gameObject.name == "Tree")
         {
-            Transform treeObj = other.gameObject.transform;
+            Renderer treeObj = other.gameObject.GetComponent<Renderer>();
+            Material treeMaterial = treeObj.materials[1];
 
-            if (hard <= 0)
+            Debug.Log(treeMaterial.name);
+
+            if ((goingWhere == "flurry") || (goingWhere == "fyre"))
             {
-
-                StartCoroutine(LerpTreeColor(treeObj.gameObject.GetComponent<Renderer>()));
+                StartCoroutine(LerpTreeTransparency(treeMaterial, 1, 0));
             }
-
-
-            /*foreach (Transform child in treeObj)
+            else if (goingWhere == "flora")
             {
-                if (child.name == "bush")
-                {
-                    StartCoroutine(LerpTreeColor(child.gameObject.GetComponent<Renderer>(), "flurry"));
-                }
-            }*/
+                StartCoroutine(LerpTreeTransparency(treeMaterial, 0, 1));
+            }
         }
 
         if (other.gameObject.name == "water")
@@ -51,12 +52,9 @@ public class TargetInteractor : MonoBehaviour
     }
 
 
-    public IEnumerator LerpTreeColor(Renderer renderer)
+    public IEnumerator LerpTreeTransparency(Material treeMat, float currentTarget ,float finalTarget)
     {
-
         float elapsedTime = 0.0f;
-
-        Color originalColor = renderer.material.GetColor("_LeafColor");
 
         while (elapsedTime < treeDuration)
         {
@@ -66,30 +64,14 @@ public class TargetInteractor : MonoBehaviour
             // Calculate the lerp value
             float lerpValue = elapsedTime / treeDuration;
 
-            if (goingWhere == "flurry")
-            {
-                // Lerp the color
-                Color currentColor = Color.Lerp(originalColor, treeSnowColor, lerpValue);
 
-                // Apply the current color to the material
-                renderer.material.SetColor("_LeafColor", currentColor);
-                renderer.material.SetFloat("_SwaySpeed", 0.03f);
-            }
-
-            if (goingWhere == "flora")
-            {
-                // Lerp the color
-                Color currentColor = Color.Lerp(originalColor, treeNatureColor, lerpValue);
-
-                // Apply the current color to the material
-                renderer.material.SetColor("_LeafColor", currentColor);
-                renderer.material.SetFloat("_SwaySpeed", 2.4f);
-            }
-
+            float currentValue = Mathf.Lerp(currentTarget, finalTarget, lerpValue);
+            treeMat.SetFloat("_Alpha", currentValue);
+        }
 
         // Yield until the next frame
         yield return null;
-        }
+        
     }
     
 }

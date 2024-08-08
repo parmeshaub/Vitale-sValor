@@ -30,9 +30,14 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - TransparentDepthPrepass
+  - TransparentDepthPostpass
+  - TransparentBackface
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -53,6 +58,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: e8553ffa10a7b684bb08433ef12cbf4c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _cloudsNoiseBase:
+        m_Texture: {fileID: 2800000, guid: f534ec4355f2c7242bc4a8c3787f97ff, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _cloudsNoisePrimary:
+        m_Texture: {fileID: 2800000, guid: e8553ffa10a7b684bb08433ef12cbf4c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -68,28 +81,102 @@ Material:
     m_Ints: []
     m_Floats:
     - Vector1_166C34A9: 0.17
-    - Vector1_249357C1: 0.002
-    - Vector1_2CC6A532: 0.6
-    - Vector1_3B7A233E: 3.5
-    - Vector1_6F3D4927: 0.08
-    - Vector1_9BA3FBEE: 0
-    - Vector1_9E12CF26: 0.308
-    - Vector1_B93A03DE: 0.008
-    - Vector1_BA803F6: 0.607
-    - Vector1_D80769F7: 1.84
-    - Vector1_ECE38ED2: 0.2
-    - Vector1_FA4E5253: 0.05
+    - Vector1_249357C1: 0.073
+    - Vector1_2CC6A532: 0
+    - Vector1_3B7A233E: 1.08
+    - Vector1_6F3D4927: -0.328
+    - Vector1_9BA3FBEE: 0.2
+    - Vector1_9E12CF26: 0.711
+    - Vector1_B93A03DE: 0
+    - Vector1_BA803F6: 0.365
+    - Vector1_D80769F7: 0
+    - Vector1_ECE38ED2: 0
+    - Vector1_FA4E5253: 0
     - Vector1_FE797C36: 0
+    - _AddPrecomputedVelocity: 0
+    - _AlphaCutoffEnable: 0
+    - _AlphaDstBlend: 0
+    - _AlphaSrcBlend: 1
+    - _BlendMode: 0
+    - _ConservativeDepthOffsetEnable: 0
+    - _CullMode: 2
+    - _CullModeForward: 2
+    - _DepthOffsetEnable: 0
+    - _DoubleSidedEnable: 0
+    - _DoubleSidedGIMode: 0
+    - _DoubleSidedNormalMode: 2
+    - _DstBlend: 0
+    - _EnableBlendModePreserveSpecularLighting: 0
+    - _EnableFogOnTransparent: 1
+    - _ExcludeFromTUAndAA: 0
+    - _HorizontalWidth: 6.98
+    - _OpaqueCullMode: 2
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RenderQueueType: 1
+    - _SrcBlend: 1
+    - _StencilRef: 0
+    - _StencilRefDepth: 1
+    - _StencilRefDistortionVec: 4
+    - _StencilRefMV: 33
+    - _StencilWriteMask: 6
+    - _StencilWriteMaskDepth: 9
+    - _StencilWriteMaskDistortionVec: 4
+    - _StencilWriteMaskMV: 43
+    - _SurfaceType: 0
+    - _TransparentBackfaceEnable: 0
+    - _TransparentCullMode: 2
+    - _TransparentDepthPostpassEnable: 0
+    - _TransparentDepthPrepassEnable: 0
+    - _TransparentSortPriority: 0
+    - _TransparentWritingMotionVec: 0
+    - _TransparentZWrite: 0
+    - _UseShadowThreshold: 0
+    - _ZTestDepthEqualForOpaque: 3
+    - _ZTestTransparent: 4
+    - _ZWrite: 1
+    - _baseNoiseScale: 0.03
+    - _cloudsCutoff: 0.162
+    - _cloudsMoveSpeed: -0.01
+    - _cloudsPrimaryScale: 0.03
+    - _cloudsSecondaryScale: 0.03
+    - _horizonBrightness: 1.23
+    - _sunRadius: 0
     m_Colors:
-    - Color_1EB49FED: {r: 0.8490566, g: 0.63861614, b: 0.20425417, a: 0}
-    - Color_424F81E0: {r: 0.509434, g: 0.4124206, b: 0.23309009, a: 0}
-    - Color_68FD0CD8: {r: 0.34060165, g: 0.7518614, b: 0.8113208, a: 0}
-    - Color_83CF459: {r: 0.4321378, g: 0.49711585, b: 0.7830189, a: 0}
-    - Color_AB9D6D2F: {r: 0.39967695, g: 0.20558918, b: 0.5660378, a: 0}
-    - Color_B54BEABE: {r: 0.8773585, g: 0.8152813, b: 0.8152813, a: 0}
-    - Color_BE31CDF2: {r: 0.13656995, g: 0.5792887, b: 0.9339623, a: 0}
-    - Color_D230EFA1: {r: 0.13150355, g: 0.09385012, b: 0.3490566, a: 0}
-    - Color_E5129607: {r: 0.3009968, g: 0.7169812, b: 0.5658305, a: 0}
+    - Color_1EB49FED: {r: 0.8490566, g: 0.63861614, b: 0.20425412, a: 1}
+    - Color_424F81E0: {r: 0, g: 0, b: 0, a: 0}
+    - Color_68FD0CD8: {r: 0.764151, g: 0.1296975, b: 0.05406728, a: 0}
+    - Color_83CF459: {r: 0.4339623, g: 0.19760782, b: 0, a: 0}
+    - Color_AB9D6D2F: {r: 0, g: 0, b: 0, a: 0}
+    - Color_B54BEABE: {r: 0, g: 0, b: 0, a: 0}
+    - Color_BE31CDF2: {r: 0, g: 0, b: 0, a: 0}
+    - Color_D230EFA1: {r: 0.087664664, g: 0.059006754, b: 0.24528301, a: 0}
+    - Color_E5129607: {r: 0, g: 0, b: 0, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _dayCloudsEdge: {r: 0, g: 0, b: 0, a: 0}
+    - _dayCloudsMain: {r: 0, g: 0, b: 0, a: 0}
+    - _daySkyColorBottom: {r: 0.21698111, g: 0.11098137, b: 0.07266821, a: 0}
+    - _daySkyColorTop: {r: 0.2, g: 0.03529412, b: 0.043137256, a: 0}
+    - _horizonColor: {r: 0, g: 0, b: 0, a: 0}
+    - _nightCloudsEdge: {r: 0, g: 0, b: 0, a: 0}
+    - _nightCloudsMain: {r: 0, g: 0, b: 0, a: 0}
+    - _nightSkyColorTop: {r: 0, g: 0, b: 0, a: 0}
+    - nightSkyColorBottom: {r: 0.5764706, g: 0.08235294, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &3554000333191039355
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 13
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 

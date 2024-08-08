@@ -26,12 +26,6 @@ public class CameraManager : MonoBehaviour
         thirdpersoncam = thirdPersonCamera.GetComponent<CinemachineFreeLook>();
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.V)) {
-            SwitchToMagicCamera();
-        }
-    }
-
     public void FreezeCamera() {
         cinemachineBrain.enabled = false;
     }
@@ -47,19 +41,14 @@ public class CameraManager : MonoBehaviour
     public void TurnOnThirdPersonCamera() {
         thirdPersonCamera.SetActive(true);
     }
+    public void TurnOnMagicCamera() {
+        magicCamera.SetActive(true);
+        TurnOffThirdPersonCamera();
+    }
 
-    //TODO - Flip FLop Function
-    public void SwitchToMagicCamera() {
-        magicCameraBool = !magicCameraBool;
-
-        if (magicCameraBool) {
-            magicCamera.SetActive(false);
-            TurnOnThirdPersonCamera();
-        }
-        else {
-            TurnOffThirdPersonCamera();
-            magicCamera.SetActive(true);
-        }
+    public void TurnOffMagicCamera() {
+        magicCamera.SetActive(false);
+        TurnOnThirdPersonCamera();
     }
 
     public void CantMoveCamera() {

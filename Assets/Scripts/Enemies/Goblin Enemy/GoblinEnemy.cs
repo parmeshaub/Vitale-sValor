@@ -44,7 +44,6 @@ public class GoblinEnemy : EnemyBase
         states = GoblinStates.IDLE;
 
         currentHealth = maxHealth;
-        Debug.Log(currentHealth);
     }
 
     private void OnTriggerEnter(Collider other) {

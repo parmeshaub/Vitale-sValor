@@ -210,10 +210,11 @@ public class PlayerCombat : MonoBehaviour
         if (!context.performed) return;
         if (isBlocking) return;
         if (!playerController.characterController.isGrounded) return;
+         CheckCombatMode();
         if (!inCombatMode) return;
         if (castManager.isCasting) return;
 
-        CheckCombatMode();
+        
 
         //If Cooldown is off
         if (!isHeavyAttackOnCooldown && !isLightAttackOnCooldown)

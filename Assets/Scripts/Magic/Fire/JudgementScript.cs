@@ -7,7 +7,7 @@ public class JudgementScript : MagicMoveSO
 {
     public override void Activate()
     {
-        Debug.Log("test");
+        Debug.Log("Judgement test");
     }
     public override void Cast() {
         throw new System.NotImplementedException();

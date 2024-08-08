@@ -11,6 +11,8 @@ public class MagicManager : MonoBehaviour
     private PlayerInput playerInput;
     public MagicMoveSO[] magicMoves = new MagicMoveSO[4];
     public MagicMoveSO nullMagic;
+    [SerializeField] private CastableScript castManager;
+    private MagicMoveSO activeCastableMagic;
 
     [SerializeField] private Image slot1Image;
     [SerializeField] private Image slot2Image;
@@ -26,6 +28,7 @@ public class MagicManager : MonoBehaviour
         playerInput.Gameplay.Magic2.started += ActivateMagic2;
         playerInput.Gameplay.Magic3.started += ActivateMagic3;
         playerInput.Gameplay.Magic4.started += ActivateMagic4;
+        playerInput.Gameplay.LightAttack.started += CheckCast;
 
     }
 
@@ -51,11 +54,30 @@ public class MagicManager : MonoBehaviour
     }
 
     private void CheckEnumType(int magicNum) {
+        
         if (magicMoves[magicNum].typeOfSkill == TypeOfSkill.INSTANT) {
             magicMoves[magicNum].Activate();
         }
-        else {
-            magicMoves[magicNum].Cast();
+        else if (castManager.isCasting) {
+            castManager.TurnOffCast();
+            activeCastableMagic = null;
+        }
+        else if (magicMoves[magicNum].typeOfSkill == TypeOfSkill.CASTABLE) {
+            castManager.TurnOnCast(magicMoves[magicNum]);
+            activeCastableMagic = magicMoves[magicNum];
+        }
+       
+
+
+    }
+
+    private void CheckCast(InputAction.CallbackContext context) {
+        if (context.started) {
+            if(activeCastableMagic != null && castManager.isCasting) {
+                activeCastableMagic.Activate();
+                castManager.TurnOffCast();
+                activeCastableMagic = null;
+            }
         }
     }
 

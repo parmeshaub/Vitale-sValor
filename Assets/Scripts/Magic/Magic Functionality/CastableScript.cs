@@ -7,13 +7,8 @@ public class CastableScript : MonoBehaviour
     [SerializeField] private GameObject castableDecal;
     public bool isCasting;
     private MagicMoveSO magicToCast;
-    private PlayerCombat playerCombat;
-    private CameraManager cameraManager;
-
-    private void Awake() {
-        playerCombat = PlayerCombat.Instance;
-        cameraManager = CameraManager.instance;
-    }
+    [SerializeField] private PlayerCombat playerCombat;
+    [SerializeField] private CameraManager cameraManager;
 
     private void Start() {
         castableDecal.SetActive(false);
@@ -22,13 +17,14 @@ public class CastableScript : MonoBehaviour
     public void TurnOnCast(MagicMoveSO magicToCast) {
         castableDecal.gameObject.SetActive(true);
         isCasting = true;
-        cameraManager.SwitchToMagicCamera();
+        cameraManager.TurnOnMagicCamera();
     }
 
     public void TurnOffCast() {
+        Debug.Log("cast off2");
         castableDecal.gameObject.SetActive(false);
         isCasting = false;
-        cameraManager.SwitchToMagicCamera();
+        cameraManager.TurnOffMagicCamera();
     }
 
     public void ActivateMagicMove() {

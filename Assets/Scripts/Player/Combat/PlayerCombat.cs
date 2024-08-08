@@ -23,6 +23,7 @@ public class PlayerCombat : MonoBehaviour
     public CharacterController characterController;
     public Animator animator;
     [SerializeField] private PlayerStatsManager playerStatsManager;
+    [SerializeField] private CastableScript castManager;
 
     //Combat Editables
     [SerializeField] private float timeToTarget = 0.3f;
@@ -132,6 +133,7 @@ public class PlayerCombat : MonoBehaviour
             if (!playerController.characterController.isGrounded) return;
             CheckCombatMode();
             if (!inCombatMode) return;
+            if (castManager.isCasting) return;
 
             //If Cooldown is off
             if (!isLightAttackOnCooldown && !isHeavyAttackOnCooldown)
@@ -208,8 +210,10 @@ public class PlayerCombat : MonoBehaviour
         if (!context.performed) return;
         if (isBlocking) return;
         if (!playerController.characterController.isGrounded) return;
-        CheckCombatMode();
         if (!inCombatMode) return;
+        if (castManager.isCasting) return;
+
+        CheckCombatMode();
 
         //If Cooldown is off
         if (!isHeavyAttackOnCooldown && !isLightAttackOnCooldown)

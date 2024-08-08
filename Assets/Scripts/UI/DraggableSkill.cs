@@ -41,7 +41,6 @@ public class DraggableSkill : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
-        UpdateUnlock();
         if (!isUnlocked) return;
         parentAfterMove = transform.parent; // To save the current parent.
         transform.SetParent(parentDuringMove.transform); // Set the Canvas as Parent DURING Drag.

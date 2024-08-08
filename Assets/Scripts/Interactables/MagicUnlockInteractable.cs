@@ -11,7 +11,6 @@ public class MagicUnlockInteractable : Interactable
         lockManager = MagicLockManager.instance;
     }
     public override void Interact() {
-        Debug.Log("test!!");
         lockManager.UnlockSkill(skillToUnlock);
     }
 }

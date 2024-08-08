@@ -95,7 +95,6 @@ public class IcebearScript : MonoBehaviour
         if(currentPhase == IceBossPhase.PhaseOne)
         {
             SetState(IceBossBossState.Patrol);
-            currentHealth = maxHealth;
         }
         
     }

@@ -15,7 +15,5 @@ MonoBehaviour:
   moveName: Herme's Blessing
   moveDescription: 
   icon: {fileID: 21300000, guid: 369a52e4e8f06fe4c86db796f000b15b, type: 3}
-  isUnlocked: 1
+  isUnlocked: 0
   lockedIcon: {fileID: 21300000, guid: 12aaf862d03f35e4982c292413a266fc, type: 3}
-  typeOfSkill: 0
-  skillPrefab: {fileID: 0}

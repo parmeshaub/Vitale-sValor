@@ -13,12 +13,10 @@ public class BorilBossScript : EnemyBase
     private float distanceThresholdToPlayer = 3;
     [SerializeField] private float chargeSpeed;
     [SerializeField] private float chargeDuration;
+    private int swipeCount = 0;
     private bool isCharging = false;
 
     private static readonly int isMovingHash = Animator.StringToHash("isMoving");
-
-    [SerializeField] private GameObject projectileVFX;
-    [SerializeField] private GameObject groundSmashVFX;
 
 
     private void Awake() {
@@ -36,19 +34,15 @@ public class BorilBossScript : EnemyBase
         playerObject = playerCombat.gameObject;
         currentPhase = IceBossPhases.Waiting;
         StartIceBoss();
-
-        currentHealth = maxHealth;
-        Debug.Log(currentHealth);
     }
 
     private void StartIceBoss() {
-        currentPhase = IceBossPhases.Phase_One;
+        currentPhase = IceBossPhases.Phase_Two;
         currentState = IceBossStates.Find_Player;
         SetState(currentState);
     }
 
     private void SetState(IceBossStates state) {
-        ManagePhases();
         currentState = state;
         StopAllCoroutines(); // Stop any running coroutine before starting a new one
         switch (state) {
@@ -88,21 +82,8 @@ public class BorilBossScript : EnemyBase
         }
     }
 
-    private void ManagePhases() {
-        if(currentHealth >= 0.5 * maxHealth) {
-            currentPhase = IceBossPhases.Phase_One;
-        }
-        else {
-            currentPhase = IceBossPhases.Phase_Two;
-            moveSpeed = 7;
-            chargeSpeed = 12;
-        }
-    }
-
     private IEnumerator FindPlayer() {
-        StartCoroutine(ExitFindPlayer());
         while (true) {
-            animator.enabled = true;
             isMoving = true;
             // Calculate the direction towards the player, ignoring the Y-axis
             Vector3 targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
@@ -129,13 +110,6 @@ public class BorilBossScript : EnemyBase
             yield return null;
         }
     }
-    private IEnumerator ExitFindPlayer() {
-        yield return new WaitForSeconds(6);
-        currentState = IceBossStates.Ice_Breath;
-        StopAllCoroutines();
-        SetState(currentState);
-        isMoving = false;
-    }
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Pillar")) {
             animator.SetTrigger("Charge_Hurt");
@@ -145,7 +119,6 @@ public class BorilBossScript : EnemyBase
         }
         else if (collision.gameObject.CompareTag("BossWall")) {
             currentState = IceBossStates.Find_Player;
-            animator.SetTrigger("Charge_Hit_Wall");
             StopAllCoroutines();
             SetState(currentState);
         }
@@ -166,19 +139,16 @@ public class BorilBossScript : EnemyBase
     }
 
     private IEnumerator Charge() {
-        Instantiate(groundSmashVFX, transform.position, Quaternion.identity);
         Debug.Log("Charge");
         Vector3 targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
         Vector3 direction = (targetPosition - transform.position).normalized;
-        transform.DOLookAt(targetPosition, 0.2f);
-
-        yield return new WaitForSeconds(5);
-        targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
-        direction = (targetPosition - transform.position).normalized;
-        transform.DOLookAt(targetPosition, 0.2f);
+        yield return new WaitForSeconds(3);
         isCharging = true;
         animator.SetBool("isCharging", isCharging);
         animator.SetTrigger("Charge");
+
+        transform.DOLookAt(targetPosition, 0.5f);
+
         float elapsedTime = 0f;
 
         while (elapsedTime < chargeDuration) {
@@ -199,11 +169,9 @@ public class BorilBossScript : EnemyBase
             Vector3 targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
             animator.SetTrigger("Swipe");
             transform.DOLookAt(targetPosition, 0.2f);
-            Instantiate(projectileVFX, transform.forward, Quaternion.identity);
             yield return new WaitForSeconds(2f);
         }
         if(currentPhase == IceBossPhases.Phase_One) {
-            animator.enabled = false;
             currentState = IceBossStates.Find_Player;
             SetState(currentState);
         }
@@ -215,7 +183,6 @@ public class BorilBossScript : EnemyBase
     }
 
     private IEnumerator GroundSmash() {
-        StartCoroutine(ExitGroundSmash());
         while (true) {
             isMoving = true;
             // Calculate the direction towards the player, ignoring the Y-axis
@@ -228,11 +195,11 @@ public class BorilBossScript : EnemyBase
             Vector3 direction = (targetPosition - transform.position).normalized;
 
             // Move towards the player
-            rb.MovePosition(rb.position + direction * 8 * Time.deltaTime);
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
 
             // Check the distance to the player
             float distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
-            if (distanceToPlayer <= 4) {
+            if (distanceToPlayer <= distanceThresholdToPlayer) {
                 animator.SetTrigger("Smash");
                 rb.AddForce(0, 5000, 0, ForceMode.Impulse);
                 SetState(IceBossStates.Charge);
@@ -242,13 +209,6 @@ public class BorilBossScript : EnemyBase
 
             yield return null;
         }
-    }
-
-    private IEnumerator ExitGroundSmash() {
-        yield return new WaitForSeconds(1);
-        StopAllCoroutines();
-        SetState(IceBossStates.Charge);
-        isMoving = false;
     }
     private IEnumerator Stunned() {
         yield return new WaitForSeconds(4);

@@ -169,7 +169,7 @@ public class UIManager : MonoBehaviour
     #endregion
 
     private void StartMenu() {
-        Debug.Log("Start");
+        //Debug.Log("Start");
         playerInputManager.SwitchToUIActionMap();
         Time.timeScale = 0.0f;
         gameplayUIElements.SetActive(false) ;
@@ -179,7 +179,7 @@ public class UIManager : MonoBehaviour
 
     public void EndMenu()
     {
-        Debug.Log("End");
+        //Debug.Log("End");
         playerInputManager.SwitchToGameplayActionMap();
         Time.timeScale = 1.0f;
         gameplayUIElements.SetActive(true) ;

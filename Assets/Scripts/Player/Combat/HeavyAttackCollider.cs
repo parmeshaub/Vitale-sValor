@@ -28,9 +28,9 @@ public class HeavyAttackCollider : MonoBehaviour
 
             damage = playerCombat.HeavyRandomizeDamage();
 
-            enemyClass.TakeDamage(damage);
-
             impulseSource.GenerateImpulse(impulseVelocity);
+
+            enemyClass.TakeDamage(damage);
         }
     }
 

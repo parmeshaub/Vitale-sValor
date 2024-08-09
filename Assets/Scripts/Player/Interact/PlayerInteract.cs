@@ -9,6 +9,7 @@ public class PlayerInteract : MonoBehaviour
     private PlayerInput playerInput;
     [HideInInspector] public GameObject currentInteractable;
     private InteractSphere interactSphere;
+
     private void Awake() {
         playerInputManager = PlayerInputManager.instance;
         playerInput = playerInputManager.playerInput;
@@ -18,17 +19,21 @@ public class PlayerInteract : MonoBehaviour
     }
 
     private void Interact(InputAction.CallbackContext context) {
-        if (currentInteractable == null) Debug.Log("currentInteractable is null");
+        if (currentInteractable == null) {
+            Debug.Log("currentInteractable is null");
+            return;
+        }
 
         if (context.started) {
             Interactable interactable = currentInteractable.GetComponent<Interactable>();
+
             if (interactable != null) {
                 interactable.Interact();
+                currentInteractable = null;
             }
             else {
-                Debug.LogError("Interactable NULL");
+                Debug.LogError("Interactable component not found!");
             }
-            
         }
     }
 }

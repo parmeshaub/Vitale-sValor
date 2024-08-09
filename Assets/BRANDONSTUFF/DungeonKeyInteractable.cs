@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class DungeonKeyInteractable : Interactable
 {
+    [SerializeField] private GateManager gateManager;
     public override void Interact()
     {
-        GateManager.instance.CollectKey();
+        gateManager.CollectKey();
         Destroy(gameObject); 
     }
 }

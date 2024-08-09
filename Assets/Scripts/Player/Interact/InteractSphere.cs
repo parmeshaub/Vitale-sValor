@@ -5,29 +5,27 @@ public class InteractSphere : MonoBehaviour
 {
     private List<GameObject> interactablesInRange = new List<GameObject>();
     private PlayerInteract playerInteract;
-    private void Awake()
-    {
+
+    private void Awake() {
         playerInteract = GetComponentInParent<PlayerInteract>();
     }
-    private void OnTriggerEnter(Collider other)
-    {
+
+    private void OnTriggerEnter(Collider other) {
         interactablesInRange.Add(other.gameObject);
         playerInteract.currentInteractable = FindClosestInteractable();
     }
 
-    private void OnTriggerExit(Collider other)
-    {
+    private void OnTriggerExit(Collider other) {
         interactablesInRange.Remove(other.gameObject);
-        if(interactablesInRange.Count <= 0)
-        {
+        if (interactablesInRange.Count <= 0) {
             playerInteract.currentInteractable = null;
         }
     }
 
-    public GameObject FindClosestInteractable()
-    {
-        if (interactablesInRange.Count == 0)
-        {
+    public GameObject FindClosestInteractable() {
+        interactablesInRange.RemoveAll(item => item == null); // Remove destroyed objects
+
+        if (interactablesInRange.Count == 0) {
             return null; // No interactables in range
         }
 
@@ -36,15 +34,14 @@ public class InteractSphere : MonoBehaviour
 
         Vector3 currentPosition = transform.position;
 
-        foreach (GameObject interactable in interactablesInRange)
-        {
+        foreach (GameObject interactable in interactablesInRange) {
             float distance = Vector3.Distance(currentPosition, interactable.transform.position);
-            if (distance < closestDistance)
-            {
+            if (distance < closestDistance) {
                 closestDistance = distance;
                 closestInteractable = interactable;
             }
         }
+
         Debug.Log(closestInteractable);
         return closestInteractable;
     }

@@ -18,6 +18,7 @@ public class PlayerCombat : MonoBehaviour
     public BattleSphereDetection battleSphereDetection;
     private SwordManager swordManager;
     private PlayerController playerController;
+    private EnchantTest enchantScript;
 
     private PlayerInput playerInput;
     public CharacterController characterController;
@@ -32,7 +33,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float detectionRadius = 6.0f; // How close the player can be to enemy before moving.
 
     //Combat Variables
-    private bool inCombatMode = false;
+    public bool inCombatMode = false;
     private float lightAttackCoolDown = 1f;
     private float heavyAttackCoolDown = 1f;
     private bool isLightAttackOnCooldown = false;
@@ -44,6 +45,7 @@ public class PlayerCombat : MonoBehaviour
     private Coroutine resetLightAttackComboCoroutine;
     private Coroutine resetHeavyAttackComboCoroutine;
     public bool isAttacking = false;
+    public bool isEnchanted = false;
 
     //Combat Cooldown
     [SerializeField] private float lightAttack1CoolDown;
@@ -377,7 +379,7 @@ public class PlayerCombat : MonoBehaviour
     }
 
     //To be called before every attack.
-    private void CheckCombatMode()
+    public void CheckCombatMode()
     {
         //Turn on Combat mode if False.
         if (!inCombatMode)
@@ -387,7 +389,7 @@ public class PlayerCombat : MonoBehaviour
             animator.SetBool(inCombatHash, true);
         }
     }
-    private void CheckCombatMode2()
+    public void CheckCombatMode2()
     {
         //Turn on Combat mode if False.
         if (!inCombatMode)
@@ -403,10 +405,12 @@ public class PlayerCombat : MonoBehaviour
         {
             if(inCombatMode)
             {
-                if (!playerController.characterController.isGrounded) return;
-                inCombatMode = false;
-                animator.SetTrigger(keepSwordHash);
-                animator.SetBool(inCombatHash, false);
+                if (!isEnchanted) {
+                    if (!playerController.characterController.isGrounded) return;
+                    inCombatMode = false;
+                    animator.SetTrigger(keepSwordHash);
+                    animator.SetBool(inCombatHash, false);
+                }
             }
         }
     }

@@ -12,6 +12,9 @@ public class LightingManager : MonoBehaviour
     public float skyboxTransition = 5f;
 
 
+
+
+    [Header("Fyre Skybox")]
     /// <summary>
     /// Fyre lighting settings
     /// </summary>
@@ -42,6 +45,9 @@ public class LightingManager : MonoBehaviour
     public Color flurryColor;
     public float changeDuraiton;
     private float lerpTime = 0f;
+
+
+
 
     public void Start()
     {
@@ -150,23 +156,6 @@ public class LightingManager : MonoBehaviour
     }
 
 
-    private IEnumerator timerTest()
-    {
-        float lerpTime = 0f;
-        float targetTime = 5f;
-
-        while (lerpTime < targetTime)
-        {
-            lerpTime += Time.deltaTime;
-            float t = Mathf.Clamp01(lerpTime / skyboxTransition);
-
-            Debug.Log(lerpTime);
-
-            Debug.Log(t);
-        }
-
-        yield return null;
-    }
 
 
 

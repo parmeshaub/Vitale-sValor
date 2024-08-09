@@ -15,6 +15,7 @@ public class MagicManager : MonoBehaviour
     [SerializeField] private CastableScript castManager;
     private MagicMoveSO activeCastableMagic;
     private int activeNum;
+    private PlayerCombat playerCombat;
 
     [SerializeField] private Image slot1Image;
     [SerializeField] private Image slot2Image;
@@ -41,6 +42,7 @@ public class MagicManager : MonoBehaviour
 
     private void Start() {
         UpdateUI();
+        playerCombat = PlayerCombat.Instance;
     }
 
     private void ActivateMagic1(InputAction.CallbackContext context) {
@@ -68,6 +70,12 @@ public class MagicManager : MonoBehaviour
         //Debug.Log("Checking Enum");
 
         if (magicMoves[magicNum].typeOfSkill == TypeOfSkill.INSTANT) {
+            if (magicMoves[magicNum].name == "Ablaze" || magicMoves[magicNum].name == "Glaciate")
+            {
+                if (playerCombat.isEnchanted) return;
+                magicMoves[magicNum].Activate();
+                StartCoroutine(StartMagicCoolDown(magicNum));
+            }
             magicMoves[magicNum].Activate();
             StartCoroutine(StartMagicCoolDown(magicNum));
         }
@@ -97,26 +105,26 @@ public class MagicManager : MonoBehaviour
 
             case 1:
                 magic2OnCooldown = true;
-                slot1Image.color = Color.gray;
+                slot2Image.color = Color.gray;
                 yield return new WaitForSeconds(magicMoves[magicNum].coolDownTiming);
                 magic2OnCooldown = false;
-                slot1Image.color = Color.white;
+                slot2Image.color = Color.white;
                 break;
 
             case 2:
                 magic3OnCooldown = true;
-                slot1Image.color = Color.gray;
+                slot3Image.color = Color.gray;
                 yield return new WaitForSeconds(magicMoves[magicNum].coolDownTiming);
                 magic3OnCooldown = false;
-                slot1Image.color = Color.white;
+                slot3Image.color = Color.white;
                 break;
 
             case 3:
                 magic4OnCooldown = true;
-                slot1Image.color = Color.gray;
+                slot4Image.color = Color.gray;
                 yield return new WaitForSeconds(magicMoves[magicNum].coolDownTiming);
                 magic4OnCooldown = false;
-                slot1Image.color = Color.white;
+                slot4Image.color = Color.white;
                 break;
 
             default:

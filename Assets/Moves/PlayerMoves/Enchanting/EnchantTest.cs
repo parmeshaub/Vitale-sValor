@@ -13,37 +13,33 @@ public class EnchantTest : MonoBehaviour
     private bool iceBounce = true;
     private bool fireBounce = true;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (iceBounce)
-            {
-                StartCoroutine(EnchantingIceSword());
-                iceBounce = false;
-            }
-            else
-            {
-                StartCoroutine(DechantingIceSword());
-                iceBounce = true;
-            }     
-        }
+    [SerializeField] private GameObject animatorObj;
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
+    private void Start() {
+        animatorObj = this.gameObject;
+        animatorObj.SetActive(false);
+    }
 
-            if (fireBounce)
-            {
-                StartCoroutine(EnchantingFireSword());
-                fireBounce = false;
-            }
-            else
-            {
-                StartCoroutine(DechantingFireSword());
-                fireBounce = true;
-            }
-        }
+    public void EnchantFireSword() {
+        //animatorObj.SetActive(true);
+        StartCoroutine(EnchantingFireSword());
+        fireBounce = false;
+    }
 
+    public void DisenchantFireSword() {
+        StartCoroutine(DechantingFireSword());
+        fireBounce = true;
+    }
+
+    public void EnchantIceSword() {
+        //animatorObj.SetActive(true);
+        StartCoroutine(EnchantingIceSword());
+        iceBounce = false;
+    }
+
+    public void DisenchantIceSword() {
+        StartCoroutine(DechantingIceSword());
+        iceBounce = true;
     }
 
 
@@ -63,6 +59,7 @@ public class EnchantTest : MonoBehaviour
         animator.SetTrigger("dechantingIce");
         yield return new WaitForSeconds(1f);
         particlesEffect.enabled = false;
+        //animatorObj.SetActive(false);
     }
 
     public IEnumerator EnchantingFireSword()
@@ -82,5 +79,6 @@ public class EnchantTest : MonoBehaviour
         animator.SetTrigger("dechantingFire");
         yield return new WaitForSeconds(1f);
         particlesEffect.enabled = false;
+        //animatorObj.SetActive(false) ;
     }
 }

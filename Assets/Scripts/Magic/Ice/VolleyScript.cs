@@ -5,9 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Magic Move", menuName = "Magic Move/Volley")]
 public class VolleyScript : MagicMoveSO
 {
+    private MagicIndicator magicIndicator;
+
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        magicIndicator = FindObjectOfType<MagicIndicator>();
+        Transform castTransform = magicIndicator.gameObject.transform;
+        Instantiate(skillPrefab, castTransform.position, castTransform.rotation);
     }
     public override void Cast() {
         throw new System.NotImplementedException();

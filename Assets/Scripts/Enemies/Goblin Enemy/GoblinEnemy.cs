@@ -77,6 +77,8 @@ public class GoblinEnemy : EnemyBase
 
     private IEnumerator StateMachineCoroutine() {
         while (true) {
+            if (isDeath) yield break; // Stop the coroutine if the goblin is dead
+
             switch (states) {
                 case GoblinStates.IDLE:
                     isMoving = false;
@@ -108,7 +110,6 @@ public class GoblinEnemy : EnemyBase
 
     protected override void Move() {
         if (isDeath) return;
-        // Walk towards the player. Uses a rigid body.
 
         // Calculate the direction towards the player, ignoring the Y-axis
         Vector3 targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
@@ -124,13 +125,16 @@ public class GoblinEnemy : EnemyBase
     }
 
     protected override void Attack() {
-        if (attackCoroutine == null && !isDeath) {
+        if (isDeath || isDead) return;
+        if (attackCoroutine == null) {
             rb.angularVelocity = Vector3.zero;
             attackCoroutine = StartCoroutine(PerformAttack());
         }
     }
 
     private IEnumerator PerformAttack() {
+        if (isDeath) yield break; // Stop the coroutine if the goblin is dead
+
         // Implement attack logic
         int random = Random.Range(0, 2);
         switch (random) {
@@ -174,20 +178,48 @@ public class GoblinEnemy : EnemyBase
     }
 
     protected override void Death() {
+        if (isDeath) return; // Prevent multiple death calls
+
+        isDeath = true;
+        CallDeath();
         enemyDetection.RemoveEnemy(this.gameObject);
         gameObject.layer = deathLayerMask;
         capCollider.isTrigger = true;
 
         int random = Random.Range(0, 2);
-        isDeath = true;
+        isDead = true;
+
+        if (attackCoroutine != null) {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+        }
+
+        // Stop any moving animation by setting isMoving to false
+        isMoving = false;
+        animator.SetBool(isMovingHash, isMoving);
 
         StartCoroutine(WaitBeforeDeath(random));
     }
 
+
+    private void CallDeath() {
+        animator.enabled = false;
+        StartCoroutine(WaitEnableAnimator());
+    }
+
+    private IEnumerator WaitEnableAnimator() {
+        yield return new WaitForSeconds(0.2f);
+        animator.enabled = true;
+    }
+
     public override void TakeDamage(float damage) {
         base.TakeDamage(damage);
-        states = GoblinStates.IDLE; // Add this line to handle state change on damage
-        ApplyImpulseBackwards();
+        if (!isDeath) {
+            states = GoblinStates.IDLE; // Add this line to handle state change on damage
+            ApplyImpulseBackwards();
+        }
+        rb.angularVelocity = Vector3.zero; // Instantly stops spinning
+
     }
 
     private void ApplyImpulseBackwards() {
@@ -203,7 +235,9 @@ public class GoblinEnemy : EnemyBase
     }
 
     private IEnumerator WaitBeforeDeath(int random) {
-        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - 0.399f, transform.position.z);
+        rb.angularVelocity = Vector3.zero; // Instantly stops spinning
+        yield return new WaitForSeconds(0.2f);
+        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - 0.299f, transform.position.z);
         transform.DOMove(newPosition, 2);
         switch (random) {
             case 0:

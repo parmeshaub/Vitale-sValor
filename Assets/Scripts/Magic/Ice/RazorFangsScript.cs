@@ -21,7 +21,6 @@ public class RazorFangsScript : MagicMoveSO
             return;
         }
 
-        // Use a helper MonoBehaviour to start the coroutine
         MagicCoroutineHelper.Instance.StartCoroutine(ActivateMagic(playerObject, playerCombat));
     }
 

@@ -12,6 +12,8 @@ public class SwordManager : MonoBehaviour
     public static SwordManager instance;
     [SerializeField] private PlayerCombat playerCombat;
     private Renderer swordRenderer;
+    [SerializeField ] public EnchantTest enchantScript;
+    [SerializeField] public GameObject enchantObject;
 
     private void Awake()
     {
@@ -31,12 +33,16 @@ public class SwordManager : MonoBehaviour
 
     public void UnsheathSword()
     {
+        GameObject enchantAnimator = enchantScript.gameObject;
+        enchantObject.SetActive(true);
         swordRenderer.enabled = true;
         vfx.Play();
     }
 
     public void SheathSword()
     {
+        GameObject enchantAnimator = enchantScript.gameObject;
+        enchantObject.SetActive(false);
         swordRenderer.enabled = false;
         vfx.Play();
     }
@@ -46,6 +52,7 @@ public class SwordManager : MonoBehaviour
         //Check if player in combat mode
         if(!swordRenderer.enabled)
         {
+            enchantObject.SetActive(true);
             swordRenderer.enabled = true;
             vfx.Play();
         }

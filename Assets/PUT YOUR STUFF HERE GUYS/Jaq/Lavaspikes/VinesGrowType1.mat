@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DagmorSide
-  m_Shader: {fileID: -6465566751694194690, guid: 36fe83e5f50a55f4082a4d7c186fb85b,
+  m_Name: VinesGrowType1
+  m_Shader: {fileID: -6465566751694194690, guid: 11efb3145581b0146a736c05afb546bc,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,40 +24,20 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _NoiseTex:
-        m_Texture: {fileID: 2800000, guid: 80c6705c29ceeeb4f9f4d4e114f0791d, type: 3}
+    - _Base:
+        m_Texture: {fileID: 2800000, guid: 25a0110af88a4ac4c9f15f089178c0af, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _currentTex:
-        m_Texture: {fileID: 2800000, guid: 5e31e1e043d54da429653b2b1fc1ef83, type: 3}
+    - _Emission:
+        m_Texture: {fileID: 2800000, guid: db9f75052ed0b374f9b0abef4677d36d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _floraTex:
-        m_Texture: {fileID: 2800000, guid: 891d002881ac081418cfaeae33e55588, type: 3}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: cc3c19e41a81ed44aa117ef09f648564, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _flurryTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _fyreTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _metallicTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _primaryTex:
-        m_Texture: {fileID: 2800000, guid: 891d002881ac081418cfaeae33e55588, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _secondaryTex:
-        m_Texture: {fileID: 2800000, guid: be6cf015aab3ad14390daa338a92c78e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _targetTex:
-        m_Texture: {fileID: 0}
+    - _Roughness:
+        m_Texture: {fileID: 2800000, guid: 4b2ff0bd8d130da4ca868a35b54f52b4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -74,26 +54,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AO: 1
-    - _EdgeWidth: 0
+    - _Clip: -1
+    - _EmissionIntensity: 0.68
+    - _Float: 1.5
+    - _Grow: 1
     - _Metallic: 0
-    - _NoiseScale: 0.17
-    - _NoiseStrength: 0.07
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RadiusCutOff: 0.48
-    - _RadiusNoiseCutoff: 0.53
+    - _RotationalDegree: -368.9
+    - _Scale: 0
     - _Smoothness: 0
-    - _Speed: 0.5
-    - _edg1: 3.16
-    - _edg2: 0.46
-    - _transitionThreshold: 0
+    - _scale: 0.32
     m_Colors:
-    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
-    - _InfluencingObjectPos: {r: 0, g: 0, b: 0, a: 0}
-    - _InfluencingObjectScale: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.40392157, g: 0.6377357, b: 0.2250123, a: 1}
+    - _EmissionColor: {r: 7.948209, g: 1.5589885, b: 1.2372214, a: 1}
+    - _Vector3: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &2358916496955767443
+--- !u!114 &6785443314075189074
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -14,6 +14,8 @@ namespace Guirao.UltimateTextDamage
 
     public class UltimateTextDamageManager : MonoBehaviour
     {
+
+        public static UltimateTextDamageManager instance;
         public Canvas canvas;
 
         public bool convertToCamera = true;
@@ -31,13 +33,16 @@ namespace Guirao.UltimateTextDamage
         private Dictionary< Transform , List< UITextDamage > > m_instancesInScreen;
         private List< GameObject > m_tempObjects = new List<GameObject>( );
         private const int kTempObjectsCount = 30;
-        
+
+        private void Awake() {
+            instance = this;
+        }
         /// <summary>
         /// Start Monobehaviours, initializes the manager with the pools
         /// </summary>
         public void Start( )
         {
-            if( ( convertToCamera || autoFaceToCamera ) && theCamera == null )
+            if ( ( convertToCamera || autoFaceToCamera ) && theCamera == null )
                 theCamera = Camera.main;
 
             // Allocate memory for our dictionaries

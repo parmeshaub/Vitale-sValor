@@ -9,7 +9,6 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] public float minDamage;
     [SerializeField] public float maxDamage;
     [SerializeField] protected float moveSpeed;
-    [SerializeField] public UltimateTextDamageManager damageNumberManager;
     [SerializeField] public Transform damageNumPosition;
 
     protected float currentHealth;
@@ -24,15 +23,23 @@ public abstract class EnemyBase : MonoBehaviour
     protected bool isMoving;
 
     [SerializeField] protected GameObject smokeVFX;
+    //public ManagerHolder managerHolder;
+    protected UltimateTextDamageManager damageNumber;
 
+    private void Awake() {
+        
+    }
     private void Start() {
+        //damageNumber = FindObjectOfType<UltimateTextDamageManager>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
+        //managerHolder = ManagerHolder.Instance;
     }
     public virtual void TakeDamage(float damage) {
         currentHealth -= damage;
         string roundedDamage = Mathf.Round(damage).ToString(); // Rounds to the nearest integer
-        damageNumberManager.Add(roundedDamage, damageNumPosition, "default");
+        damageNumber = FindObjectOfType<UltimateTextDamageManager>();
+        damageNumber.Add(roundedDamage, damageNumPosition, "default");
         Debug.Log(currentHealth);
         if (currentHealth <= 0) {
             currentHealth = 0;

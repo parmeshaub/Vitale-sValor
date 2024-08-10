@@ -23,6 +23,9 @@
         },
         {
             "m_Id": "0a77560136304678938b979e9c115cff"
+        },
+        {
+            "m_Id": "108803ec6c504ae98623e658028a272b"
         }
     ],
     "m_Keywords": [],
@@ -33,6 +36,9 @@
         },
         {
             "m_Id": "0aeeccffb88a4ddaa3924678346d3432"
+        },
+        {
+            "m_Id": "691da670af6d42b9a00d8c70553372ca"
         }
     ],
     "m_Nodes": [
@@ -185,6 +191,9 @@
         },
         {
             "m_Id": "297f4fc654fd4cbc906a611986d32586"
+        },
+        {
+            "m_Id": "3289d99076c94535925c568481908df6"
         }
     ],
     "m_GroupDatas": [
@@ -313,6 +322,20 @@
                     "m_Id": "7164a2347f8244008bdaf5988fa6dd5a"
                 },
                 "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "3289d99076c94535925c568481908df6"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "6a69a67f750f41b890acf0c35a5820e9"
+                },
+                "m_SlotId": 0
             }
         },
         {
@@ -986,6 +1009,34 @@
 
 {
     "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "108803ec6c504ae98623e658028a272b",
+    "m_Guid": {
+        "m_GuidSerialized": "2a6b0b49-91df-45f8-bc16-6cbaabdc9019"
+    },
+    "m_Name": "Clip",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Clip",
+    "m_DefaultReferenceName": "_Clip",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.PositionNode",
     "m_ObjectId": "1198d837fcdb442a819a9a01ddf80d3e",
     "m_Group": {
@@ -1542,7 +1593,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "AlphaClipThreshold",
     "m_StageCapability": 2,
-    "m_Value": 0.5,
+    "m_Value": 1.0,
     "m_DefaultValue": 0.5,
     "m_Labels": []
 }
@@ -1809,6 +1860,42 @@
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "3289d99076c94535925c568481908df6",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -204.1159210205078,
+            "y": 712.976318359375,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "ba811ceb8e2a4ed9af8722e24826afb5"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "108803ec6c504ae98623e658028a272b"
     }
 }
 
@@ -3296,6 +3383,18 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "691da670af6d42b9a00d8c70553372ca",
+    "m_Name": "Transparency",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "108803ec6c504ae98623e658028a272b"
+        }
+    ]
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
     "m_ObjectId": "6a69a67f750f41b890acf0c35a5820e9",
     "m_Group": {
@@ -4685,6 +4784,21 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "ba811ceb8e2a4ed9af8722e24826afb5",
+    "m_Id": 0,
+    "m_DisplayName": "Clip",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {

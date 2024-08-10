@@ -60,15 +60,35 @@ public class LightingManager : MonoBehaviour
     public Color floraColor7;
     public Color floraColor8;
 
+    [Header("Flurry Skybox")]
+    /// <summary>
+    /// Flora Lighting Settings
+    /// </summary>
+    public Color flurryFogColor;
+    public float flurryFogIntensity;
+    // Skybox settings below
+    public Color flurryColor1;
+    public Color flurryColor2;
+    public Color flurryColor3;
+    public Color flurryColor4;
+
+    public float flurryHorizontolWidth;
+    public float flurryHorizontolBrightness;
+    public Color flurryHorizontolColor;
+    public float flurryCloudsScale;
+
+    public Color flurryColor5;
+    public Color flurryColor6;
+    public Color flurryColor7;
+    public Color flurryColor8;
+
+
     /// <summary>
     /// For directional light color lerp
     /// </summary>
     public Color floraColor;
     public Color flurryColor;
     public float changeDuraiton;
-
-
- 
 
 
     public void Start()

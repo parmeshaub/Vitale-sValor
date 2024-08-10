@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 
 public class TargetInteractor : MonoBehaviour
@@ -10,9 +11,10 @@ public class TargetInteractor : MonoBehaviour
     public float treeSwaySpeed;
 
     public float treeDuration = 5.0f; // Duration of the lerp
+    public float triplanarDuration = 2.0f; //Duration of triplanar lerp
+
 
     public string goingWhere;
-
     private void Start()
     {
         goingWhere = "flurry";
@@ -44,12 +46,95 @@ public class TargetInteractor : MonoBehaviour
         {
 
         }
+
+        // This is for all assets. Dungeon exteriors, village props, rocks and etc.
+        // Checking the object's layer name
+        if (other.gameObject.tag == "Changable")
+        {
+            StartCoroutine(Triplanar(other.gameObject.GetComponent<Renderer>(), goingWhere));
+        }
+    }
+
+
+    public IEnumerator Triplanar(Renderer renderer, string goingWhere)
+    {
+        Material[] currentMaterials = renderer.materials; // Getting all materials attached
+        float gainingTime = 0.0f; // Resets time to gain for lerp
+
+        foreach (Material mat in currentMaterials) 
+        {
+            
+
+            if (goingWhere == "flurry")
+            {
+                // Holder values with default initializations
+                float targetSlider;
+                float targetLevel;
+                Vector3 targetDirection;
+                float targetSlide;
+
+                if (mat.name == "triplanarbricks (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = 0.54f;
+                    targetLevel = 2.2f;
+                    targetDirection = new Vector3(0f, -5.82f, 0f);
+                    targetSlide = 1.2f;
+                }
+
+                /*if (mat.name == "triplanarPillar (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    Debug.Log("yes gotten");
+                    targetSlider = -0.11f;
+                    targetLevel = 0.66f;
+                    targetDirection = new Vector3(0.12f, -4f, 0f);
+                    targetSlide = 1.16f;
+                }*/
+
+
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                while (gainingTime < triplanarDuration)
+                {
+                    // Increment elapsed time
+                    gainingTime += Time.deltaTime;
+                    float lerpValue = gainingTime / triplanarDuration;
+                    yield return new WaitForSeconds(0.000000001f);
+
+                    // Lerping values
+                    float currentValue1 = Mathf.Lerp(currentSlider, targetSlider, lerpValue);
+
+                    
+
+                    float currentValue2 = Mathf.Lerp(currentSlide, targetSlide, lerpValue);
+                    float currentValue3 = Mathf.Lerp(currentTargetLevel, targetLevel, lerpValue);
+                    Vector3 currentValue4 = Vector3.Lerp(currentTargetDirection, targetDirection, lerpValue);
+
+                    // Applying lerping values to current material renderer
+                    mat.SetFloat("_Slider", currentValue1);
+                    mat.SetFloat("_Slide", currentValue2);
+                    mat.SetFloat("_Level", currentValue3);
+                    mat.SetVector("_Direction", currentValue4);
+                }
+            }
+        }
+
+
     }
 
     public void GoingWhere(string goingWheree)
     {
         goingWhere = goingWheree;
     }
+
+
+
+
 
 
     public IEnumerator LerpTreeTransparency(Material treeMat, float currentTarget ,float finalTarget)

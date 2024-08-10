@@ -67,11 +67,11 @@ Material:
     - _RefractionTransparency: 0.12
     - _RippleAmount: 2
     - _Smoothness: 1.67
-    - _Transparency: 0.27
+    - _Transparency: 5.26
     - _VoronoidSpeed: 0.21
     m_Colors:
     - _RefractionSpeed: {r: 0.5, g: 1, b: 0, a: 0}
     - _RefractionSpeed2: {r: -0.05, g: 0.1, b: 0, a: 0}
-    - _RippleColor: {r: 0.5518868, g: 0.6248355, b: 1, a: 1}
+    - _RippleColor: {r: 0.61049575, g: 0.90466136, b: 0.9559735, a: 1}
     - _RippleSpeed: {r: 0, g: 0.2, b: 0, a: 0}
   m_BuildTextureStacks: []

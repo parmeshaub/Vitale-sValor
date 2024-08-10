@@ -57,7 +57,7 @@ Material:
     - _Clip: 1
     - _EmissionIntensity: 0.68
     - _Float: 1.5
-    - _Grow: 1
+    - _Grow: 0.815
     - _Metallic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -67,7 +67,7 @@ Material:
     - _scale: 0.32
     m_Colors:
     - _Color: {r: 0.40392157, g: 0.6377357, b: 0.2250123, a: 1}
-    - _EmissionColor: {r: 7.948209, g: 1.5589885, b: 1.2372214, a: 1}
+    - _EmissionColor: {r: 15.896418, g: 3.117977, b: 2.4744427, a: 1}
     - _Vector3: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6785443314075189074

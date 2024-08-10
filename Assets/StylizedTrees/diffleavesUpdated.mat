@@ -111,7 +111,7 @@ Material:
     - _Alpha: 1
     - _AlphaClip: 1
     - _AlphaToMask: 1
-    - _BillboardSize: 7.27
+    - _BillboardSize: 72.1
     - _Blend: 0
     - _BlendModePreserveSpecular: 0
     - _BumpScale: 1
@@ -129,7 +129,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Inflate: -0.34
+    - _Inflate: 15.2
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005

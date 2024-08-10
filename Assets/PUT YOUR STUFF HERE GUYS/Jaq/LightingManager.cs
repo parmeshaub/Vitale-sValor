@@ -11,7 +11,8 @@ public class LightingManager : MonoBehaviour
 
     public float skyboxTransition = 5f;
 
-
+    private float sunDefaultRadius = 0.356f;
+    private float sunGoneRadius = 0f;
 
 
     [Header("Fyre Skybox")]
@@ -21,22 +22,43 @@ public class LightingManager : MonoBehaviour
     public Color fyreFogColor;
     public float fyreFogIntensity;
     // Skybox settings below
-    public Color color1;
-    public Color color2;
-    public Color color3;
-    public Color color4;
+    public Color fyreColor1;
+    public Color fyreColor2;
+    public Color fyreColor3;
+    public Color fyreColor4;
 
-    public Color cloudsColor;
+    public float fyreHorizontolWidth;
+    public float fyreHorizontolBrightness;
+    public Color fyreHorizontolColor;
+    public float fyreCloudsScale;
 
-    public float horizontolWidth;
-    public float cloudsScale;
-    private float sunDefaultRadius = 0.356f;
-    private float sunGoneRadius = 0f;
+    public Color fyreColor5;
+    public Color fyreColor6;
+    public Color fyreColor7;
+    public Color fyreColor8;
 
-    public Color color5;
-    public Color color6;
-    public Color color7;
-    public Color color8;
+
+    [Header("Flora Skybox")]
+    /// <summary>
+    /// Flora Lighting Settings
+    /// </summary>
+    public Color floraFogColor;
+    public float floraFogIntensity;
+    // Skybox settings below
+    public Color floraColor1;
+    public Color floraColor2;
+    public Color floraColor3;
+    public Color floraColor4;
+
+    public float floraHorizontolWidth;
+    public float floraHorizontolBrightness;
+    public Color floraHorizontolColor;
+    public float floraCloudsScale;
+
+    public Color floraColor5;
+    public Color floraColor6;
+    public Color floraColor7;
+    public Color floraColor8;
 
     /// <summary>
     /// For directional light color lerp
@@ -44,9 +66,9 @@ public class LightingManager : MonoBehaviour
     public Color floraColor;
     public Color flurryColor;
     public float changeDuraiton;
-    private float lerpTime = 0f;
 
 
+ 
 
 
     public void Start()
@@ -72,91 +94,143 @@ public class LightingManager : MonoBehaviour
 
 
     private IEnumerator ChangeSkyBox(string goingWhere)
-    {
-        if (goingWhere == "fyre")
+    {      
+        // All colors
+        Color currentColor1 = skyBox.GetColor("_daySkyColorTop");
+        Color currentColor2 = skyBox.GetColor("_daySkyColorBottom");
+        Color currentColor3 = skyBox.GetColor("_nightSkyColorTop");
+        Color currentColor4 = skyBox.GetColor("nightSkyColorBottom");
+
+        Color currentColor5 = skyBox.GetColor("_dayCloudsEdge");
+        Color currentColor6 = skyBox.GetColor("_dayCloudsMain");
+        Color currentColor7 = skyBox.GetColor("_nightCloudsMain");
+        Color currentColor8 = skyBox.GetColor("_nightCloudsEdge");
+
+        // Getting cloud values         
+        float currentBaseNoiseScale = skyBox.GetFloat("_baseNoiseScale");
+        float currentCloudsPrimaryScale = skyBox.GetFloat("_cloudsPrimaryScale");
+        float currentCloudsSecondaryScale = skyBox.GetFloat("_cloudsSecondaryScale");
+
+        // Getting current horizontal values
+        float gottenHorizontalWidth = skyBox.GetFloat("_HorizontalWidth");
+        float gottenHorizontalBrightness = skyBox.GetFloat("_horizonBrightness");
+        Color gottenHorizontalColor = skyBox.GetColor("_horizonColor");
+
+        // Getting sun radius
+        float currentSunRadius = skyBox.GetFloat("_sunRadius");
+
+
+        float timeElapsedd = 0f;
+
+        while (timeElapsedd < skyboxTransition)
         {
-            // All colors
-            Color currentColor1 = skyBox.GetColor("_daySkyColorTop");
-            Color currentColor2 = skyBox.GetColor("_daySkyColorBottom");
-            Color currentColor3 = skyBox.GetColor("_nightSkyColorTop");
-            Color currentColor4 = skyBox.GetColor("nightSkyColorBottom");
+            yield return new WaitForSeconds(0.0000000000001f);
+            timeElapsedd += Time.deltaTime / skyboxTransition;
+            float t = Mathf.Clamp01(timeElapsedd / skyboxTransition);
 
-            Color currentColor5 = skyBox.GetColor("_dayCloudsEdge");
-            Color currentColor6 = skyBox.GetColor("_dayCloudsMain");
-            Color currentColor7 = skyBox.GetColor("_nightCloudsMain");
-            Color currentColor8 = skyBox.GetColor("_nightCloudsEdge");
+            // Creating variables to store lerp colors            
+            Color newColor1 = Color.white;
+            Color newColor2 = Color.white;
+            Color newColor3 = Color.white;
+            Color newColor4 = Color.white;
+            Color newColor5 = Color.white;
+            Color newColor6 = Color.white;
+            Color newColor7 = Color.white;
+            Color newColor8 = Color.white;
 
-            // Getting cloud values         
-            float currentBaseNoiseScale = skyBox.GetFloat("_baseNoiseScale");
-            float currentCloudsPrimaryScale = skyBox.GetFloat("_cloudsPrimaryScale");
-            float currentCloudsSecondaryScale = skyBox.GetFloat("_cloudsSecondaryScale");
+            float sunRadius = 0f;
 
-            // Getting current horizontal values
-            float currentHorizontalRadius = skyBox.GetFloat("_HorizontalWidth");
-            Color currentHorizontalColor = skyBox.GetColor("_horizonColor");
+            Color currentHorizonColor = Color.white;
+            float currentHorizonWidth = 0f;
+            float currentHorizonBrightness = 0f;
 
-            // Getting sun radius
-            float currentSunRadius = skyBox.GetFloat("_sunRadius");
+            float currentCloudScale = 0f;
+            float currentCloudPrimary = 0f;
+            float currentCloudSecondary = 0f;
 
-
-            float timeElapsedd = 0f;
-
-            while (timeElapsedd < skyboxTransition)
+            if (goingWhere == "fyre")
             {
-                yield return new WaitForSeconds(0.0000000000001f);
-                timeElapsedd += Time.deltaTime / skyboxTransition;
-                float t = Mathf.Clamp01(timeElapsedd / skyboxTransition);
-
-         
-
-
                 // Lerping colors
-                Color newColor1 = Color.Lerp(currentColor1, color1, t);
-                Color newColor2 = Color.Lerp(currentColor2, color2, t);
-                Color newColor3 = Color.Lerp(currentColor3, color3, t);
-                Color newColor4 = Color.Lerp(currentColor4, color4, t);
+                newColor1 = Color.Lerp(currentColor1, fyreColor1, t);
+                newColor2 = Color.Lerp(currentColor2, fyreColor2, t);
+                newColor3 = Color.Lerp(currentColor3, fyreColor3, t);
+                newColor4 = Color.Lerp(currentColor4, fyreColor4, t);
 
-                Color newColor5 = Color.Lerp(currentColor5, color5, t);
-                Color newColor6 = Color.Lerp(currentColor6, color6, t);
-                Color newColor7 = Color.Lerp(currentColor7, color7, t);
-                Color newColor8 = Color.Lerp(currentColor8, color8, t);
+                newColor5 = Color.Lerp(currentColor5, fyreColor5, t);
+                newColor6 = Color.Lerp(currentColor6, fyreColor6, t);
+                newColor7 = Color.Lerp(currentColor7, fyreColor7, t);
+                newColor8 = Color.Lerp(currentColor8, fyreColor8, t);
 
                 // Lerping sun
-                float sunRadius = Mathf.Lerp(sunDefaultRadius, sunGoneRadius, t);
+                sunRadius = Mathf.Lerp(sunDefaultRadius, sunGoneRadius, t);
+
+                // Lerping Horizon
+                currentHorizonColor = Color.Lerp(gottenHorizontalColor, fyreHorizontolColor, t);
+                currentHorizonWidth = Mathf.Lerp(gottenHorizontalWidth, fyreHorizontolWidth, t);
+                currentHorizonBrightness = Mathf.Lerp(gottenHorizontalBrightness, fyreHorizontolBrightness, t);
 
                 // Lerping clouds
-                float currentCloudScale = Mathf.Lerp(currentBaseNoiseScale, 0, t);
-                float currentCloudPrimary = Mathf.Lerp(currentCloudsPrimaryScale, 0, t);
-                float currentCloudSecondary = Mathf.Lerp(currentCloudsSecondaryScale, 0, t);
-
-
-
-
-                // Setting colors
-                skyBox.SetColor("_daySkyColorTop", newColor1);
-                skyBox.SetColor("_daySkyColorBottom", newColor2);
-                skyBox.SetColor("_nightSkyColorTop", newColor3);
-                skyBox.SetColor("nightSkyColorBottom", newColor4);
-
-                skyBox.SetColor("_dayCloudsEdge", newColor5);
-                skyBox.SetColor("_dayCloudsMain", newColor6);
-                skyBox.SetColor("_nightCloudsMain", newColor7);
-                skyBox.SetColor("_nightCloudsEdge", newColor8);
-
-                // Setting Sun
-                skyBox.SetFloat("_sunRadius", sunRadius);
-
-                // Setting clouds
-                skyBox.SetFloat("_baseNoiseScale", currentBaseNoiseScale);
-                skyBox.SetFloat("_cloudsPrimaryScale", currentCloudsPrimaryScale);
-                skyBox.SetFloat("_cloudsSecondaryScale", currentCloudsSecondaryScale);
+                currentCloudScale = Mathf.Lerp(currentBaseNoiseScale, 0, t);
+                currentCloudPrimary = Mathf.Lerp(currentCloudsPrimaryScale, 0, t);
+                currentCloudSecondary = Mathf.Lerp(currentCloudsSecondaryScale, 0, t);
             }
-        }
+            
+            // Setting colors
+            skyBox.SetColor("_daySkyColorTop", newColor1);
+            skyBox.SetColor("_daySkyColorBottom", newColor2);
+            skyBox.SetColor("_nightSkyColorTop", newColor3);
+            skyBox.SetColor("nightSkyColorBottom", newColor4);
+
+            skyBox.SetColor("_dayCloudsEdge", newColor5);
+            skyBox.SetColor("_dayCloudsMain", newColor6);
+            skyBox.SetColor("_nightCloudsMain", newColor7);
+            skyBox.SetColor("_nightCloudsEdge", newColor8);
+
+            // Setting Sun
+            skyBox.SetFloat("_sunRadius", sunRadius);
+
+            // Setting Horizon
+            skyBox.SetColor("_horizonColor", currentHorizonColor);
+            skyBox.SetFloat("_HorizontalWidth", currentHorizonWidth);
+            skyBox.SetFloat("_horizonBrightness", currentHorizonBrightness);
+
+            // Setting clouds
+            skyBox.SetFloat("_baseNoiseScale", currentCloudScale);
+            skyBox.SetFloat("_cloudsPrimaryScale", currentCloudPrimary);
+            skyBox.SetFloat("_cloudsSecondaryScale", currentCloudSecondary);
+        }   
         yield return null;
     }
 
+    /// <summary>
+    /// Change back skybox settings to default
+    /// </summary>
+    private void OnDisable()
+    {
+        // Setting colors
+        skyBox.SetColor("_daySkyColorTop", floraColor1);
+        skyBox.SetColor("_daySkyColorBottom", floraColor2);
+        skyBox.SetColor("_nightSkyColorTop", floraColor3);
+        skyBox.SetColor("nightSkyColorBottom", floraColor4);
 
+        skyBox.SetColor("_dayCloudsEdge", floraColor5);
+        skyBox.SetColor("_dayCloudsMain", floraColor6);
+        skyBox.SetColor("_nightCloudsMain", floraColor7);
+        skyBox.SetColor("_nightCloudsEdge", floraColor8);
 
+        // Horizion Settings
+        skyBox.SetColor("_horizonColor", floraHorizontolColor);
+        skyBox.SetFloat("_HorizontalWidth", floraHorizontolWidth);
+        skyBox.SetFloat("_horizonBrightness", floraHorizontolBrightness);
+
+        // Setting Sun
+        skyBox.SetFloat("_sunRadius", sunDefaultRadius);
+
+        // Setting clouds
+        skyBox.SetFloat("_baseNoiseScale", 0.03f);
+        skyBox.SetFloat("_cloudsPrimaryScale", 0.03f);
+        skyBox.SetFloat("_cloudsSecondaryScale", 0.03f);
+    }
 
 
     private IEnumerator LerpColor(Color startColor, Color endColor)

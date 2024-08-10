@@ -155,25 +155,25 @@ Material:
     - _UseTex: 0
     - _UseWindMask: 1
     - _UseWindNoiseTex: 1
-    - _WindIntensity: 0.15
+    - _WindIntensity: 0.24
     - _WindSpeed: 0.5
-    - _WindWeight: 0.5
+    - _WindWeight: 0.28
     - _ZWrite: 1
     m_Colors:
     - _AdditionalWPO: {r: 1, g: 0, b: 0.5, a: 0}
-    - _BottomColor: {r: 0.2748148, g: 0.49056602, b: 0.085617654, a: 1}
+    - _BottomColor: {r: 0.42097682, g: 0.5754717, b: 0.28502136, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NearFarRange: {r: 400, g: 25, b: 0, a: 0}
     - _NoiseContrast: {r: 241.67, g: -160.12, b: 0.37, a: 1}
     - _SSSColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0.31038624, g: 0.60303116, b: 0.7075472, a: 1}
-    - _TopColor: {r: 2.996079, g: 2.996079, b: 2.996079, a: 1}
-    - _TopColorNear: {r: 0.23283193, g: 1, b: 0.19339621, a: 1}
+    - _TopColor: {r: 1.7207953, g: 1.7207953, b: 1.7207953, a: 1}
+    - _TopColorNear: {r: 0.22357577, g: 1, b: 0.18396229, a: 1}
     - _TopColorNear_1: {r: 0, g: 0, b: 0, a: 0}
     - _TopColorNear_2: {r: 0, g: 0, b: 0, a: 0}
     - _TopColorNear_3: {r: 0, g: 0, b: 0, a: 0}
     - _UVContrast: {r: 0, g: 0, b: 0.96, a: 0.37}
     - _WindNoiseColor: {r: 0.52156866, g: 0.86666673, b: 0.43529415, a: 1}
-    - _WindNoiseTexScale: {r: 100, g: 400, b: 0, a: 0}
+    - _WindNoiseTexScale: {r: 50, g: 50, b: 0, a: 0}
   m_BuildTextureStacks: []

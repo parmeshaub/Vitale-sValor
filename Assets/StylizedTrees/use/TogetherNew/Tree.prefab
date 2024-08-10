@@ -62,7 +62,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: a4a9830b754e81543a3cde07d2e37d79, type: 2}
+      objectReference: {fileID: 2100000, guid: c46920d75f9263d4d9919b104a336d01, type: 2}
     - target: {fileID: 919132149155446097, guid: d1faf00a788269a4dab7036bbac32cb1,
         type: 3}
       propertyPath: m_Name
@@ -122,6 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greenColors:
-  - {r: 0.5566038, g: 0.43767384, b: 0, a: 0}
-  - {r: 0.6132076, g: 0.49943924, b: 0, a: 0}
-  - {r: 0.33962262, g: 0.24840818, b: 0, a: 0}
+  - {r: 0, g: 0.7924528, b: 0.06648412, a: 0}
+  - {r: 0, g: 0.5377358, b: 0.016448343, a: 0}
+  - {r: 0.25698647, g: 0.67947227, b: 0.7264151, a: 0}

@@ -117,7 +117,7 @@ public class Interactor : MonoBehaviour
 
         for (int i = 0; i < materialInstances.Length; i++)
         {
-            Material material = materialInstances[i];
+            Material material = materialInstances[i];   
 
             if (state == "decreasee")
             {

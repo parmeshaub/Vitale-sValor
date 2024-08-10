@@ -61,37 +61,54 @@ public class TargetInteractor : MonoBehaviour
         Material[] currentMaterials = renderer.materials; // Getting all materials attached
         float gainingTime = 0.0f; // Resets time to gain for lerp
 
-        foreach (Material mat in currentMaterials) 
+
+
+        for (int i = 0; i < currentMaterials.Length; i++)
         {
-            
+            // Access each material instance
+            var mat = currentMaterials[i];
+            Debug.Log(mat.name);
+
 
             if (goingWhere == "flurry")
             {
                 // Holder values with default initializations
-                float targetSlider;
-                float targetLevel;
-                Vector3 targetDirection;
-                float targetSlide;
+                float targetSlider = 0f;
+                float targetLevel = 0f;
+                Vector3 targetDirection = Vector3.zero;
+                float targetSlide = 0f;
 
-                if (mat.name == "triplanarbricks (Instance)")
+                /*if (mat.name == "triplanarbricks (Instance)")
                 {
                     // Target snowy properties of triplanar material
                     targetSlider = 0.54f;
                     targetLevel = 2.2f;
                     targetDirection = new Vector3(0f, -5.82f, 0f);
                     targetSlide = 1.2f;
-                }
+                }*/
 
-                /*if (mat.name == "triplanarPillar (Instance)")
+                if (mat.name == "triplanarPillar (Instance)")
                 {
                     // Target snowy properties of triplanar material
-                    Debug.Log("yes gotten");
+
+                    Debug.Log("GOTTEN pillar");
                     targetSlider = -0.11f;
                     targetLevel = 0.66f;
                     targetDirection = new Vector3(0.12f, -4f, 0f);
                     targetSlide = 1.16f;
-                }*/
+                    
+                }
 
+                if (mat.name == "triplanarRoof (Instance)")
+                {
+                    Debug.Log("GOTTEN roof");
+                    // Target snowy properties of triplanar material
+                    targetSlider = 1.2f;
+                    targetLevel = 2.2f;
+                    targetDirection = new Vector3(4.38f, -71.1f, 21.6f);
+                    targetSlide = 2.9f;
+
+                }
 
                 // Current triplanar properties
                 float currentSlider = mat.GetFloat("_Slider");
@@ -99,28 +116,32 @@ public class TargetInteractor : MonoBehaviour
                 Vector3 currentTargetDirection = mat.GetVector("_Direction");
                 float currentSlide = mat.GetFloat("_Slide");
 
-                while (gainingTime < triplanarDuration)
+                if (currentSlider != 0f)
                 {
-                    // Increment elapsed time
-                    gainingTime += Time.deltaTime;
-                    float lerpValue = gainingTime / triplanarDuration;
-                    yield return new WaitForSeconds(0.000000001f);
+                    while (gainingTime < triplanarDuration)
+                    {
+                        // Increment elapsed time
+                        gainingTime += Time.deltaTime;
+                        float lerpValue = gainingTime / triplanarDuration;
+                        yield return new WaitForSeconds(0.000000001f);
 
-                    // Lerping values
-                    float currentValue1 = Mathf.Lerp(currentSlider, targetSlider, lerpValue);
+                        // Lerping values
+                        float currentValue1 = Mathf.Lerp(currentSlider, targetSlider, lerpValue);
 
-                    
+                        Debug.Log(currentValue1);
+                        Debug.Log(targetSlider);
 
-                    float currentValue2 = Mathf.Lerp(currentSlide, targetSlide, lerpValue);
-                    float currentValue3 = Mathf.Lerp(currentTargetLevel, targetLevel, lerpValue);
-                    Vector3 currentValue4 = Vector3.Lerp(currentTargetDirection, targetDirection, lerpValue);
+                        float currentValue2 = Mathf.Lerp(currentSlide, targetSlide, lerpValue);
+                        float currentValue3 = Mathf.Lerp(currentTargetLevel, targetLevel, lerpValue);
+                        Vector3 currentValue4 = Vector3.Lerp(currentTargetDirection, targetDirection, lerpValue);
 
-                    // Applying lerping values to current material renderer
-                    mat.SetFloat("_Slider", currentValue1);
-                    mat.SetFloat("_Slide", currentValue2);
-                    mat.SetFloat("_Level", currentValue3);
-                    mat.SetVector("_Direction", currentValue4);
-                }
+                        // Applying lerping values to current material renderer
+                        mat.SetFloat("_Slider", currentValue1);
+                        mat.SetFloat("_Slide", currentValue2);
+                        mat.SetFloat("_Level", currentValue3);
+                        mat.SetVector("_Direction", currentValue4);
+                    }
+                }             
             }
         }
 

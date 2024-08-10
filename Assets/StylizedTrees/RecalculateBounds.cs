@@ -18,9 +18,9 @@ public class RecalculateBounds : MonoBehaviour
 
         for (int i = 0; i < materials.Length; i++)
         {
-            if (materials[i].name == "diffleavesUpdated (Instance)")
+            if ((materials[i].name == "leave_1 (Instance)") || (materials[i].name == "leave_1_2 (Instance)"))
             {
-                leaveMat = renderer.materials[1];
+                leaveMat = renderer.materials[i];
                 ColorRandomizer();
             }
         }
@@ -33,7 +33,6 @@ public class RecalculateBounds : MonoBehaviour
     {
         int randomIndex = Random.Range(0, greenColors.Length);
         leaveMat.SetColor("_LeafColor", greenColors[randomIndex]);
-        Debug.Log("set");
     }
 
 }

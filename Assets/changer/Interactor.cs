@@ -119,19 +119,34 @@ public class Interactor : MonoBehaviour
         {
             Material material = materialInstances[i];
 
-            if (state == "decrease")
+            if (state == "decreasee")
             {
-                float currentValue = material.GetFloat("_NoiseStrength");
+                yield return new WaitForSeconds(0.0000000000001f);
+                //float currentValue = material.GetFloat("_NoiseStrength");
+                //currentValue -= normalDecreaseRate * Time.deltaTime;
+                //currentValue = Mathf.Max(currentValue, minValue);
+                //material.SetFloat("_NoiseStrength", currentValue);
+
+
+                float currentValue = material.GetFloat("_NoiseScale");
                 currentValue -= normalDecreaseRate * Time.deltaTime;
                 currentValue = Mathf.Max(currentValue, minValue);
-                material.SetFloat("_NoiseStrength", currentValue);
-                yield return null;
+
+
             }
 
             else if (state == "reset")
             {
                 material.SetFloat("_NoiseStrength", 0.53f);
-            }          
+            }  
+
+            while (true)
+            {
+                float currentValue = material.GetFloat("_NoiseStrength");
+
+            }
+            
+            
         }    
     }
 
@@ -235,7 +250,7 @@ public class Interactor : MonoBehaviour
     }
 
     /// <summary>
-    /// When shrinking back, make sure can't see the border effect of it going back
+    /// Hiding normal and displaying color
     /// </summary>
     /// <returns></returns>
     public void ControllerDetails(string state, string goingWhere)

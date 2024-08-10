@@ -34,6 +34,9 @@ public class PlayerHealthAndDamage : MonoBehaviour
 
     private static readonly int deathHash = Animator.StringToHash("Death");
 
+    [SerializeField] private FadeManager fadeManager;
+    [SerializeField] private RespawnManager respawnManager;
+
     private void Start() {
         cameraManager = CameraManager.instance;
         animator = GetComponentInChildren<Animator>();
@@ -41,8 +44,7 @@ public class PlayerHealthAndDamage : MonoBehaviour
         swordManager = SwordManager.instance;
         playerStatsManager = PlayerStatsManager.instance;
 
-        maxPlayerHealth = playerStatsManager.maxHealth;
-        currentPlayerHealth = maxPlayerHealth;
+        InitializeHealth();
 
         SetMaxToHealth();
         InitializeHeartBreak();
@@ -51,7 +53,7 @@ public class PlayerHealthAndDamage : MonoBehaviour
 
     private void Update() {
         if (Input.GetKeyUp(KeyCode.O)) {
-            TakeDamage(10);
+            TakeDamage(60);
         }
 
         // Automatically heal the player if CanHeal is true
@@ -83,16 +85,17 @@ public class PlayerHealthAndDamage : MonoBehaviour
             swordManager.SheathSword();
             shieldManager.TakeInShield();
 
-            StartCoroutine(DestroyPlayerAfterWait());
+            StartCoroutine(RespawnAfterWait());
             deathDoOnce = true;
         }
     }
 
-    private IEnumerator DestroyPlayerAfterWait() {
+    private IEnumerator RespawnAfterWait() {
         // Wait for black fadeout animation?
         yield return new WaitForSeconds(4);
-        cameraManager.FreezeCamera();
-        Destroy(gameObject);
+        fadeManager.StartFadeIn(1.8f);
+        yield return new WaitForSeconds(2);
+        respawnManager.RespawnPlayer();
     }
 
     private void SetMaxToHealth() {
@@ -149,5 +152,12 @@ public class PlayerHealthAndDamage : MonoBehaviour
             currentPlayerHealth = maxPlayerHealth;
             SetHealthUI();
         }
+    }
+
+    public void InitializeHealth() {
+        maxPlayerHealth = playerStatsManager.maxHealth;
+        currentPlayerHealth = maxPlayerHealth;
+        SetHealthUI();
+        deathDoOnce = false;
     }
 }

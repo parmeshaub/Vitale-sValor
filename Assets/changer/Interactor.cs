@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 
 public class Interactor : MonoBehaviour
 {
+    /*
     public GameObject controller; // The sphere controller in charge of lerping textures
     public GameObject lightingManager;
 
@@ -327,4 +328,5 @@ public class Interactor : MonoBehaviour
         }
 
     }
+    */
 }

@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     // Combat
     private PlayerCombat playerCombat;
-    private bool isAttacking = false;
+    public bool isAttacking = false;
 
     // For Animation
     private Animator animator;
@@ -99,8 +99,8 @@ public class PlayerController : MonoBehaviour
     }
     void Update() {
         HandleAnimation();
+        HandleGravity();
         if (!isAttacking) {
-            HandleGravity();
             if (!playerCombat.isAttacking) {
                 if (!playerCombat.isBlocking) {
                     HandleJump();

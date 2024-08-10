@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TargetInteractor : MonoBehaviour
 {
+    /*
     public Color treeNatureColor;
     public Color treeFireColor;
     public Color treeSnowColor;
@@ -91,7 +92,7 @@ public class TargetInteractor : MonoBehaviour
                     targetDirection = new Vector3(0.12f, -4f, 0f);
                     targetSlide = 1.16f;
                 }*/
-
+    /*
 
                 // Current triplanar properties
                 float currentSlider = mat.GetFloat("_Slider");
@@ -158,5 +159,6 @@ public class TargetInteractor : MonoBehaviour
         yield return null;
         
     }
+    */
     
 }

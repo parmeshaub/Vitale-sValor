@@ -7,15 +7,11 @@ public class ArtemisPillar : Interactable
 {
     public Animator artemisAnimator;
     public bool isUnlocked = false;
+    public Transform respawnPoint;
 
     public void ActivateArtemis()
     {
         artemisAnimator.SetTrigger("activated");
-    }
- 
-    private void Update()
-    {
-
     }
 
     public override void Interact() {

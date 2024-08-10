@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class ArtemisPillar : MonoBehaviour
+public class ArtemisPillar : Interactable
 {
     public Animator artemisAnimator;
+    public bool isUnlocked = false;
+
     public void ActivateArtemis()
     {
         artemisAnimator.SetTrigger("activated");
@@ -13,9 +15,11 @@ public class ArtemisPillar : MonoBehaviour
  
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            ActivateArtemis();
-        }
+
+    }
+
+    public override void Interact() {
+        isUnlocked = true;
+        ActivateArtemis();
     }
 }

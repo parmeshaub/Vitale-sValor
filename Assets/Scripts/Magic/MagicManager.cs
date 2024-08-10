@@ -76,6 +76,13 @@ public class MagicManager : MonoBehaviour
                 magicMoves[magicNum].Activate();
                 StartCoroutine(StartMagicCoolDown(magicNum));
             }
+            else if (magicMoves[magicNum].name == "Wings Of Comfort") {
+                if(playerCombat.characterController.isGrounded) return;
+                else {
+                    magicMoves[magicNum].Activate();
+                    StartCoroutine(StartMagicCoolDown(magicNum));
+                }
+            }
             magicMoves[magicNum].Activate();
             StartCoroutine(StartMagicCoolDown(magicNum));
         }

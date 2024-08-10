@@ -25,6 +25,7 @@ public class PlayerCombat : MonoBehaviour
     public Animator animator;
     [SerializeField] private PlayerStatsManager playerStatsManager;
     [SerializeField] private CastableScript castManager;
+    [SerializeField] public PlayerHealthAndDamage playerHealth;
 
     //Combat Editables
     [SerializeField] private float timeToTarget = 0.3f;

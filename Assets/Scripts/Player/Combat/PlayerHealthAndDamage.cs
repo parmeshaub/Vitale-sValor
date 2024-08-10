@@ -24,17 +24,17 @@ public class PlayerHealthAndDamage : MonoBehaviour
     [SerializeField] private ShieldScript shieldManager;
     [SerializeField] private CinemachineImpulseSource impulseSource;
     private PlayerStatsManager playerStatsManager;
-    private Vector3 impulseDirection = new Vector3(0,-0.5f,0);
+    private Vector3 impulseDirection = new Vector3(0, -0.5f, 0);
+
+    [Header("Healing Settings")]
+    public bool CanHeal = false; // Public boolean to check if healing is allowed
+    public float currentHealRate = 10f; // Public heal rate, modifiable by other scripts
 
     private bool deathDoOnce = false;
 
     private static readonly int deathHash = Animator.StringToHash("Death");
-    
-    //TODO.
-    // Now stats must come from the playerStats script.
-    // Update Accordingly.
 
-    private void Start(){
+    private void Start() {
         cameraManager = CameraManager.instance;
         animator = GetComponentInChildren<Animator>();
         playerInputManager = PlayerInputManager.instance;
@@ -44,36 +44,39 @@ public class PlayerHealthAndDamage : MonoBehaviour
         maxPlayerHealth = playerStatsManager.maxHealth;
         currentPlayerHealth = maxPlayerHealth;
 
-
         SetMaxToHealth();
         InitializeHeartBreak();
         deathDoOnce = false;
     }
 
-    private void Update(){
-        if(Input.GetKeyUp(KeyCode.O))
-        {
+    private void Update() {
+        if (Input.GetKeyUp(KeyCode.O)) {
             TakeDamage(10);
+        }
+
+        // Automatically heal the player if CanHeal is true
+        if (CanHeal) {
+            HealPlayer();
         }
     }
 
-    public void TakeDamage(float damageDealt){
-        //Deal Damage
+    public void TakeDamage(float damageDealt) {
+        // Deal Damage
         currentPlayerHealth -= damageDealt;
         impulseSource.GenerateImpulse(impulseDirection);
 
-        //Check if Death
+        // Check if Death
         CheckDeath();
 
-        //Update the UI
+        // Update the UI
         SetHealthUI();
     }
 
-    private void CheckDeath(){
-        //if player is alive
+    private void CheckDeath() {
+        // if player is alive
         if (currentPlayerHealth > 0) return;
 
-        //Death
+        // Death
         playerInputManager.playerInput.Gameplay.Disable();
         if (!deathDoOnce) {
             animator.SetTrigger(deathHash);
@@ -81,25 +84,24 @@ public class PlayerHealthAndDamage : MonoBehaviour
             shieldManager.TakeInShield();
 
             StartCoroutine(DestroyPlayerAfterWait());
-            deathDoOnce=true;
+            deathDoOnce = true;
         }
     }
 
     private IEnumerator DestroyPlayerAfterWait() {
-        //Wait for black fadeout animation?
+        // Wait for black fadeout animation?
         yield return new WaitForSeconds(4);
         cameraManager.FreezeCamera();
         Destroy(gameObject);
     }
 
-    private void SetMaxToHealth(){
-        currentPlayerHealth = playerStatsManager.maxHealth;;
+    private void SetMaxToHealth() {
+        currentPlayerHealth = playerStatsManager.maxHealth; ;
         healthSlider.value = currentPlayerHealth;
     }
 
     private void SetHealthUI() {
         float calcHealth = Mathf.Lerp(0, 1, currentPlayerHealth / maxPlayerHealth);
-        Debug.Log(calcHealth);
         healthSlider.value = calcHealth;
 
         // Player Health 100% - 75%
@@ -126,10 +128,26 @@ public class PlayerHealthAndDamage : MonoBehaviour
         }
     }
 
-
     private void InitializeHeartBreak() {
         heartbreakSmall.SetActive(false);
         heartbreakMedium.SetActive(false);
         heartbreakLarge.SetActive(false);
+    }
+
+    private void HealPlayer() {
+        Debug.Log(currentPlayerHealth);
+        // Check if player health is not full
+        if (currentPlayerHealth < maxPlayerHealth) {
+            // Heal the player based on the current heal rate
+            currentPlayerHealth += currentHealRate * Time.deltaTime * 10;
+
+            // Update the health UI
+            SetHealthUI();
+        }
+        else {
+            CanHeal = false;
+            currentPlayerHealth = maxPlayerHealth;
+            SetHealthUI();
+        }
     }
 }

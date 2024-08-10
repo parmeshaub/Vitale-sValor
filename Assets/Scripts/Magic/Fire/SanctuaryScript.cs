@@ -5,9 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Magic Move", menuName = "Magic Move/Sanctuary")]
 public class SanctuaryScript : MagicMoveSO
 {
+    private PlayerCombat playerCombat;
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        playerCombat = PlayerCombat.Instance;
+        GameObject playerObj = playerCombat.gameObject;
+
+        Instantiate(skillPrefab, playerObj.transform);
     }
     public override void Cast() {
         throw new System.NotImplementedException();

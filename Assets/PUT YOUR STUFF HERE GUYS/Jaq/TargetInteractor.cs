@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class TargetInteractor : MonoBehaviour
 {
+    public Animator LiquidAnimator;
+    public GameObject WaterObject;
+
     public Color treeNatureColor;
     public Color treeFireColor;
     public Color treeSnowColor;
@@ -14,9 +17,13 @@ public class TargetInteractor : MonoBehaviour
     public float triplanarDuration = 2.0f; //Duration of triplanar lerp
 
 
+    public string currentWhere;
     public string goingWhere;
+
+
     private void Start()
     {
+        currentWhere = "flora";
         goingWhere = "flurry";
     }
 
@@ -44,15 +51,62 @@ public class TargetInteractor : MonoBehaviour
 
         if (other.gameObject.name == "water")
         {
-
+            LiquidSwitcher(goingWhere);
         }
 
         // This is for all assets. Dungeon exteriors, village props, rocks and etc.
         // Checking the object's layer name
         if (other.gameObject.tag == "Changable")
         {
-            StartCoroutine(Triplanar(other.gameObject.GetComponent<Renderer>(), goingWhere));
+            //StartCoroutine(Triplanar(other.gameObject.GetComponent<Renderer>(), goingWhere));
         }
+    }
+
+    public void LiquidSwitcher(string goingWhere)
+    {
+        if (currentWhere == "flora")
+        {
+            if (goingWhere == "flurry")
+            {
+                LiquidAnimator.SetTrigger("waterToIce");
+                WaterObject.GetComponent<Collider>().isTrigger = false; // Make it able to walk on ice
+            }
+
+            if (goingWhere == "fyre")
+            {
+                LiquidAnimator.SetTrigger("waterToLava");
+            }
+        }
+
+        if (currentWhere == "flurry")
+        {
+            if (goingWhere == "fyre")
+            {
+                LiquidAnimator.SetTrigger("lavaToIce");
+                WaterObject.GetComponent<Collider>().isTrigger = false; // Make it able to walk on ice
+            }
+
+            if (goingWhere == "flora")
+            {
+                LiquidAnimator.SetTrigger("iceToWater");
+                WaterObject.GetComponent<Collider>().isTrigger = true; // Make it able to not walk on ice
+            }
+        }
+
+        if (currentWhere == "fyre")
+        {
+            if (goingWhere == "flora")
+            {
+                LiquidAnimator.SetTrigger("lavaToWater");
+            }
+
+            if (goingWhere == "flurry")
+            {
+                LiquidAnimator.SetTrigger("lavaToIce");
+                WaterObject.GetComponent<Collider>().isTrigger = false; // Make it able to walk on ice
+            }
+
+        }      
     }
 
 
@@ -154,10 +208,6 @@ public class TargetInteractor : MonoBehaviour
     }
 
 
-
-
-
-
     public IEnumerator LerpTreeTransparency(Material treeMat, float currentTarget ,float finalTarget)
     {
         float elapsedTime = 0.0f;
@@ -170,14 +220,11 @@ public class TargetInteractor : MonoBehaviour
             // Calculate the lerp value
             float lerpValue = elapsedTime / treeDuration;
 
-
+            yield return new WaitForSeconds(0.000001f);
             float currentValue = Mathf.Lerp(currentTarget, finalTarget, lerpValue);
             treeMat.SetFloat("_Alpha", currentValue);
-        }
-
-        // Yield until the next frame
-        yield return null;
-        
+        }  
     }
     
+    // Do not make any update test with keybinds here! Do it in the interactor script :o
 }

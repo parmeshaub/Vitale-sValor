@@ -136,7 +136,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     - _baseNoiseScale: 0.03
-    - _cloudsCutoff: 0.094
+    - _cloudsCutoff: 0.46
     - _cloudsMoveSpeed: -0.01
     - _cloudsPrimaryScale: 0.03
     - _cloudsSecondaryScale: 0.03

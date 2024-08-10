@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 
 public class Interactor : MonoBehaviour
 {
-    /*
+    
     public GameObject controller; // The sphere controller in charge of lerping textures
     public GameObject lightingManager;
 
@@ -287,46 +287,39 @@ public class Interactor : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    {
-        Material material = materialInstances[0];
-        Debug.Log(material.GetTexture("_currentTex"));
+    {       
 
-        
+        /// Super impt for texture transition!
         for (int i = 0; i < materialInstances.Length; i++)
         {
             Material currentMaterial = materialInstances[i];
 
             currentMaterial.SetVector("_InfluencingObjectPos", influencingObject.position);
-            currentMaterial.SetVector("_InfluencingObjectScale", influencingObject.localScale);  // Update scale
+            currentMaterial.SetVector("_InfluencingObjectScale", influencingObject.localScale);  
         }
         
 
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(GrowController("flurry"));
-            ControllerDetails("show", "flurry");
-            StartCoroutine(ChangeNormalStrength("decrease"));
-            myScript.GoingWhere("flurry");
-            lightingManager.GetComponent<LightingManager>().FloraToFlurry();
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            StartCoroutine(GrowController("flora"));
-            ControllerDetails("show", "flora");
-            StartCoroutine(ChangeNormalStrength("decrease"));
-            myScript.GoingWhere("flora");
-        }
 
         if (Input.GetKeyDown(KeyCode.U))
         {
             StartCoroutine(GrowController("fyre"));
             ControllerDetails("show", "fyre");
-            StartCoroutine(ChangeNormalStrength("decrease"));
-            myScript.GoingWhere("fyre");
+            //StartCoroutine(ChangeNormalStrength("decrease"));
+
+            myScript.GoingWhere("fyre"); // Tells the target interactor where its going
+            lightingManager.GetComponent<LightingManager>().FloraToFyre(); // Tells lighting what to do
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            StartCoroutine(GrowController("flurry"));
+            ControllerDetails("show", "flurry");
+            //StartCoroutine(ChangeNormalStrength("decrease"));
+
+            myScript.GoingWhere("flurry"); // Tells the target interactor where its going
+            lightingManager.GetComponent<LightingManager>().FloraToFlurry(); // Tells lighting what to do
         }
 
     }
-    */
+    
 }

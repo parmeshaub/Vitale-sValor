@@ -10,6 +10,7 @@ public class Interactor : MonoBehaviour
     
     public GameObject controller; // The sphere controller in charge of lerping textures
     public GameObject lightingManager;
+    public GameObject capManager; // Chests and portals
 
     public Terrain currentTerrain;
     public Transform influencingObject; // Assign Object A in the inspector
@@ -253,7 +254,6 @@ public class Interactor : MonoBehaviour
     /// <summary>
     /// Hiding normal and displaying color
     /// </summary>
-    /// <returns></returns>
     public void ControllerDetails(string state, string goingWhere)
     {     
         for (int i = 0; i < materialInstances.Length; i++)
@@ -285,10 +285,50 @@ public class Interactor : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// What is being called when user changes dimension into flurry
+    /// </summary>
+    public void GoingFlurry()
+    {
+        StartCoroutine(GrowController("flurry"));
+        ControllerDetails("show", "flurry");
+
+        myScript.GoingWhere("flurry"); // Tells the target interactor where its going
+        lightingManager.GetComponent<LightingManager>().ToFlurry(); // Tells lighting what to do
+        capManager.GetComponent<CAP>().SetWorld("flurry"); // Telling portals and chests what to do
+
+        currentTerrain.detailObjectDistance = 0; // Disable Grass
+    }
+
+    public void GoingFyre()
+    {
+        StartCoroutine(GrowController("flurry"));
+        ControllerDetails("show", "flurry");
+
+        myScript.GoingWhere("flurry"); // Tells the target interactor where its going
+        lightingManager.GetComponent<LightingManager>().ToFyre(); // Tells lighting what to do
+        capManager.GetComponent<CAP>().SetWorld("flurry"); // Telling portals and chests what to do
+
+        currentTerrain.detailObjectDistance = 0; // Disable Grass
+    }
+
+    public void GoingFlora()
+    {
+        StartCoroutine(GrowController("flora"));
+        ControllerDetails("show", "flora");
+
+        myScript.GoingWhere("flora"); // Tells the target interactor where its going
+        lightingManager.GetComponent<LightingManager>().ToFlora(); // Tells lighting what to do
+        capManager.GetComponent<CAP>().SetWorld("flora"); // Telling portals and chests what to do
+
+        currentTerrain.detailObjectDistance = 1; // Re-enable Grass
+    }
+
+
     // Update is called once per frame
     void Update()
     {       
-
         /// Super impt for texture transition!
         for (int i = 0; i < materialInstances.Length; i++)
         {
@@ -297,31 +337,5 @@ public class Interactor : MonoBehaviour
             currentMaterial.SetVector("_InfluencingObjectPos", influencingObject.position);
             currentMaterial.SetVector("_InfluencingObjectScale", influencingObject.localScale);  
         }
-        
-
-
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            StartCoroutine(GrowController("fyre"));
-            ControllerDetails("show", "fyre");
-            //StartCoroutine(ChangeNormalStrength("decrease"));
-
-            myScript.GoingWhere("fyre"); // Tells the target interactor where its going
-            lightingManager.GetComponent<LightingManager>().FloraToFyre(); // Tells lighting what to do
-            currentTerrain.detailObjectDistance = 0; // Disable Grass
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            StartCoroutine(GrowController("flurry"));
-            ControllerDetails("show", "flurry");
-            //StartCoroutine(ChangeNormalStrength("decrease"));
-
-            myScript.GoingWhere("flurry"); // Tells the target interactor where its going
-            lightingManager.GetComponent<LightingManager>().FloraToFlurry(); // Tells lighting what to do
-            currentTerrain.detailObjectDistance = 0; // Disable Grass
-        }
-
-    }
-    
+    }    
 }

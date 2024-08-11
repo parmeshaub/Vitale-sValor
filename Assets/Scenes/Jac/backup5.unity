@@ -11346,12 +11346,12 @@ PrefabInstance:
     - target: {fileID: 57650509055031758, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.055468265
+      value: -0.055467803
       objectReference: {fileID: 0}
     - target: {fileID: 57650509055031758, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.045369413
+      value: -0.045369
       objectReference: {fileID: 0}
     - target: {fileID: 57650509055031758, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -11428,20 +11428,10 @@ PrefabInstance:
       propertyPath: m_FollowOffset.z
       value: -0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2092833220028121178, guid: e3e4ff080ad21564b895837e00fdd8ba,
-        type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3145674848216446883, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_Name
       value: PlayerPack2 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3249778096461947715, guid: e3e4ff080ad21564b895837e00fdd8ba,
-        type: 3}
-      propertyPath: m_Alpha
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3940478086057564332, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -11461,22 +11451,22 @@ PrefabInstance:
     - target: {fileID: 3940478086057564332, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.05790451
+      value: -0.05790487
       objectReference: {fileID: 0}
     - target: {fileID: 3940478086057564332, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.04419188
+      value: -0.0441922
       objectReference: {fileID: 0}
     - target: {fileID: 3940478086057564332, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.79269546
+      value: 0.7926954
       objectReference: {fileID: 0}
     - target: {fileID: 3940478086057564332, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.60525036
+      value: -0.6052504
       objectReference: {fileID: 0}
     - target: {fileID: 5612727115230358686, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -11551,12 +11541,7 @@ PrefabInstance:
     - target: {fileID: 6801876853914592068, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_XAxis.m_MaxSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6801876853914592068, guid: e3e4ff080ad21564b895837e00fdd8ba,
-        type: 3}
-      propertyPath: m_YAxis.m_MaxSpeed
-      value: 0
+      value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 8624280682632310156, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -11621,22 +11606,22 @@ PrefabInstance:
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.27072996
+      value: 0.2707301
       objectReference: {fileID: 0}
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.24267088
+      value: 0.242671
       objectReference: {fileID: 0}
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7050378
+      value: 0.7050377
       objectReference: {fileID: 0}
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.60888255
+      value: -0.6088825
       objectReference: {fileID: 0}
     - target: {fileID: 9146203952835715614, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -11656,17 +11641,17 @@ PrefabInstance:
     - target: {fileID: 9146203952835715614, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.050973617
+      value: -0.050973315
       objectReference: {fileID: 0}
     - target: {fileID: 9146203952835715614, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.044998582
+      value: -0.044998333
       objectReference: {fileID: 0}
     - target: {fileID: 9146203952835715614, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7479432
+      value: 0.7479433
       objectReference: {fileID: 0}
     - target: {fileID: 9146203952835715614, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -12145,7 +12130,7 @@ MonoBehaviour:
   flurryColor7: {r: 0, g: 0, b: 0, a: 0}
   flurryColor8: {r: 0, g: 0, b: 0, a: 0}
   directionalFloraLighting: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 0}
-  directionalFloraLightingIntensity: 0
+  directionalFloralLightingIntensity: 1
   directionalFlurryLighting: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 0}
   directionalFlurryLightingIntensity: 3
   directionalFyreLighting: {r: 0.13333334, g: 0.1254902, b: 0.1254902, a: 0}
@@ -26908,7 +26893,7 @@ GameObject:
   - component: {fileID: 759648713}
   - component: {fileID: 759648712}
   m_Layer: 0
-  m_Name: DAGMOR_Portal
+  m_Name: volleyPortal (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65404,16 +65389,16 @@ MonoBehaviour:
   portal1: {fileID: 1356966175}
   portal2: {fileID: 1453127083}
   portal3: {fileID: 583120591}
-  portal4: {fileID: 1712830628}
-  portal5: {fileID: 1942230021}
-  portal6: {fileID: 1321241961}
+  portal4: {fileID: 583120591}
+  portal5: {fileID: 1712830628}
+  portal6: {fileID: 1942230021}
   portal7: {fileID: 1890721556}
   portal8: {fileID: 267189082}
-  portal9: {fileID: 1901332347}
-  Tier1Chest: {fileID: 1583178963}
-  Tier2Chest: {fileID: 1777811009}
-  Tier3Chest: {fileID: 1903681369}
-  volcanoPortal: {fileID: 759648711}
+  portal9: {fileID: 1321241961}
+  Tier1Chest: {fileID: 0}
+  Tier2Chest: {fileID: 0}
+  Tier3Chest: {fileID: 0}
+  volcanoPortal: {fileID: 0}
   goingWhere: 
 --- !u!4 &1876974507
 Transform:
@@ -75792,7 +75777,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   lightingManager: {fileID: 0}
-  capManager: {fileID: 0}
   currentTerrain: {fileID: 0}
   influencingObject: {fileID: 0}
   objectRenderer: {fileID: 0}
@@ -77259,7 +77243,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 164683625}
   lightingManager: {fileID: 332534885}
-  capManager: {fileID: 0}
   currentTerrain: {fileID: 252886569}
   influencingObject: {fileID: 164683626}
   objectRenderer: {fileID: 5183592464194326426}

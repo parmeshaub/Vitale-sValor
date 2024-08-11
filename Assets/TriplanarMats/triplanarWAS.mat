@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: triplanarfire
+  m_Name: triplanarWAS
   m_Shader: {fileID: -6465566751694194690, guid: 1c5409f4a3d6a9d408c231db6bf5bd0b,
     type: 3}
   m_Parent: {fileID: 0}
@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AOMAP:
-        m_Texture: {fileID: 2800000, guid: 780c318ce0d11e743b1e9c8c30cd33d7, type: 3}
+        m_Texture: {fileID: 2800000, guid: fa0b7a097890a334c911012df5f307f6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -46,11 +46,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: dbca62e8cf6f62440a85e2d794744130, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3b425973e0093e04f8e0c45f3ead37e8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OriginalTex:
-        m_Texture: {fileID: 2800000, guid: 240b2159073dbe848aa89548957e7623, type: 3}
+        m_Texture: {fileID: 2800000, guid: fa0b7a097890a334c911012df5f307f6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SnowTex:
@@ -83,8 +83,8 @@ Material:
     - _Slider: 0
     - _Smoothstep: 0
     m_Colors:
-    - _ColorInfluence: {r: 2.8284268, g: 2.8284268, b: 2.8284268, a: 0}
-    - _Direction: {r: 0, g: 0, b: 0, a: 0}
+    - _ColorInfluence: {r: 1.4142135, g: 1.4142135, b: 1.4142135, a: 0}
+    - _Direction: {r: -0.65, g: 4.5, b: 0.08, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _FresnalEffect: {r: 0, g: 0, b: 0, a: 0}
     - _SnowTexTilling: {r: 1, g: 1, b: 0, a: 0}

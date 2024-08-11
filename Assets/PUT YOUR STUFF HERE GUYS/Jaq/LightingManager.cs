@@ -8,12 +8,10 @@ public class LightingManager : MonoBehaviour
     public Light directionalLight; // Assign your directional light in the inspector
     public Material skyBox;
 
-
     public float skyboxTransition = 5f;
 
     private float sunDefaultRadius = 0.356f;
     private float sunGoneRadius = 0f;
-
 
     [Header("Fyre Skybox")]
     /// <summary>
@@ -82,12 +80,11 @@ public class LightingManager : MonoBehaviour
     public Color flurryColor7;
     public Color flurryColor8;
 
-
     /// <summary>
     /// For directional light color lerp
     /// </summary>
     public Color directionalFloraLighting;
-    public float directionalFloralLightingIntensity;
+    public float directionalFloraLightingIntensity;
     public Color directionalFlurryLighting;
     public float directionalFlurryLightingIntensity;
     public Color directionalFyreLighting;
@@ -112,20 +109,30 @@ public class LightingManager : MonoBehaviour
     /// <summary>
     /// Changing directional lighting influence, fog and skybox
     /// </summary>
-    public void FloraToFlurry()
+    public void ToFlora()
     {
-        StartCoroutine(LerpDirectionalColor(directionalFloraLighting, directionalFlurryLighting, directionalFloralLightingIntensity, directionalFlurryLightingIntensity));
-        StartCoroutine(LerpFogColor(floraFogColor, flurryFogColor, floraFogIntensity, flurryFogIntensity));
+        StartCoroutine(LerpDirectionalColor(directionalFloraLighting, directionalFloraLightingIntensity));
+        StartCoroutine(LerpFogColor(floraFogColor, floraFogIntensity));
+        StartCoroutine(ChangeSkyBox("flora"));
+    }
+
+    /// <summary>
+    /// Changing directional lighting influence, fog and skybox
+    /// </summary>
+    public void ToFlurry()
+    {
+        StartCoroutine(LerpDirectionalColor(directionalFlurryLighting, directionalFlurryLightingIntensity));
+        StartCoroutine(LerpFogColor(flurryFogColor, flurryFogIntensity));
         StartCoroutine(ChangeSkyBox("flurry"));
     }
 
     /// <summary>
     /// Changing directional lighting influence, fog and skybox
     /// </summary>
-    public void FloraToFyre()
+    public void ToFyre()
     {
-        StartCoroutine(LerpDirectionalColor(directionalFloraLighting, directionalFyreLighting, directionalFloralLightingIntensity,directionalFyreLightingIntensity));
-        StartCoroutine(LerpFogColor(floraFogColor, fyreFogColor, floraFogIntensity, fyreFogIntensity));
+        StartCoroutine(LerpDirectionalColor(directionalFyreLighting,directionalFyreLightingIntensity));
+        StartCoroutine(LerpFogColor(fyreFogColor, fyreFogIntensity));
         StartCoroutine(ChangeSkyBox("fyre"));
     }
 
@@ -214,7 +221,6 @@ public class LightingManager : MonoBehaviour
                 currentCloudSecondary = Mathf.Lerp(currentCloudsSecondaryScale, 0, t);
             }
 
-
             if (goingWhere == "flurry")
             {
                 // Lerping colors
@@ -235,6 +241,33 @@ public class LightingManager : MonoBehaviour
                 currentHorizonColor = Color.Lerp(gottenHorizontalColor, flurryHorizontolColor, t);
                 currentHorizonWidth = Mathf.Lerp(gottenHorizontalWidth, flurryHorizontolWidth, t);
                 currentHorizonBrightness = Mathf.Lerp(gottenHorizontalBrightness, flurryHorizontolBrightness, t);
+
+                // Lerping clouds
+                currentCloudScale = Mathf.Lerp(currentBaseNoiseScale, 0.02f, t);
+                currentCloudPrimary = Mathf.Lerp(currentCloudsPrimaryScale, 0.02f, t);
+                currentCloudSecondary = Mathf.Lerp(currentCloudsSecondaryScale, 0.02f, t);
+            }
+
+            if (goingWhere == "flora")
+            {
+                // Lerping colors
+                newColor1 = Color.Lerp(currentColor1, floraColor1, t);
+                newColor2 = Color.Lerp(currentColor2, floraColor2, t);
+                newColor3 = Color.Lerp(currentColor3, floraColor3, t);
+                newColor4 = Color.Lerp(currentColor4, floraColor4, t);
+
+                newColor5 = Color.Lerp(currentColor5, floraColor5, t);
+                newColor6 = Color.Lerp(currentColor6, floraColor6, t);
+                newColor7 = Color.Lerp(currentColor7, floraColor7, t);
+                newColor8 = Color.Lerp(currentColor8, floraColor8, t);
+
+                // Lerping sun
+                sunRadius = Mathf.Lerp(sunGoneRadius, sunDefaultRadius, t);
+
+                // Lerping Horizon
+                currentHorizonColor = Color.Lerp(gottenHorizontalColor, floraHorizontolColor, t);
+                currentHorizonWidth = Mathf.Lerp(gottenHorizontalWidth, floraHorizontolWidth, t);
+                currentHorizonBrightness = Mathf.Lerp(gottenHorizontalBrightness, floraHorizontolBrightness, t);
 
                 // Lerping clouds
                 currentCloudScale = Mathf.Lerp(currentBaseNoiseScale, 0.02f, t);
@@ -299,9 +332,14 @@ public class LightingManager : MonoBehaviour
         skyBox.SetFloat("_cloudsSecondaryScale", 0.03f);
     }
 
-
-    private IEnumerator LerpDirectionalColor(Color startColor, Color endColor, float startIntensity, float endIntensity)
+    /// <summary>
+    /// Lerps from current to target
+    /// </summary>
+    private IEnumerator LerpDirectionalColor(Color endColor, float endIntensity)
     {
+        Color startColor = directionalLight.color; // Get current color
+        float startIntensity = directionalLight.intensity; // Get current intensity
+
         float lerpTime = 0f;
 
         while (lerpTime < 1.0f)
@@ -316,8 +354,11 @@ public class LightingManager : MonoBehaviour
     /// <summary>
     /// Changing fog color AND intensity mamamiaaa
     /// </summary>
-    private IEnumerator LerpFogColor(Color startColor, Color endColor, float startIntensity, float endIntensity)
+    private IEnumerator LerpFogColor(Color endColor, float endIntensity)
     {
+        Color startColor = directionalLight.color; // Get current color
+        float startIntensity = directionalLight.intensity; // Get current intensity
+
         float lerpTime = 0f;
 
         while (lerpTime < 1.0f)
@@ -327,23 +368,6 @@ public class LightingManager : MonoBehaviour
             RenderSettings.fogDensity = Mathf.Lerp(startIntensity, endIntensity, lerpTime);
             yield return null;
         }
-
-        // Swap start and end colors
-        Color temp = startColor;
-        startColor = endColor;
-        endColor = temp;
-
-        // Reset lerpTime to loop the color lerp
-        lerpTime = 0f;
     }
 
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            //FloraToFyre();
-            //StartCoroutine(ChangeSkyBox("fyre"));
-        }
-    }
 }

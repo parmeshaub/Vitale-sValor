@@ -16,18 +16,19 @@ public class TargetInteractor : MonoBehaviour
     public float treeDuration = 5.0f; // Duration of the lerp
     public float triplanarDuration = 2.0f; //Duration of triplanar lerp
 
-
     public string currentWhere;
     public string goingWhere;
 
 
     private void Start()
     {
-        currentWhere = "flora";
+        currentWhere = "flora"; // Cause alw starts in flora
         goingWhere = "flurry";
     }
 
-    
+    /// <summary>
+    /// Identifies the invidual gameobject elements and what to do with them
+    /// </summary>
     void OnTriggerEnter(Collider other)
     {
         // Check if the object entering the trigger zone has the specified tag
@@ -111,7 +112,7 @@ public class TargetInteractor : MonoBehaviour
         }      
     }
 
-
+    
     public IEnumerator Triplanar(Renderer renderer, string goingWhere)
     {
         yield return new WaitForSeconds(0.000000000000000000001f);
@@ -308,6 +309,10 @@ public class TargetInteractor : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Lerp unique triplanar values and textures for diff mats based on their names
+    /// </summary>
     private IEnumerator LerpTriplanar(Material mat, float currentSlider, float targetSlider, float currentTargetLevel, float targetLevel, float currentSlide, float targetSlide, Vector3 currentTargetDirection, Vector3 targetDirection)
     {
         float gainingTime = 0f;
@@ -338,7 +343,6 @@ public class TargetInteractor : MonoBehaviour
     {
         goingWhere = goingWheree;
     }
-
 
     public IEnumerator LerpTreeTransparency(Material treeMat, float currentTarget ,float finalTarget)
     {

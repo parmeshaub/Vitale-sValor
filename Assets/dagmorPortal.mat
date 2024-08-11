@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-708103048498036883
+--- !u!114 &-127382731486270998
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,23 +20,33 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterfallMat1
-  m_Shader: {fileID: -6465566751694194690, guid: 416fca3fd57c2a345a4ef4c1bd7615dd,
+  m_Name: dagmorPortal
+  m_Shader: {fileID: -6465566751694194690, guid: d4b8ad36a0cd8364db6f4cee94ef199f,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  - _RECEIVE_SHADOWS_OFF
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - SHADOWCASTER
+  - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: 0659dde14370d35478d564adfc62071e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -51,18 +61,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Emission_Strength: 3.36
-    - _FoamScale: 0.89
-    - _Height: 0.44
-    - _NoiseScale: 13.7
+    - _AlphaClip: 1
+    - _AlphaToMask: 0
+    - _Blend: 2
+    - _BlendModePreserveSpecular: 0
+    - _CastShadows: 0
+    - _Cull: 0
+    - _DstBlend: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 1
-    - _Transparency: 1.23
+    - _ReceiveShadows: 0
+    - _Scale: 2.3
+    - _Slider: 0
+    - _Speed: -0.53
+    - _SrcBlend: 5
+    - _Surface: 1
+    - _TwirlStrength: 21.67
+    - _WorkflowMode: 1
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
     m_Colors:
-    - _BottomColor: {r: 0, g: 0.2466022, b: 0.6313726, a: 1}
-    - _FlowDirection: {r: 0, g: 0.2, b: 0, a: 0}
-    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColor: {r: 1, g: 0.9575472, b: 0.9575472, a: 1}
-    - _glowColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 12.410662, g: 1.4367341, b: 0, a: 1}
   m_BuildTextureStacks: []

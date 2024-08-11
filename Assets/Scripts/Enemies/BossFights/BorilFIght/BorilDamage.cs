@@ -23,5 +23,4 @@ public class BorilDamage : MonoBehaviour
         float damage = Random.Range(borilScript.minDamage, borilScript.maxDamage);
         return damage;
     }
-
 }

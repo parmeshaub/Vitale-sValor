@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private DialogueManager dialogueManager;
+    [SerializeField] private DialogueSO dialogue;
+    [SerializeField] private BoxCollider boxCollider;
+    private void OnTriggerEnter(Collider other) {
+        dialogueManager = DialogueManager.instance;
+        dialogueManager.InitiateDialogue(dialogue);
+        boxCollider.enabled = false;
     }
 }

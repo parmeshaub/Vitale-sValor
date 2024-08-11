@@ -10,15 +10,22 @@ public class EnemyAttack : MonoBehaviour
     private GameObject playerObject;
     [SerializeField] private EnemyBase parentEnemy;
 
+
     private void Start() {
         attackCollider.enabled = false;
+        if(parentEnemy == null) {
+            parentEnemy = GetComponentInParent<EnemyBase>();
+        }
+
     }
 
     private void OnTriggerEnter(Collider other) {
         if(other != null) {
             playerObject = other.gameObject;
             playerHealth = playerObject.GetComponent<PlayerHealthAndDamage>();
-            playerHealth.TakeDamage(RandomizeDamage());
+            if(playerHealth != null) {
+                playerHealth.TakeDamage(RandomizeDamage());
+            }
         }
     }
 

@@ -56,7 +56,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void Death() {
         if (animator != null) {
             animator.Play("Death", 0, 0f);
-            animator.enabled = false;
+            animator.enabled = true;
         }
         isDead = true;
         Destroy(gameObject, 1.5f);

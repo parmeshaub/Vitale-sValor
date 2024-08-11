@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5834674871992796793}
   - component: {fileID: 2762585972894131396}
   - component: {fileID: 2365674284924223191}
+  - component: {fileID: 6945551892375509481}
   m_Layer: 0
   m_Name: bridge_LOD0
-  m_TagString: Untagged
+  m_TagString: Changable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +85,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6945551892375509481
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4052527044345933470}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7785959395627643024, guid: 4d783fc70839cbf44b5c5f6baf4017b8, type: 3}
 --- !u!1 &4743434302671979112
 GameObject:
   m_ObjectHideFlags: 0

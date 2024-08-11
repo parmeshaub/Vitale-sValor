@@ -83,10 +83,10 @@ Material:
     - _Slider: 0
     - _Smoothstep: 0
     m_Colors:
-    - _ColorInfluence: {r: 0.5943396, g: 0.3504361, b: 0.3504361, a: 0}
+    - _ColorInfluence: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0}
     - _Direction: {r: 32.9, g: 166.7, b: 5.5, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _FresnalEffect: {r: 0.2015842, g: 0.24484637, b: 0.2830189, a: 0}
+    - _FresnalEffect: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
     - _SnowTexTilling: {r: 1, g: 1, b: 0, a: 0}
     - _Vector2: {r: 2, g: 3, b: 0, a: 0}
   m_BuildTextureStacks: []

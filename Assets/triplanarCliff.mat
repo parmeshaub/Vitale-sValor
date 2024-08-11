@@ -76,7 +76,7 @@ Material:
     - _FresnalSpeed: 1
     - _Level: 0
     - _NoiseTilling: 0
-    - _NormalStrength: 1
+    - _NormalStrength: 5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Slide: 0

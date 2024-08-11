@@ -119,6 +119,7 @@ public class TargetInteractor : MonoBehaviour
 
         for (int i = 0; i < currentMaterials.Length; i++)
         {
+
             // Target snowy properties of triplanar material
             var targetSlider = 0f;
             var targetLevel = 0f;
@@ -135,6 +136,14 @@ public class TargetInteractor : MonoBehaviour
                 targetLevel = 2.2f;
                 targetDirection = new Vector3(0f, -5.82f, 0f);
                 targetSlide = 1.2f;
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                // Passing it to a function to lerp the respective properties
+                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
             }
 
             if (mat.name == "triplanarPillar (Instance)")
@@ -143,6 +152,14 @@ public class TargetInteractor : MonoBehaviour
                 targetLevel = 0.66f;
                 targetDirection = new Vector3(0.12f, -4f, 0f);
                 targetSlide = 1.16f;
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                // Passing it to a function to lerp the respective properties
+                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
             }
 
             if (mat.name == "triplanarRoof (Instance)")
@@ -152,6 +169,14 @@ public class TargetInteractor : MonoBehaviour
                 targetLevel = 2.2f;
                 targetDirection = new Vector3(4.38f, -71.1f, 21.6f);
                 targetSlide = 2.9f;
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                // Passing it to a function to lerp the respective properties
+                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
 
             }
 
@@ -162,6 +187,14 @@ public class TargetInteractor : MonoBehaviour
                 targetLevel = 0.03f;
                 targetDirection = new Vector3(6.92f, 95.3f, 36.1f);
                 targetSlide = 2f;
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                // Passing it to a function to lerp the respective properties
+                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
 
             }
 
@@ -172,6 +205,14 @@ public class TargetInteractor : MonoBehaviour
                 targetLevel = 2.2f;
                 targetDirection = new Vector3(4.38f, -71.1f, 21.6f);
                 targetSlide = 2.9f;
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                // Passing it to a function to lerp the respective properties
+                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
             }
 
             if (mat.name == "triplanarPlane (Instance)")
@@ -181,6 +222,14 @@ public class TargetInteractor : MonoBehaviour
                 targetLevel = 0.03f;
                 targetDirection = new Vector3(6.92f, 95.3f, 36.1f);
                 targetSlide = 2f;
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                // Passing it to a function to lerp the respective properties
+                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
             }
 
             if (mat.name == "triplanarSR (Instance)")
@@ -190,16 +239,33 @@ public class TargetInteractor : MonoBehaviour
                 targetLevel = 2.2f;
                 targetDirection = new Vector3(0f, -5.82f, 0f);
                 targetSlide = 1.2f;
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                // Passing it to a function to lerp the respective properties
+                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
             }
 
 
             if (mat.name == "triplanarCliff (Instance)")
             {
+                Debug.Log("guat");
                 // Target snowy properties of triplanar material
                 targetSlider = 0.37f;
                 targetLevel = -2.12f;
                 targetDirection = new Vector3(-9.8f, 166.7f, 5.5f);
                 targetSlide = -6.81f;
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                // Passing it to a function to lerp the respective properties
+                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
             }
 
             if (mat.name == "triplanarRock (Instance)")
@@ -209,17 +275,18 @@ public class TargetInteractor : MonoBehaviour
                 targetLevel = 36.51f;
                 targetDirection = new Vector3(32.9f, 166.7f, 5.5f);
                 targetSlide = 0f;
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                // Passing it to a function to lerp the respective properties
+                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
             }
 
 
-            // Current triplanar properties
-            float currentSlider = mat.GetFloat("_Slider");
-            float currentTargetLevel = mat.GetFloat("_Level");
-            Vector3 currentTargetDirection = mat.GetVector("_Direction");
-            float currentSlide = mat.GetFloat("_Slide");
-
-            // Passing it to a function to lerp the respective properties
-            StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));                     
+                                 
         }
     }
 

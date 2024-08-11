@@ -88,6 +88,8 @@ public class PlayerController : MonoBehaviour
         playerInput.Gameplay.Dash.started += OnDash;
         playerInput.Gameplay.Dash.canceled += OnDash;
 
+        DontDestroyOnLoad(gameObject);
+
 
         SetupJumpVariables();
     }

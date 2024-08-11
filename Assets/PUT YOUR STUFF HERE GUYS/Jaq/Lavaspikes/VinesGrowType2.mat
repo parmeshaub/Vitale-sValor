@@ -57,7 +57,7 @@ Material:
     - _Clip: 1
     - _EmissionIntensity: 0.68
     - _Float: 1.5
-    - _Grow: 0.815
+    - _Grow: 0.97
     - _Metallic: 0
     - _QueueControl: 0
     - _QueueOffset: 0

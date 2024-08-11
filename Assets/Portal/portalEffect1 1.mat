@@ -71,7 +71,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 0
-    - _Scale: 2.7
+    - _Scale: 1.43
     - _Slider: 0
     - _Speed: -0.53
     - _SrcBlend: 5

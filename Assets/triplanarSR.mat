@@ -74,13 +74,13 @@ Material:
     - _BlendApperance: 0
     - _BlendScale: 0
     - _FresnalSpeed: 1
-    - _Level: 2.2
+    - _Level: 0
     - _NoiseTilling: 0
     - _NormalStrength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Slide: 1.2
-    - _Slider: 1.2
+    - _Slide: 0
+    - _Slider: 0
     - _Smoothstep: 0
     m_Colors:
     - _ColorInfluence: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0}

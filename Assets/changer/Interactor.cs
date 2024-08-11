@@ -11,7 +11,7 @@ public class Interactor : MonoBehaviour
     public GameObject controller; // The sphere controller in charge of lerping textures
     public GameObject lightingManager;
 
-
+    public Terrain currentTerrain;
     public Transform influencingObject; // Assign Object A in the inspector
     public Renderer objectRenderer; // Renderer of Object B
     private Material[] materialInstances;
@@ -308,6 +308,7 @@ public class Interactor : MonoBehaviour
 
             myScript.GoingWhere("fyre"); // Tells the target interactor where its going
             lightingManager.GetComponent<LightingManager>().FloraToFyre(); // Tells lighting what to do
+            currentTerrain.detailObjectDistance = 0; // Disable Grass
         }
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -318,6 +319,7 @@ public class Interactor : MonoBehaviour
 
             myScript.GoingWhere("flurry"); // Tells the target interactor where its going
             lightingManager.GetComponent<LightingManager>().FloraToFlurry(); // Tells lighting what to do
+            currentTerrain.detailObjectDistance = 0; // Disable Grass
         }
 
     }

@@ -18,12 +18,14 @@ public class LightAttackCollider : MonoBehaviour
         //impulseSource = GetComponent<CinemachineImpulseSource>();  
     }
     private void OnTriggerEnter(Collider other) {
-        //Debug.Log("run");
-        // Get the EnemyClass component from the collided object.
+        // Check if the collided object has an EnemyBase component
         EnemyBase enemyClass = other.GetComponent<EnemyBase>();
 
-        if (enemyClass != null) {
+        // Check if the collided object has a BorilScript component
+        BorilScript borilScript = other.GetComponent<BorilScript>();
 
+        // Proceed if either EnemyBase or BorilScript is present
+        if (enemyClass != null || borilScript != null) {
             Vector3 contactPoint = other.ClosestPoint(transform.position);
             Vector3 directionToPlayer = (transform.position - contactPoint).normalized;
             float offsetDistance = 0.2f; // Adjust this value as needed
@@ -34,11 +36,17 @@ public class LightAttackCollider : MonoBehaviour
             }
 
             float damage = playerCombat.LightRandomizeDamage();
-            enemyClass.TakeDamage(damage);
+
+            if (enemyClass != null) {
+                enemyClass.TakeDamage(damage);
+            }
+            else if (borilScript != null) {
+                borilScript.Damage();
+            }
+
             impulseSource.GenerateImpulse(impulseVelocity);
         }
     }
-
 
 
     public void TurnLightAttackColliderOn()

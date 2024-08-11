@@ -14,7 +14,7 @@ public class DraggableSkill : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     [HideInInspector] public Transform parentAfterMove;
     public bool isUsedMagicSlot = false;
     [SerializeField] private TMP_Text skillTitle;
-    private bool isUnlocked;
+    public bool isUnlocked;
     private MagicLockManager magicLockManager;
 
     private void Awake() {
@@ -72,6 +72,7 @@ public class DraggableSkill : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
 
     public void UpdateUnlock() {
+        Debug.Log("Update Lock");
         if (magicMove.isUnlocked) {
             isUnlocked = true;
             uiDisplayImage.sprite = magicMove.icon;

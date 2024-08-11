@@ -12,9 +12,12 @@ public class MagicLockManager : MonoBehaviour
         instance = this;
     }
     
-    //Make a interactable that can do this.
     public void UnlockSkill(MagicMoveSO unlockSkill) {
         unlockSkill.isUnlocked = true;
+        onMagicUnlocked.Invoke();
+    }
+
+    public void CallIsUnlocked() {
         onMagicUnlocked.Invoke();
     }
 }

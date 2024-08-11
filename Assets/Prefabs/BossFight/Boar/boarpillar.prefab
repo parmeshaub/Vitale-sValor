@@ -1081,9 +1081,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1238442770619076039}
+  - component: {fileID: 5920405504252724016}
+  - component: {fileID: 774292713366233543}
+  - component: {fileID: 5395901955820653458}
+  - component: {fileID: 7319746648202252323}
   m_Layer: 0
   m_Name: boarpillar
-  m_TagString: Untagged
+  m_TagString: Pillar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1096,7 +1100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6442758207352181342}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.10873563, z: -0, w: 0.9940707}
+  m_LocalRotation: {x: 0, y: -0.10873672, z: 0, w: 0.9940706}
   m_LocalPosition: {x: 685.3, y: 58.911724, z: 190.9}
   m_LocalScale: {x: 0.02096, y: 0.02096, z: 0.02096}
   m_ConstrainProportionsScale: 0
@@ -1115,6 +1119,140 @@ Transform:
   - {fileID: 6156341239387224928}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -12.485, z: 0}
+--- !u!65 &5920405504252724016
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442758207352181342}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 170, y: 600, z: 170}
+  m_Center: {x: 0, y: 298.52, z: 0}
+--- !u!114 &774292713366233543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442758207352181342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed5d5987067cee42830c1290c39c14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pillarParts:
+  - {fileID: 7644055432012015702}
+  - {fileID: 1827175423840892868}
+  - {fileID: 5423604497759919358}
+  - {fileID: 603092690768285259}
+  - {fileID: 4057839942050797126}
+  - {fileID: 2662746494048253115}
+  - {fileID: 5474113052024383688}
+  - {fileID: 4632565046140487766}
+  - {fileID: 8714255334975348436}
+  - {fileID: 3222783001690947613}
+  - {fileID: 2011984090611801790}
+  - {fileID: 7937063999833808025}
+  scaleDownDuration: 2
+--- !u!54 &5395901955820653458
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442758207352181342}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &7319746648202252323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442758207352181342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_IgnoreTag: 
+  m_UseImpactDirection: 1
+  m_ScaleImpactWithMass: 0
+  m_ScaleImpactWithSpeed: 0
 --- !u!1 &7870887200621652545
 GameObject:
   m_ObjectHideFlags: 0

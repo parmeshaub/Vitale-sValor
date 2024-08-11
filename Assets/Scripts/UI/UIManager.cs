@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject armourUI;
     [SerializeField] private GameObject skillTreeUI;
     //[SerializeField] private GameObject runeUI;
+
+    private MagicLockManager magicLockManager;
+    [SerializeField] private List<DraggableSkill> draggableSkills;
 
     //[Header("Option Elements")]
     [SerializeField] private GameObject optionsUI;
@@ -47,7 +51,8 @@ public class UIManager : MonoBehaviour
         playerInput.Gameplay.SkillTree.started += OpenSkillTree;
     }
     private void Start()
-    {
+    { 
+        magicLockManager = MagicLockManager.instance;
         InitializeUIForGameplay();
     }
     private void InitializeUIForGameplay()
@@ -79,6 +84,8 @@ public class UIManager : MonoBehaviour
     {
         if (!context.started) return;
         StartMenu();
+
+        UpdateSkillImage();
 
         //Activate Main UI Object.
         menuUIElements.SetActive(true);
@@ -168,6 +175,20 @@ public class UIManager : MonoBehaviour
     //public void 
     #endregion
 
+    private void UpdateSkillImage() {
+        foreach (var item in draggableSkills) {
+            //Debug.Log("done" + item);
+            if (item.magicMove.isUnlocked) {
+                item.isUnlocked = true;
+                item.uiDisplayImage.sprite = item.magicMove.icon;
+            }
+            else {
+                item.isUnlocked = false;
+                item.uiDisplayImage.sprite = item.magicMove.lockedIcon;
+            }
+        }
+    }
+
     private void StartMenu() {
         //Debug.Log("Start");
         playerInputManager.SwitchToUIActionMap();
@@ -242,6 +263,7 @@ public class UIManager : MonoBehaviour
                 pauseMenuUI.SetActive(true);
                 break;
             case 1:
+                UpdateSkillImage();
                 magicSelectUI.SetActive(true);
                 break;
             case 2:

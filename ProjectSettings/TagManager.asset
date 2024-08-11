@@ -8,6 +8,7 @@ TagManager:
   - BossWall
   - Tree
   - Changable
+  - ArtemisPillar
   layers:
   - Default
   - TransparentFX

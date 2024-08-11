@@ -52,6 +52,6 @@ Material:
     - Vector1_99B978: 0.19
     - _EmissionStrength: 1
     m_Colors:
-    - Color_70EBBDEE: {r: 0.6132076, g: 0.5698202, b: 0.5698202, a: 0}
+    - Color_70EBBDEE: {r: 0.6117647, g: 0.5686275, b: 0.5686275, a: 0}
     - Color_CFC87909: {r: 10.378345, g: 8.422216, b: 3.3145497, a: 0}
   m_BuildTextureStacks: []

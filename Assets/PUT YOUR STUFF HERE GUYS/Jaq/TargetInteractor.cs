@@ -132,9 +132,9 @@ public class TargetInteractor : MonoBehaviour
             if (mat.name == "triplanarbricks (Instance)")
             {
                 // Target snowy properties of triplanar material
-                targetSlider = 0.54f;
-                targetLevel = 2.2f;
-                targetDirection = new Vector3(0f, -5.82f, 0f);
+                targetSlider = -3.07f;
+                targetLevel = 1.61f;
+                targetDirection = new Vector3(0f, -5.43f, 0f);
                 targetSlide = 1.2f;
                 // Current triplanar properties
                 float currentSlider = mat.GetFloat("_Slider");
@@ -148,9 +148,9 @@ public class TargetInteractor : MonoBehaviour
 
             if (mat.name == "triplanarPillar (Instance)")
             {
-                targetSlider = -0.11f;
-                targetLevel = 0.66f;
-                targetDirection = new Vector3(0.12f, -4f, 0f);
+                targetSlider = -1.81f;
+                targetLevel = -0.03f;
+                targetDirection = new Vector3(-0.76f, 60.49f, 0.41f);
                 targetSlide = 1.16f;
                 // Current triplanar properties
                 float currentSlider = mat.GetFloat("_Slider");
@@ -165,10 +165,10 @@ public class TargetInteractor : MonoBehaviour
             if (mat.name == "triplanarRoof (Instance)")
             {
                 // Target snowy properties of triplanar material
-                targetSlider = 1.2f;
-                targetLevel = 2.2f;
-                targetDirection = new Vector3(4.38f, -71.1f, 21.6f);
-                targetSlide = 2.9f;
+                targetSlider = 0.67f;
+                targetLevel = 2.27f;
+                targetDirection = new Vector3(0.18f, 2.48f, 1.78f);
+                targetSlide = 1.2f;
                 // Current triplanar properties
                 float currentSlider = mat.GetFloat("_Slider");
                 float currentTargetLevel = mat.GetFloat("_Level");
@@ -183,9 +183,9 @@ public class TargetInteractor : MonoBehaviour
             if (mat.name == "triplanarRubble (Instance)")
             {
                 // Target snowy properties of triplanar material
-                targetSlider = -1.09f;
-                targetLevel = 0.03f;
-                targetDirection = new Vector3(6.92f, 95.3f, 36.1f);
+                targetSlider = -0.84f;
+                targetLevel = -0.04f;
+                targetDirection = new Vector3(47.03f, 95.3f, 12.35f);
                 targetSlide = 2f;
                 // Current triplanar properties
                 float currentSlider = mat.GetFloat("_Slider");
@@ -215,10 +215,29 @@ public class TargetInteractor : MonoBehaviour
                 StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
             }
 
+            if (mat.name == "triplanarFloor3 (Instance)")
+            {
+                // Target snowy properties of triplanar material
+                targetSlider = 11.88f;
+                targetLevel = 3.66f;
+                targetDirection = new Vector3(5f, 5f, 5f);
+                targetSlide = -2.1f;
+                // Current triplanar properties
+                float currentSlider = mat.GetFloat("_Slider");
+                float currentTargetLevel = mat.GetFloat("_Level");
+                Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                float currentSlide = mat.GetFloat("_Slide");
+
+                // Passing it to a function to lerp the respective properties
+                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+            }
+
+
+
             if (mat.name == "triplanarPlane (Instance)")
             {
                 // Target snowy properties of triplanar material
-                targetSlider = -1.09f;
+                targetSlider = 1.63f;
                 targetLevel = 0.03f;
                 targetDirection = new Vector3(6.92f, 95.3f, 36.1f);
                 targetSlide = 2f;
@@ -235,8 +254,8 @@ public class TargetInteractor : MonoBehaviour
             if (mat.name == "triplanarSR (Instance)")
             {
                 // Target snowy properties of triplanar material
-                targetSlider = 1.2f;
-                targetLevel = 2.2f;
+                targetSlider = -0.1f;
+                targetLevel = 2.15f;
                 targetDirection = new Vector3(0f, -5.82f, 0f);
                 targetSlide = 1.2f;
                 // Current triplanar properties
@@ -252,11 +271,10 @@ public class TargetInteractor : MonoBehaviour
 
             if (mat.name == "triplanarCliff (Instance)")
             {
-                Debug.Log("guat");
                 // Target snowy properties of triplanar material
-                targetSlider = 0.37f;
-                targetLevel = -2.12f;
-                targetDirection = new Vector3(-9.8f, 166.7f, 5.5f);
+                targetSlider = 5.24f;
+                targetLevel = 39.59f;
+                targetDirection = new Vector3(5f, 5f, 5f);
                 targetSlide = -6.81f;
                 // Current triplanar properties
                 float currentSlider = mat.GetFloat("_Slider");
@@ -271,9 +289,9 @@ public class TargetInteractor : MonoBehaviour
             if (mat.name == "triplanarRock (Instance)")
             {
                 // Target snowy properties of triplanar material
-                targetSlider = 9.37f;
-                targetLevel = 36.51f;
-                targetDirection = new Vector3(32.9f, 166.7f, 5.5f);
+                targetSlider = 5.24f;
+                targetLevel = 5.8f;
+                targetDirection = new Vector3(0.6f, 2.9f, 1f);
                 targetSlide = 0f;
                 // Current triplanar properties
                 float currentSlider = mat.GetFloat("_Slider");

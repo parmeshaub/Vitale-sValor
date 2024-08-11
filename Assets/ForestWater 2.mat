@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3589331738456849973
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ForestWater 2
+  m_Shader: {fileID: -6465566751694194690, guid: 4ae3b203ce5de1b45a3545fe15ceda21,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainNorm:
+        m_Texture: {fileID: 2800000, guid: da42076a6b1a3404c87d195f488ea0dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Refraction:
+        m_Texture: {fileID: 2800000, guid: a7c43003ce6344b4cb20617ed467a704, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondNorm:
+        m_Texture: {fileID: 2800000, guid: a7c43003ce6344b4cb20617ed467a704, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Clip: 0
+    - _Depth: 0.67
+    - _Displacement: 1.27
+    - _FoamAmt: 0
+    - _FoamCutoff: 10
+    - _FoamScale: 1
+    - _FoamSpeed: -0
+    - _NormalStrength: 0.1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _RefractionSpeed: 177.5
+    - _RefractionStrength: 41.68
+    - _Smoothnes: 0.613
+    - _Strength: 0.3
+    m_Colors:
+    - _DeepColor: {r: 0.24705869, g: 0.7529412, b: 0.64557356, a: 0.6313726}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainNormScale: {r: 100, g: 100, b: 0, a: 0}
+    - _RefractionScale: {r: 5, g: 5, b: 0, a: 0}
+    - _SecondNormScale: {r: 100, g: 100, b: 0, a: 0}
+    - _ShallowColor: {r: 0.13163042, g: 0.5471698, b: 0.3324067, a: 0.34901962}
+    - _WavesTiling: {r: 5, g: 5, b: 0, a: 0}
+  m_BuildTextureStacks: []

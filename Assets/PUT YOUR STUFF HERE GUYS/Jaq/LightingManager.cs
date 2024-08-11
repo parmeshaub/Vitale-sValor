@@ -87,8 +87,11 @@ public class LightingManager : MonoBehaviour
     /// For directional light color lerp
     /// </summary>
     public Color directionalFloraLighting;
+    public float directionalFloralLightingIntensity;
     public Color directionalFlurryLighting;
+    public float directionalFlurryLightingIntensity;
     public Color directionalFyreLighting;
+    public float directionalFyreLightingIntensity;
 
     public float changeDuraiton;
 
@@ -111,7 +114,7 @@ public class LightingManager : MonoBehaviour
     /// </summary>
     public void FloraToFlurry()
     {
-        StartCoroutine(LerpDirectionalColor(directionalFloraLighting, directionalFlurryLighting));
+        StartCoroutine(LerpDirectionalColor(directionalFloraLighting, directionalFlurryLighting, directionalFloralLightingIntensity, directionalFlurryLightingIntensity));
         StartCoroutine(LerpFogColor(floraFogColor, flurryFogColor, floraFogIntensity, flurryFogIntensity));
         StartCoroutine(ChangeSkyBox("flurry"));
     }
@@ -121,7 +124,7 @@ public class LightingManager : MonoBehaviour
     /// </summary>
     public void FloraToFyre()
     {
-        StartCoroutine(LerpDirectionalColor(directionalFloraLighting, directionalFyreLighting));
+        StartCoroutine(LerpDirectionalColor(directionalFloraLighting, directionalFyreLighting, directionalFloralLightingIntensity,directionalFyreLightingIntensity));
         StartCoroutine(LerpFogColor(floraFogColor, fyreFogColor, floraFogIntensity, fyreFogIntensity));
         StartCoroutine(ChangeSkyBox("fyre"));
     }
@@ -297,7 +300,7 @@ public class LightingManager : MonoBehaviour
     }
 
 
-    private IEnumerator LerpDirectionalColor(Color startColor, Color endColor)
+    private IEnumerator LerpDirectionalColor(Color startColor, Color endColor, float startIntensity, float endIntensity)
     {
         float lerpTime = 0f;
 
@@ -305,16 +308,9 @@ public class LightingManager : MonoBehaviour
         {
             lerpTime += Time.deltaTime / changeDuraiton;
             directionalLight.color = Color.Lerp(startColor, endColor, lerpTime);
+            directionalLight.intensity = Mathf.Lerp(startIntensity, endIntensity, lerpTime);
             yield return null;
         }
-
-        // Swap start and end colors
-        Color temp = startColor;
-        startColor = endColor;
-        endColor = temp;
-
-        // Reset lerpTime to loop the color lerp
-        lerpTime = 0f;
     }
 
     /// <summary>

@@ -9,6 +9,8 @@ TagManager:
   - Tree
   - Changable
   - ArtemisPillar
+  - Pillar
+  - Dungeon Initialization
   layers:
   - Default
   - TransparentFX

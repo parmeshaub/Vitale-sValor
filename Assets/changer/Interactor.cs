@@ -348,7 +348,6 @@ public class Interactor : MonoBehaviour
         currentTerrain.detailObjectDistance = 1; // Re-enable Grass
     }
 
-
     // Update is called once per frame
     void Update()
     {       

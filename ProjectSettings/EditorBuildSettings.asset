@@ -6,15 +6,48 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/GameScenes/01 - Main Menu.unity
+    guid: 2030d75b42569af4db7631ec51d53291
   - enabled: 1
-    path: Assets/Scenes/Jac/Backup3.unity
-    guid: f153c3a51b1e96e4183683258b346cd3
+    path: Assets/Scenes/GameScenes/02 - Dungeon_Tutorial.unity
+    guid: cc0e4070d4c1aaf40a58dbf6ccda9bdb
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/03 - Main World.unity
+    guid: 5d560eefca14b6b4291f8d267c11cfd1
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/04 - Dragon.unity
+    guid: 84235d1aade96f14984b0b18d585add8
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/05 - Boar.unity
+    guid: cd03f9de65a790e469764d6e00c781f6
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/06 - FinalDungeon.unity
+    guid: d53826be40d7ccc42b5e476cef6dee50
   - enabled: 1
     path: Assets/Scenes/GameScenes/Dungeons/Dungeon_Ablaze.unity
-    guid: 49adc63edb356914295c778da97d4393
+    guid: 90b2e69201d33ee4c9e0c72a74f32b77
   - enabled: 1
-    path: Assets/Scenes/Jac/backup6.unity
-    guid: 5e1572feffb4ff54bb96527f96355225
+    path: Assets/Scenes/GameScenes/Dungeons/Dungeon_Blisfulness.unity
+    guid: 9c63f71e320ab154db4809e75ca11aed
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Dungeons/Dungeon_Combustion.unity
+    guid: 681d45153859a964f94dcc1c904f4ade
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Dungeons/Dungeon_Glaciate.unity
+    guid: ce9725305434ece428425e68945ec798
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Dungeons/Dungeon_Judgement.unity
+    guid: a20823693dde97c4da736f30115e4bea
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Dungeons/Dungeon_RazorFangs.unity
+    guid: c6b4b0fb6ea559149afb98625fd9919e
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Dungeons/Dungeon_Sanctuary.unity
+    guid: 1d7c53f0ad305d4468023d56e579ac76
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Dungeons/Dungeon_Volley.unity
+    guid: d6837efc8a8b29541b537beb4cd4651e
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Dungeons/Dungeon_WingsOfComfort.unity
+    guid: ede1940254724fb4c9f69150de5578a9
   m_configObjects: {}

@@ -16922,7 +16922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 992917783695017101}
-  AttackProjectile: {fileID: 2136543677343139619, guid: 9b7c76941d20ddc40b44e78a344a709d,
+  AttackProjectile: {fileID: 2136543677343139619, guid: 8d3f2f6c86a05c04aa85f5657c6a8a4e,
     type: 3}
   ForceRatio: 0.248
   MaxThrowForce: 25
@@ -25080,7 +25080,7 @@ MonoBehaviour:
   bossAnimationObject: {fileID: 217497508}
   BossObject: {fileID: 624772601}
   cutsceneCamera: {fileID: 1319909141}
-  sceneName: backup6
+  sceneName: 03 - Main World
 --- !u!4 &910588426
 Transform:
   m_ObjectHideFlags: 0

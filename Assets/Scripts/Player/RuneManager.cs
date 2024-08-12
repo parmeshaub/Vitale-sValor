@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 
 public class RuneManager : MonoBehaviour
 {
+    public static RuneManager instance;
     private PlayerInputManager playerInputManager;
     private PlayerInput playerInput;
     private bool runeOpen = false;
-    [SerializeField] private CurrentWorld worldEnum;
+    [SerializeField] public CurrentWorld worldEnum;
     [SerializeField] private GameObject runeUIObject;
     [SerializeField] private CanvasGroup runeCanvasGroup;
     private bool isRuneOnCoolDown = false;
@@ -22,6 +23,7 @@ public class RuneManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         playerInputManager = PlayerInputManager.instance;
         playerInput = playerInputManager.playerInput;
 

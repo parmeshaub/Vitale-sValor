@@ -46,6 +46,8 @@ public class Interactor : MonoBehaviour
     public float normalDecreaseRate = 1.0f; // Rate at which the float value decreases
     private TargetInteractor myScript;
 
+    private GameObject player;
+
     public void Start()
     {
         // Acknowledges materials assigned for texture blending
@@ -80,6 +82,7 @@ public class Interactor : MonoBehaviour
 
     public void FindController()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         influencingObject = GameObject.Find("Controller").transform;
     }
 

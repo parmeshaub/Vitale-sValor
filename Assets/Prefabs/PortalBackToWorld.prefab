@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af58751fa47767646b2c356b79105778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Backup3
+  sceneName: 03 - Main World
 --- !u!1 &5660037147702212033
 GameObject:
   m_ObjectHideFlags: 0

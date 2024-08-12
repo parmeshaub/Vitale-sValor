@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8690474012832551814}
   - component: {fileID: 6801749362272053670}
   - component: {fileID: 6008884159196694599}
+  - component: {fileID: 4486750543317531572}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -114,7 +115,7 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
+  m_DynamicPixelsPerUnit: 0
   m_PresetInfoIsWorld: 1
 --- !u!114 &6008884159196694599
 MonoBehaviour:
@@ -133,6 +134,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &4486750543317531572
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380280314834259912}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1631317131899284258
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +345,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4d4e9d0f1aeffef4ea2618f57c593b81, type: 2}
+  - {fileID: 2100000, guid: a3b0da87ec7ba9e45939e70965d7b681, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

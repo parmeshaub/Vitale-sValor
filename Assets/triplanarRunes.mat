@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: triplanarArtemis
+  m_Name: triplanarRunes
   m_Shader: {fileID: -6465566751694194690, guid: 1c5409f4a3d6a9d408c231db6bf5bd0b,
     type: 3}
   m_Parent: {fileID: 0}

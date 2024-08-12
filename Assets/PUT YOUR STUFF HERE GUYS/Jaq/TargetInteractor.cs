@@ -24,6 +24,18 @@ public class TargetInteractor : MonoBehaviour
     public string goingWhere;
     public string previouslyWhere;
 
+
+    public void FindObjects()
+    {
+        // Find animator for liquds
+        GameObject liquidParent = GameObject.Find("LiquidAnimator");
+        LiquidAnimator = liquidParent.GetComponent<Animator>();
+
+        // Game obj for water body
+        GameObject WaterObject = GameObject.Find("water");
+    }
+
+
     /// <summary>
     /// Identifies the invidual gameobject elements and what to do with them
     /// </summary>
@@ -313,6 +325,40 @@ public class TargetInteractor : MonoBehaviour
                     // Passing it to a function to lerp the respective properties
                     StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
                 }
+
+                if (mat.name == "triplanarT4 (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = 1.51f;
+                    targetLevel = 3.17f;
+                    targetDirection = new Vector3(6.4f, 146.64f, 15.92f);
+                    targetSlide = 0f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                }
+
+                if (mat.name == "triplanarT6 (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = 1.51f;
+                    targetLevel = 3.17f;
+                    targetDirection = new Vector3(6.4f, 146.64f, 15.92f);
+                    targetSlide = 0f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                }
             }
 
             else if (goingWhere == "flora")
@@ -364,7 +410,6 @@ public class TargetInteractor : MonoBehaviour
             mat.SetVector("_Direction", currentValue4);
         }
     }
-
 
     public void GoingWhere(string goingWheree, string currentWheree)
     {

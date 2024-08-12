@@ -77,6 +77,12 @@ public class Interactor : MonoBehaviour
         myScript.GoingWhere(goingWhere, currentlyWhere);
     }
 
+    public void FindController()
+    {
+        influencingObject = GameObject.Find("LiquidAnimator").transform;
+    }
+
+
     /// <summary>
     /// Making controller grow
     /// </summary>

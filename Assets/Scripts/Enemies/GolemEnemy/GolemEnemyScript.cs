@@ -1,232 +1,231 @@
-using UnityEngine;
-using System.Collections;
 using DG.Tweening;
-using Guirao.UltimateTextDamage;
+using System.Collections;
+using UnityEngine;
 
 public class GolemEnemyScript : EnemyBase
 {
-    private GolemStates currentState;
-    private Transform playerTransform;
-    private BattleSphereDetection enemyDetection;
-    private PlayerCombat playerCombat;
-
-    // Golem Stats
-    [SerializeField] private float attackRange = 2.0f;
-    [SerializeField] private float attackCooldown = 5.0f;
-    [SerializeField] private float detectionRadius = 5.0f; // Radius for detecting the player
-
     // Animation Hashes
-    private static readonly int isMovingHash = Animator.StringToHash("isMoving");
-    private static readonly int attackHash = Animator.StringToHash("Smash");
+    private static readonly int smashHash = Animator.StringToHash("Smash");
     private static readonly int deathHash = Animator.StringToHash("Death");
+    private static readonly int isMovingHash = Animator.StringToHash("isMoving");
 
-    private CapsuleCollider capCollider;
+    [SerializeField] private LayerMask deathLayerMask;
+    [SerializeField] private CapsuleCollider capCollider;
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private float smoothTime = 0.3f; // Smoothing time for movement
+    private float detectRange = 5f;
 
-    private Coroutine currentCoroutine;
+    private GolemStates states;
+    private PlayerCombat playerCombat;
+    private BattleSphereDetection enemyDetection;
 
-    private bool playerInside = false;
+    private Coroutine stateMachineCoroutine;
+    private Coroutine attackCoroutine;
+
+    private GameObject playerObject;
+
+    private bool isDeath;
 
     private void Awake() {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        capCollider = GetComponent<CapsuleCollider>();
     }
 
-    void Start() {
+    private void Start() {
         playerCombat = PlayerCombat.Instance;
-        capCollider = GetComponent<CapsuleCollider>();
         enemyDetection = playerCombat.battleSphereDetection;
-        currentState = GolemStates.Idle;
-        TransitionToCoroutine(currentState);
+        states = GolemStates.IDLE;
 
         currentHealth = maxHealth;
     }
 
-    private void TransitionToCoroutine(GolemStates newState) {
-        if (currentCoroutine != null) {
-            StopCoroutine(currentCoroutine);
-        }
+    private void OnTriggerEnter(Collider other) {
 
-        currentState = newState;
+        playerObject = playerCombat.gameObject;
+        states = GolemStates.MOVING;
 
-        switch (currentState) {
-            case GolemStates.Idle:
-                currentCoroutine = StartCoroutine(IdleState());
-                break;
-            case GolemStates.Find_Player:
-                currentCoroutine = StartCoroutine(FindPlayerState());
-                break;
-            case GolemStates.Attack:
-                currentCoroutine = StartCoroutine(AttackState());
-                break;
-            case GolemStates.Death:
-                currentCoroutine = StartCoroutine(DeathState());
-                break;
+        // Assign the player
+        playerObject = other.gameObject;
+
+        // Start the state machine coroutine
+        if (stateMachineCoroutine == null) {
+            stateMachineCoroutine = StartCoroutine(StateMachineCoroutine());
         }
     }
 
-    private IEnumerator IdleState() {
-        animator.SetBool(isMovingHash, false);
+    private void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Player")) {
+            // Check the distance before setting playerObject to null
+            if (CheckDistanceFromPlayer(other.gameObject) > detectRange) {
+                playerObject = null;
+                Debug.Log("Exit");
+                states = GolemStates.IDLE;
+            }
+        }
+    }
 
+    private IEnumerator StateMachineCoroutine() {
         while (true) {
-            // The IdleState simply waits for the player to enter the detection radius,
-            // which will be handled by the OnTriggerEnter method.
+            if (isDeath) yield break; // Stop the coroutine if the golem is dead
+
+            switch (states) {
+                case GolemStates.IDLE:
+                    isMoving = false;
+                    break;
+                case GolemStates.MOVING:
+                    isMoving = true;
+                    Move();
+                    break;
+                case GolemStates.ATTACK:
+                    isMoving = false;
+                    if (attackCoroutine == null) {
+                        attackCoroutine = StartCoroutine(PerformAttack());
+                    }
+                    break;
+            }
+
+            // Check the distance to the player if moving
+            if (states == GolemStates.MOVING && playerObject != null) {
+                float distToPlayer = CheckDistanceFromPlayer(playerObject);
+                if (distToPlayer <= attackRange) {
+                    states = GolemStates.ATTACK;
+                }
+            }
+
+            HandleAnimation();
             yield return null; // Wait until the next frame
         }
     }
 
-    private IEnumerator FindPlayerState() {
-        Debug.Log("Entered FindPlayerState");
-        animator.SetBool(isMovingHash, true);
+    protected override void Move() {
+        if (isDeath) return;
 
-        while (playerInside) {
-            if (playerTransform != null) {
-                // Calculate the direction towards the player, ignoring the Y-axis
-                Vector3 targetPosition = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
+        // Calculate the direction towards the player, ignoring the Y-axis
+        Vector3 targetPosition = new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z);
 
-                // Rotate to face the player without changing the Y-axis
-                transform.DOLookAt(targetPosition, 0.2f);
+        // Rotate to face the player without changing the Y-axis
+        transform.DOLookAt(targetPosition, 0.2f);
 
-                // Calculate the direction towards the player
-                Vector3 direction = (targetPosition - transform.position).normalized;
+        // Calculate the direction towards the player
+        Vector3 direction = (targetPosition - transform.position).normalized;
 
-                // Move the Golem towards the player
-                rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
-
-                float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-
-                if (distanceToPlayer <= attackRange) {
-                    // Transition to Attack state if within range
-                    TransitionToCoroutine(GolemStates.Attack);
-                    yield break;
-                }
-            }
-            else {
-                // If playerTransform is null, exit to Idle state
-                TransitionToCoroutine(GolemStates.Idle);
-                yield break;
-            }
-
-            yield return null; // Continue execution in the next frame
-        }
-
-        // If player is no longer inside, exit to Idle state
-        TransitionToCoroutine(GolemStates.Idle);
-    }
-
-
-
-    private IEnumerator AttackState() {
-        animator.SetBool(isMovingHash, false);
-        Debug.Log("Attack");
-        // Attack animation and logic
-        animator.SetTrigger(attackHash);
-        yield return new WaitForSeconds(attackCooldown);
-
-        // After attacking, check if player is still within range
-        if (playerTransform != null) {
-            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-
-            if (distanceToPlayer > attackRange) {
-                // Return to finding player if out of attack range
-                TransitionToCoroutine(GolemStates.Find_Player);
-            }
-            else {
-                // Otherwise, continue attacking
-                currentCoroutine = StartCoroutine(AttackState());
-            }
-        }
-        else {
-            // If player is not found, transition back to Idle
-            TransitionToCoroutine(GolemStates.Idle);
-        }
-    }
-
-    private IEnumerator DeathState() {
-        animator.SetTrigger(deathHash);
-
-        enemyDetection.RemoveEnemy(this.gameObject);
-        gameObject.layer = LayerMask.NameToLayer("Default");
-        capCollider.isTrigger = true;
-        rb.isKinematic = true;
-
-        // Perform the movement over 2 seconds, then destroy the object
-        transform.DOMove(new Vector3(transform.position.x, transform.position.y - 0.899f, transform.position.z), 4)
-            .OnComplete(() => {
-                Debug.Log("Golem reached final position, preparing to destroy.");
-                if (smokeVFX != null) {
-                    Instantiate(smokeVFX, transform.position, transform.rotation);
-                }
-                else {
-                    Debug.LogWarning("smokeVFX is not assigned.");
-                }
-
-                Destroy(gameObject);
-                Debug.Log("Golem destroyed.");
-            });
-
-        yield return new WaitForSeconds(2f);
-
-        // Coroutine ends here
-        yield break;
-    }
-
-
-
-    public override void TakeDamage(float damage) {
-        currentHealth -= damage;
-
-        string roundedDamage = Mathf.Round(damage).ToString(); // Rounds to the nearest integer
-        damageNumber = FindObjectOfType<UltimateTextDamageManager>();
-        damageNumber.Add(roundedDamage, damageNumPosition, "default");
-
-        Debug.Log(currentHealth);
-        if (currentHealth <= 0) {
-            currentHealth = 0;
-            TransitionToCoroutine(GolemStates.Death);
-        }
-        else {
-            animator.SetTrigger(hurtHash);
-        }
-
-
+        // Move the golem towards the player
+        rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
     }
 
     protected override void Attack() {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void Move() {
-        throw new System.NotImplementedException();
-    }
-
-    // This method is called when the player enters the Golem's detection range
-    private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
-            Debug.Log("Player Enter");
-            playerInside = true;
-            playerTransform = other.transform;
-            // Transition to Find_Player state when the player enters detection range
-            TransitionToCoroutine(GolemStates.Find_Player);
+        if (isDeath || isDead) return;
+        if (attackCoroutine == null) {
+            rb.angularVelocity = Vector3.zero;
+            attackCoroutine = StartCoroutine(PerformAttack());
         }
     }
 
-    // This method is called when the player exits the Golem's detection range
-    private void OnTriggerExit(Collider other) {
-        if (other.CompareTag("Player")) {
-            playerInside = false;
-            playerTransform = null;
-            Debug.Log("Player Exit");
-            // Transition back to Idle state when the player exits detection range
-            TransitionToCoroutine(GolemStates.Idle);
+    private IEnumerator PerformAttack() {
+        if (isDeath) yield break; // Stop the coroutine if the golem is dead
+
+        // Implement attack logic
+        animator.SetTrigger(smashHash);
+
+        // Wait for the attack animation to finish
+        yield return new WaitForSeconds(3f);
+
+        // Check if the playerObject is still valid
+        if (playerObject != null) {
+            float distToPlayer = CheckDistanceFromPlayer(playerObject);
+            if (distToPlayer <= attackRange) {
+                states = GolemStates.ATTACK;
+            }
+            else {
+                states = GolemStates.MOVING;
+            }
+        }
+        else {
+            states = GolemStates.IDLE;
+        }
+
+        attackCoroutine = null;
+    }
+
+    private float CheckDistanceFromPlayer(GameObject playerObject) {
+        return Vector3.Distance(transform.position, playerObject.transform.position);
+    }
+
+    private void HandleAnimation() {
+        Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        float speed = horizontalVelocity.magnitude / moveSpeed; // Normalize by moveSpeed
+        animator.SetBool(isMovingHash, isMoving);
+    }
+
+    protected override void Death() {
+        if (isDeath) return; // Prevent multiple death calls
+
+        isDeath = true;
+        CallDeath();
+        enemyDetection.RemoveEnemy(this.gameObject);
+        gameObject.layer = deathLayerMask;
+        capCollider.isTrigger = true;
+
+        isDead = true;
+
+        if (attackCoroutine != null) {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+        }
+
+        // Stop any moving animation by setting isMoving to false
+        isMoving = false;
+        animator.SetBool(isMovingHash, isMoving);
+
+        StartCoroutine(WaitBeforeDeath());
+    }
+
+    private void CallDeath() {
+        animator.enabled = false;
+        StartCoroutine(WaitEnableAnimator());
+    }
+
+    private IEnumerator WaitEnableAnimator() {
+        yield return new WaitForSeconds(0.2f);
+        animator.enabled = true;
+    }
+
+    private IEnumerator WaitBeforeDeath() {
+        rb.angularVelocity = Vector3.zero; // Instantly stops spinning
+        yield return new WaitForSeconds(0.2f);
+        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - 0.299f, transform.position.z);
+        transform.DOMove(newPosition, 2);
+        animator.enabled = false;
+        yield return new WaitForSeconds(0.05f);
+        animator.enabled = true;
+        animator.SetTrigger(deathHash);
+        yield return new WaitForSeconds(2f);
+
+        // Instantiate the smokeVFX at the current position and rotation
+        Instantiate(smokeVFX, transform.position, transform.rotation);
+
+        Destroy(gameObject);
+    }
+
+    public override void TakeDamage(float damage) {
+        base.TakeDamage(damage);
+        if (!isDeath) {
+            states = GolemStates.IDLE; // Add this line to handle state change on damage
+            ApplyImpulseBackwards();
+        }
+        rb.angularVelocity = Vector3.zero; // Instantly stops spinning
+    }
+
+    private void ApplyImpulseBackwards() {
+        // Check if the Rigidbody is assigned
+        if (rb != null) {
+            // Calculate the backward direction (opposite of the forward direction)
+            Vector3 backwardDirection = -transform.forward;
+
+            // Apply an impulse force in the backward direction
+            float impulseForce = 2f; // Adjust this value as needed
+            rb.AddForce(backwardDirection * impulseForce, ForceMode.Impulse);
         }
     }
-}
-
-
-public enum GolemStates
-{
-    Idle,
-    Find_Player,
-    Attack,
-    Death
 }

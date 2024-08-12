@@ -62,7 +62,7 @@ Material:
     - Vector1_242C9891: 0.7
     - Vector1_81088C75: 32
     - Vector1_99B978: 0.1
-    - _EmissionStrength: 15
+    - _EmissionStrength: 8
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

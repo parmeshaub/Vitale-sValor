@@ -64,26 +64,26 @@ Material:
     m_Ints: []
     m_Floats:
     - _Clip: 0
-    - _Depth: 0.67
-    - _Displacement: 1.27
+    - _Depth: 1.81
+    - _Displacement: 0
     - _FoamAmt: 0
-    - _FoamCutoff: 10
-    - _FoamScale: 1
-    - _FoamSpeed: -0
-    - _NormalStrength: 0.1
+    - _FoamCutoff: 3.8
+    - _FoamScale: 12.69
+    - _FoamSpeed: 0.04
+    - _NormalStrength: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RefractionSpeed: 177.5
-    - _RefractionStrength: 41.68
-    - _Smoothnes: 0.613
-    - _Strength: 0.3
+    - _RefractionSpeed: 0
+    - _RefractionStrength: 0
+    - _Smoothnes: 0.318
+    - _Strength: 0.174
     m_Colors:
-    - _DeepColor: {r: 0.24705869, g: 0.7529412, b: 0.64557356, a: 0.6313726}
+    - _DeepColor: {r: 0.092337035, g: 0.44764358, b: 0.7830188, a: 0.05490196}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainNormScale: {r: 100, g: 100, b: 0, a: 0}
-    - _RefractionScale: {r: 5, g: 5, b: 0, a: 0}
-    - _SecondNormScale: {r: 100, g: 100, b: 0, a: 0}
-    - _ShallowColor: {r: 0.13163042, g: 0.5471698, b: 0.3324067, a: 0.34901962}
-    - _WavesTiling: {r: 5, g: 5, b: 0, a: 0}
+    - _FoamColor: {r: 2, g: 2, b: 2, a: 1}
+    - _MainNormScale: {r: 1, g: 1, b: 0, a: 0}
+    - _RefractionScale: {r: 0, g: 0, b: 0, a: 0}
+    - _SecondNormScale: {r: 10, g: 10, b: 0, a: 0}
+    - _ShallowColor: {r: 0.1351904, g: 0.5719611, b: 0.5849056, a: 0.11372549}
+    - _WavesTiling: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

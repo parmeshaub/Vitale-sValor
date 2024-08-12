@@ -25,14 +25,20 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHAPREMULTIPLY_ON
+  - _ALPHATEST_ON
+  - _RECEIVE_SHADOWS_OFF
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -56,12 +62,28 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO: 0
+    - _AlphaClip: 1
+    - _AlphaToMask: 0
     - _BillboardSize: 3.6
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 1
+    - _CastShadows: 1
+    - _Clip: 0
+    - _Cull: 0
+    - _DstBlend: 10
     - _Inflate: 0.95
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 0
     - _Smoothness: 0
+    - _SrcBlend: 1
+    - _Surface: 1
     - _SwayAmplitude: 1
     - _SwaySpeed: 1
-    m_Colors: []
+    - _WorkflowMode: 1
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
+    m_Colors:
+    - _LeafColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

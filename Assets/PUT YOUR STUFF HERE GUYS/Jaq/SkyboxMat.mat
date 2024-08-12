@@ -86,7 +86,7 @@ Material:
     - Vector1_3B7A233E: 1.08
     - Vector1_6F3D4927: -0.328
     - Vector1_9BA3FBEE: 0.17
-    - Vector1_9E12CF26: 0.557
+    - Vector1_9E12CF26: 0.118
     - Vector1_B93A03DE: 0
     - Vector1_BA803F6: 0.581
     - Vector1_D80769F7: 0
@@ -136,7 +136,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     - _baseNoiseScale: 0.03
-    - _cloudsCutoff: 0.46
+    - _cloudsCutoff: 0.184
     - _cloudsMoveSpeed: -0.01
     - _cloudsPrimaryScale: 0.03
     - _cloudsSecondaryScale: 0.03

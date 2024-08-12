@@ -11,5 +11,6 @@ public class WorldLoader : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) {
         sceneLoader.LoadToWorld(sceneName);
+        GameManager.Instance.miniDungeonsCompleted++;
     }
 }

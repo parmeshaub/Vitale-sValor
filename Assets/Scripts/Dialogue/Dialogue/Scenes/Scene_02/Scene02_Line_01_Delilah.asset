@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c384236c3bc1e46b6c1b339a8a02c5, type: 3}
+  m_Name: Scene02_Line_01_Delilah
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  audioClip: {fileID: 8300000, guid: ec07b33e5299b3b4bb936df84f89e1a8, type: 3}
+  dialogueText: ...
+  nextDialogue: {fileID: 11400000, guid: 8aa5293a5b8013e4397d694e53484852, type: 2}
+  speakerName: Delilah
+  speakerRole: Hero
+  parsingSpeed: 0
+  isPlayerSpeaking: 0
+  emotionEnum: 0
+  choices: []
+  dialogueExitTime: 0

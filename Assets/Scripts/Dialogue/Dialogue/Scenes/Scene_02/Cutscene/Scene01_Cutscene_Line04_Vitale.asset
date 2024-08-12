@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c384236c3bc1e46b6c1b339a8a02c5, type: 3}
+  m_Name: Scene01_Cutscene_Line04_Vitale
+  m_EditorClassIdentifier: 
+  dialogueType: 1
+  audioClip: {fileID: 8300000, guid: d5a829536cc6684429fa4f716fb4616d, type: 3}
+  dialogueText: Yes, but fear not, for both these creatures have weaknesses which
+    you can exploit.
+  nextDialogue: {fileID: 11400000, guid: 0fe42180698a2b9418216571ec51e3b2, type: 2}
+  speakerName: Delilah
+  speakerRole: Hero
+  parsingSpeed: 0
+  isPlayerSpeaking: 0
+  emotionEnum: 0
+  choices: []
+  dialogueExitTime: 8

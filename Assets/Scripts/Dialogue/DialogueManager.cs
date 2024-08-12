@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     private PlayerInputManager playerInputManager;
     private PlayerInput playerInput;
     private CameraManager cameraManager;
+    [SerializeField] private SoundManager soundManager;
 
     //UI Elements
     [SerializeField] private TMP_Text speakerName;
@@ -108,9 +109,11 @@ public class DialogueManager : MonoBehaviour
                 //Make sure that dialogue text is empty.
                 dialogueText.text = "";
 
-                //Play animation here.
+                //Play animation here. (NO TIMEEMMEME)
 
                 //Play Audio Here.
+                soundManager.StopDialogue();
+                soundManager.PlayDialogue(dialogue.audioClip);
 
                 //Start Parsing words.
                 StartCoroutine(StartParsingDialogue(currentDialogue.dialogueText));
@@ -124,6 +127,8 @@ public class DialogueManager : MonoBehaviour
                 cinematicDialogueObject.SetActive(true);
                 cinematicDialogueGroup.alpha = 1;
                 cinematicDialogue.text = dialogue.dialogueText;
+                soundManager.StopDialogue();
+                soundManager.PlayDialogue(dialogue.audioClip);
 
                 StartCoroutine(WaitUntilNextDialogue(dialogue));
             }
@@ -133,6 +138,8 @@ public class DialogueManager : MonoBehaviour
     #region Normal Dialogue
     private IEnumerator StartParsingDialogue(string originalDialogueText)
     {
+        
+
         Debug.Log("Parsing Now");
         canSkipDialogue = true;
 
@@ -206,6 +213,8 @@ public class DialogueManager : MonoBehaviour
         {
             inDialogue = false;
 
+            soundManager.StopDialogue();
+
             //Turn off dialogue box.
             speakerName.text = "";
             speakerRole.text = "";
@@ -226,6 +235,7 @@ public class DialogueManager : MonoBehaviour
             //Turns boolean on to skip dialogue.
             if (canSkipDialogue)
             {
+                soundManager.StopDialogue();
                 skipDialogue = true;
             }
 
@@ -275,6 +285,7 @@ public class DialogueManager : MonoBehaviour
 
     private void CompleteCinematicDialogue()
     {
+        soundManager.StopDialogue();
         lockEnterDialogue = false;
         cinematicDialogue.text = "";
         FadeOut(cinematicDialogueGroup);

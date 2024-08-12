@@ -79,7 +79,7 @@ public class Interactor : MonoBehaviour
 
     public void FindController()
     {
-        influencingObject = GameObject.Find("LiquidAnimator").transform;
+        influencingObject = GameObject.Find("Controller").transform;
     }
 
 

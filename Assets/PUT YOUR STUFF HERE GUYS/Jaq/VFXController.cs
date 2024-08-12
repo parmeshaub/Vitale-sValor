@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class VFXController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject splashParent;
 
-    // Update is called once per frame
-    void Update()
+
+    public void SplashController(string status)
     {
-        
+        foreach (Transform t in splashParent.transform)}
+
     }
 }

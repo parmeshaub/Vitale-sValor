@@ -75,6 +75,7 @@ public class Interactor : MonoBehaviour
         goingWhere = null;
         currentlyWhere = "flora";
         myScript.GoingWhere(goingWhere, currentlyWhere);
+        FindController();
     }
 
     public void FindController()

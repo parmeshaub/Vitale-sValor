@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 appliedMovement;
     private Vector3 cameraRelativeMovement;
 
+    [SerializeField] private SoundManager soundManager;
+    [SerializeField] private PlayerSoundHolder soundHolder;
+
     [SerializeField] public GameObject combustionObject;
     [SerializeField] public GameObject playerVisual;
     [SerializeField] public VisualEffect combustionEffect;
@@ -151,6 +154,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump() {
         if (isJumpPressed && characterController.isGrounded) {
+            soundManager.PlaySFX(soundHolder.jumpSound);
             animator.SetTrigger(jumpHash);
             isJumpAnimating = true;
             isJumping = true;
@@ -276,6 +280,7 @@ public class PlayerController : MonoBehaviour
     #region Dash
     private IEnumerator Dash() {
         isDashing = true;
+        soundManager.PlaySFX(soundHolder.dash);
         animator.SetTrigger(dodgeHash);
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
@@ -340,6 +345,7 @@ public class PlayerController : MonoBehaviour
 
     public void StartGlide() {
         if (!characterController.isGrounded && !isGliding) {
+            soundManager.PlaySFX(soundHolder.WOC);
             wingsObject.Play();
             isGliding = true;
 

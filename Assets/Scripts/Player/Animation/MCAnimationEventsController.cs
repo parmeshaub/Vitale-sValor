@@ -14,6 +14,7 @@ public class MCAnimationEventsController : MonoBehaviour
     [SerializeField] private HeavyAttackCollider heavyAttackCollider;
     [SerializeField] private ShieldScript shieldScript;
     [SerializeField] private PlayerCombat playerCombat;
+    [SerializeField] private SoundManager soundManager;
 
     private void Start()
     {

@@ -7,6 +7,8 @@ using Cinemachine;
 
 public class PlayerHealthAndDamage : MonoBehaviour
 {
+    [SerializeField] SoundManager soundManager;
+    [SerializeField] PlayerSoundHolder soundHolder;
     [SerializeField] private float currentPlayerHealth;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider manaSlider;
@@ -52,10 +54,6 @@ public class PlayerHealthAndDamage : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKeyUp(KeyCode.O)) {
-            TakeDamage(60);
-        }
-
         // Automatically heal the player if CanHeal is true
         if (CanHeal) {
             HealPlayer();
@@ -66,6 +64,23 @@ public class PlayerHealthAndDamage : MonoBehaviour
         // Deal Damage
         currentPlayerHealth -= damageDealt;
         impulseSource.GenerateImpulse(impulseDirection);
+
+        // Play a sound 1 out of 4 times
+        int randomChance = Random.Range(0, 4);
+        switch (randomChance) {
+            case 0:
+                soundManager.PlaySFX(soundHolder.hurt_01);
+                break;
+            case 1:
+                soundManager.PlaySFX(soundHolder.hurt_02);
+                break;
+            case 2:
+                soundManager.PlaySFX(soundHolder.hurt_03);
+                break;
+            case 3:
+                soundManager.PlaySFX(soundHolder.hurt_04);
+                break;
+        }
 
         // Check if Death
         CheckDeath();
@@ -84,7 +99,7 @@ public class PlayerHealthAndDamage : MonoBehaviour
             animator.SetTrigger(deathHash);
             swordManager.SheathSword();
             shieldManager.TakeInShield();
-
+            soundManager.PlaySFX(soundHolder.death);
             StartCoroutine(RespawnAfterWait());
             deathDoOnce = true;
         }

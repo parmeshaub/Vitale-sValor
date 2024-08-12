@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -19,6 +20,8 @@ public class PlayerCombat : MonoBehaviour
     private SwordManager swordManager;
     private PlayerController playerController;
     private EnchantTest enchantScript;
+    [SerializeField] private SoundManager soundManager;
+    [SerializeField] PlayerSoundHolder playerSoundHolder;
 
     private PlayerInput playerInput;
     public CharacterController characterController;
@@ -101,6 +104,7 @@ public class PlayerCombat : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         swordManager = SwordManager.instance;
         playerController = GetComponent<PlayerController>();
+        
 
         playerInput = playerInputManager.playerInput;
         characterController = GetComponent<CharacterController>();
@@ -167,6 +171,7 @@ public class PlayerCombat : MonoBehaviour
         {
             //Attack 1
             case 0:
+                soundManager.PlaySFX(playerSoundHolder.attack_01);
                 MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(lightAtk1Hash);
                 lightAttackCoolDown = lightAttack1CoolDown;
@@ -174,6 +179,7 @@ public class PlayerCombat : MonoBehaviour
 
             //Attack 2
             case 1:
+                soundManager.PlaySFX(playerSoundHolder.attack_02);
                 MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(lightAtk2Hash);
                 lightAttackCoolDown = lightAttack2CoolDown;
@@ -181,12 +187,14 @@ public class PlayerCombat : MonoBehaviour
 
             //Attack 3
             case 2:
+                soundManager.PlaySFX(playerSoundHolder.attack_03);
                 MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(lightAtk3Hash);
                 lightAttackCoolDown = lightAttack3CoolDown;
                 break;
 
             case 3:
+                soundManager.PlaySFX(playerSoundHolder.attack_04);
                 MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(lightAtk4Hash);
                 lightAttackCoolDown = lightAttack4CoolDown;
@@ -247,6 +255,7 @@ public class PlayerCombat : MonoBehaviour
         {
             //Attack 1
             case 0:
+                soundManager.PlaySFX(playerSoundHolder.attack_01);
                 MoveWhileAttack(2f,0.4f);
                 animator.SetTrigger(heavyAtk1Hash);
                 heavyAttackCoolDown = heavyAttack1CoolDown;
@@ -254,6 +263,7 @@ public class PlayerCombat : MonoBehaviour
 
             //Attack 2
             case 1:
+                soundManager.PlaySFX(playerSoundHolder.attack_02);
                 MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(heavyAtk2Hash);
                 heavyAttackCoolDown = heavyAttack2CoolDown;
@@ -261,12 +271,14 @@ public class PlayerCombat : MonoBehaviour
 
             //Attack 3
             case 2:
+                soundManager.PlaySFX(playerSoundHolder.attack_03);
                 MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(heavyAtk3Hash);
                 heavyAttackCoolDown = heavyAttack3CoolDown;
                 break;
 
             case 3:
+                soundManager.PlaySFX(playerSoundHolder.attack_04);
                 MoveWhileAttack(2f, 0.4f);
                 animator.SetTrigger(heavyAtk4Hash);
                 heavyAttackCoolDown = heavyAttack4CoolDown;
@@ -408,6 +420,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (!isEnchanted) {
                     if (!playerController.characterController.isGrounded) return;
+                    soundManager.PlaySFX(playerSoundHolder.sheathSword) ;
                     inCombatMode = false;
                     animator.SetTrigger(keepSwordHash);
                     animator.SetBool(inCombatHash, false);

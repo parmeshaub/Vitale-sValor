@@ -357,7 +357,7 @@ public class LightingManager : MonoBehaviour
     private IEnumerator LerpFogColor(Color endColor, float endIntensity)
     {
         Color startColor = directionalLight.color; // Get current color
-        float startIntensity = directionalLight.intensity; // Get current intensity
+        float startIntensity = RenderSettings.fogDensity; // Get current intensity
 
         float lerpTime = 0f;
 

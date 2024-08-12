@@ -79,7 +79,7 @@ Material:
     - _EdgeWidth: 0
     - _Metallic: 0
     - _NoiseScale: 0.17
-    - _NoiseStrength: 0.07
+    - _NoiseStrength: 0.007
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RadiusCutOff: 0.48

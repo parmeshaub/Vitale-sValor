@@ -7,12 +7,12 @@ using UnityEngine.Rendering;
 
 public class Interactor : MonoBehaviour
 {
-    
     public GameObject controller; // The sphere controller in charge of lerping textures
     public GameObject lightingManager;
     public GameObject capManager; // Chests and portals
 
     public Terrain currentTerrain;
+    public Animator terrainMeshAnimator;
     public Transform influencingObject; // Assign Object A in the inspector
     public Renderer objectRenderer; // Renderer of Object B
     private Material[] materialInstances;
@@ -25,6 +25,9 @@ public class Interactor : MonoBehaviour
 
     private Vector3 initialScale;
     private float timeElapsed;
+
+    public string currentlyWhere;
+    public string goingWhere;
 
     /// <summary>
     /// Textures for nodes in shader graph to control environmental blending
@@ -67,8 +70,11 @@ public class Interactor : MonoBehaviour
         // Used for growing
         initialScale = transform.localScale; // Store the initial scale
 
-
         myScript = controller.GetComponent<TargetInteractor>();
+        /// Im not going anywhere in the beginning
+        goingWhere = null;
+        currentlyWhere = "flora";
+        myScript.GoingWhere(goingWhere, currentlyWhere);
     }
 
     /// <summary>
@@ -111,6 +117,11 @@ public class Interactor : MonoBehaviour
 
         // Ensure the target scale is set at the end of the duration
         controller.transform.localScale = initialScale;
+
+        /// Impt part //////////////////////// !!!
+        currentlyWhere = goingWhere; // Now that it is done, my target location has become my original location
+        goingWhere = null; // Without any key inputs, there is no where to go
+        myScript.GoingWhere(goingWhere, currentlyWhere); // Update it in the target interactor
     }
 
     public IEnumerator ChangeNormalStrength(string state)
@@ -271,7 +282,7 @@ public class Interactor : MonoBehaviour
 
 
             // Sets color for boundaries
-            if (goingWhere == "flurry")
+            /*if (goingWhere == "flurry")
             {
                 material.SetColor("_EdgeColor", flurryBoundColor); 
             }
@@ -282,7 +293,7 @@ public class Interactor : MonoBehaviour
             else if (goingWhere == "fyre")
             {
                 material.SetColor("_EdgeColor", fyreBoundColor);
-            }
+            }*/
         }
     }
 
@@ -293,8 +304,13 @@ public class Interactor : MonoBehaviour
     {
         StartCoroutine(GrowController("flurry"));
         ControllerDetails("show", "flurry");
+        terrainMeshAnimator.SetTrigger("flurry");
 
-        myScript.GoingWhere("flurry"); // Tells the target interactor where its going
+
+        goingWhere = "flurry";
+        myScript.GoingWhere(goingWhere, currentlyWhere); // Tells the target interactor where its going
+
+
         lightingManager.GetComponent<LightingManager>().ToFlurry(); // Tells lighting what to do
         capManager.GetComponent<CAP>().SetWorld("flurry"); // Telling portals and chests what to do
 
@@ -303,12 +319,15 @@ public class Interactor : MonoBehaviour
 
     public void GoingFyre()
     {
-        StartCoroutine(GrowController("flurry"));
-        ControllerDetails("show", "flurry");
+        StartCoroutine(GrowController("fyre"));
+        ControllerDetails("show", "fyre");
+        terrainMeshAnimator.SetTrigger("fyre");
 
-        myScript.GoingWhere("flurry"); // Tells the target interactor where its going
+        goingWhere = "fyre";
+        myScript.GoingWhere(goingWhere, currentlyWhere); // Tells the target interactor where its going
+
         lightingManager.GetComponent<LightingManager>().ToFyre(); // Tells lighting what to do
-        capManager.GetComponent<CAP>().SetWorld("flurry"); // Telling portals and chests what to do
+        capManager.GetComponent<CAP>().SetWorld("fyre"); // Telling portals and chests what to do
 
         currentTerrain.detailObjectDistance = 0; // Disable Grass
     }
@@ -317,8 +336,12 @@ public class Interactor : MonoBehaviour
     {
         StartCoroutine(GrowController("flora"));
         ControllerDetails("show", "flora");
+        terrainMeshAnimator.SetTrigger("Change");
 
-        myScript.GoingWhere("flora"); // Tells the target interactor where its going
+
+        goingWhere = "flora";
+        myScript.GoingWhere(goingWhere, currentlyWhere); // Tells the target interactor where its going
+
         lightingManager.GetComponent<LightingManager>().ToFlora(); // Tells lighting what to do
         capManager.GetComponent<CAP>().SetWorld("flora"); // Telling portals and chests what to do
 
@@ -341,7 +364,18 @@ public class Interactor : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.N))
         {
+            GoingFyre();
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            GoingFlora();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
             GoingFlurry();
         }
+
     }    
 }

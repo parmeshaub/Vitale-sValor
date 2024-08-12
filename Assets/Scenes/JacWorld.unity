@@ -1091,6 +1091,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d58a1f39119de4c8787174f77d9527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snowTexture: {fileID: 0}
+  fireTexture: {fileID: 0}
   LiquidAnimator: {fileID: 0}
   WaterObject: {fileID: 0}
   treeNatureColor: {r: 0, g: 0, b: 0, a: 0}
@@ -1101,6 +1103,7 @@ MonoBehaviour:
   triplanarDuration: 2
   currentWhere: 
   goingWhere: flurry
+  previouslyWhere: 
 --- !u!54 &26940007
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6355,8 +6358,8 @@ Transform:
   m_GameObject: {fileID: 164683625}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0085801035, y: -0.38198555, z: 0.003391903, w: 0.9241222}
-  m_LocalPosition: {x: -0.009, y: 1.478, z: 0.004}
-  m_LocalScale: {x: 0.41421232, y: 0.41421232, z: 0.41421238}
+  m_LocalPosition: {x: -0.009, y: 1.603, z: 0.002}
+  m_LocalScale: {x: 0.14851649, y: 0.14851649, z: 0.1485165}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1675501890}
@@ -6444,16 +6447,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d58a1f39119de4c8787174f77d9527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snowTexture: {fileID: 2800000, guid: 75b807f3d28ec1644aeac1e8f4a2d857, type: 3}
+  fireTexture: {fileID: 2800000, guid: 78f45571c62b3ba4dbba95640f1c48dc, type: 3}
   LiquidAnimator: {fileID: 132139284}
   WaterObject: {fileID: 2016851105411397832}
   treeNatureColor: {r: 0.12635757, g: 0.9811321, b: 0, a: 1}
-  treeFireColor: {r: 1, g: 0.25131887, b: 0, a: 0}
+  treeFireColor: {r: 1, g: 0.25131887, b: 0, a: 1}
   treeSnowColor: {r: 0.6273585, g: 0.99642223, b: 1, a: 1}
   treeSwaySpeed: 0
   treeDuration: 1
   triplanarDuration: 2
   currentWhere: 
   goingWhere: 
+  previouslyWhere: 
 --- !u!54 &164683631
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13040,8 +13046,8 @@ MonoBehaviour:
   fyreColor6: {r: 0, g: 0, b: 0, a: 0}
   fyreColor7: {r: 0, g: 0, b: 0, a: 0}
   fyreColor8: {r: 0, g: 0, b: 0, a: 0}
-  floraFogColor: {r: 0, g: 0, b: 0, a: 0}
-  floraFogIntensity: 0.002
+  floraFogColor: {r: 0.7647059, g: 0.78431374, b: 0.76862746, a: 1}
+  floraFogIntensity: 0.0025
   floraColor1: {r: 0.03137255, g: 0.93333334, b: 1, a: 0}
   floraColor2: {r: 0, g: 0.47058824, b: 0.81960785, a: 0}
   floraColor3: {r: 0, g: 0.9607843, b: 1, a: 0}
@@ -13069,10 +13075,10 @@ MonoBehaviour:
   flurryColor7: {r: 0, g: 0, b: 0, a: 0}
   flurryColor8: {r: 0, g: 0, b: 0, a: 0}
   directionalFloraLighting: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 0}
-  directionalFloraLightingIntensity: 0
-  directionalFlurryLighting: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 0}
+  directionalFloraLightingIntensity: 1
+  directionalFlurryLighting: {r: 0.7647059, g: 0.78431374, b: 0.76862746, a: 1}
   directionalFlurryLightingIntensity: 3
-  directionalFyreLighting: {r: 0.13333334, g: 0.1254902, b: 0.1254902, a: 0}
+  directionalFyreLighting: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 0}
   directionalFyreLightingIntensity: 1
   changeDuraiton: 2
 --- !u!4 &332534887
@@ -15326,22 +15332,22 @@ PrefabInstance:
     - target: {fileID: 57650509055031758, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0525939
+      value: -0.05259412
       objectReference: {fileID: 0}
     - target: {fileID: 57650509055031758, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.043092612
+      value: -0.043092806
       objectReference: {fileID: 0}
     - target: {fileID: 57650509055031758, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7717256
+      value: 0.7717254
       objectReference: {fileID: 0}
     - target: {fileID: 57650509055031758, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.63231057
+      value: -0.6323106
       objectReference: {fileID: 0}
     - target: {fileID: 208378936847149756, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -15371,17 +15377,17 @@ PrefabInstance:
     - target: {fileID: 992917785037158499, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 89.49
+      value: 239.7
       objectReference: {fileID: 0}
     - target: {fileID: 992917785037158499, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.42
+      value: -7.66
       objectReference: {fileID: 0}
     - target: {fileID: 992917785037158499, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 119.63
+      value: 265.1
       objectReference: {fileID: 0}
     - target: {fileID: 1937664333061484152, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -15416,22 +15422,22 @@ PrefabInstance:
     - target: {fileID: 3940478086057564332, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.05400383
+      value: -0.054003518
       objectReference: {fileID: 0}
     - target: {fileID: 3940478086057564332, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.041312683
+      value: -0.04131246
       objectReference: {fileID: 0}
     - target: {fileID: 3940478086057564332, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7924087
+      value: 0.7924086
       objectReference: {fileID: 0}
     - target: {fileID: 3940478086057564332, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.6061892
+      value: -0.60618937
       objectReference: {fileID: 0}
     - target: {fileID: 5612727115230358686, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -15511,7 +15517,7 @@ PrefabInstance:
     - target: {fileID: 8624280682632310156, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.008035946
+      value: -0.007790889
       objectReference: {fileID: 0}
     - target: {fileID: 8624280682632310156, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -15521,7 +15527,7 @@ PrefabInstance:
     - target: {fileID: 8624280682632310156, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.017155377
+      value: -0.017212622
       objectReference: {fileID: 0}
     - target: {fileID: 8634458885411601823, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -15536,37 +15542,37 @@ PrefabInstance:
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 89.49426
+      value: 239.70032
       objectReference: {fileID: 0}
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.419998
+      value: -2.6600037
       objectReference: {fileID: 0}
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 120.130005
+      value: 265.60004
       objectReference: {fileID: 0}
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0032026938
+      value: -0.00018310902
       objectReference: {fileID: 0}
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0028272686
+      value: -0.0001616454
       objectReference: {fileID: 0}
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.74967283
+      value: 0.74967813
       objectReference: {fileID: 0}
     - target: {fileID: 8801120629069790722, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.66179484
+      value: -0.6618026
       objectReference: {fileID: 0}
     - target: {fileID: 9146203952835715614, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -15586,12 +15592,12 @@ PrefabInstance:
     - target: {fileID: 9146203952835715614, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.050973013
+      value: -0.050973415
       objectReference: {fileID: 0}
     - target: {fileID: 9146203952835715614, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.044998065
+      value: -0.044998415
       objectReference: {fileID: 0}
     - target: {fileID: 9146203952835715614, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
@@ -15601,7 +15607,7 @@ PrefabInstance:
     - target: {fileID: 9146203952835715614, guid: e3e4ff080ad21564b895837e00fdd8ba,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.66027105
+      value: -0.660271
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -82790,10 +82796,13 @@ MonoBehaviour:
   lightingManager: {fileID: 0}
   capManager: {fileID: 0}
   currentTerrain: {fileID: 0}
+  terrainMeshAnimator: {fileID: 0}
   influencingObject: {fileID: 0}
   objectRenderer: {fileID: 0}
   targetScale: {x: 2, y: 2, z: 2}
   duration: 2
+  currentlyWhere: 
+  goingWhere: 
   floraTexture: []
   flurryTexture: []
   fyreTexture: []
@@ -84118,6 +84127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6315451017201595637}
   - component: {fileID: 6920667755559598928}
+  - component: {fileID: 6920667755559598931}
   - component: {fileID: 5183592464194326426}
   - component: {fileID: 6920667755559598929}
   - component: {fileID: 6920667755559598930}
@@ -84256,10 +84266,13 @@ MonoBehaviour:
   lightingManager: {fileID: 332534885}
   capManager: {fileID: 1876974505}
   currentTerrain: {fileID: 252886569}
+  terrainMeshAnimator: {fileID: 6920667755559598931}
   influencingObject: {fileID: 164683626}
   objectRenderer: {fileID: 5183592464194326426}
-  targetScale: {x: 2000, y: 2000, z: 2000}
+  targetScale: {x: 1000, y: 1000, z: 1000}
   duration: 10
+  currentlyWhere: 
+  goingWhere: 
   floraTexture:
   - {fileID: 2800000, guid: 809b2fed08cd9284e975530073fcb70e, type: 3}
   - {fileID: 2800000, guid: de63e8f7343e0aa40953714e1155d954, type: 3}
@@ -84316,6 +84329,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2176367142196832353, guid: ad6fcb142dfe98543b0887c11f522541, type: 3}
+--- !u!95 &6920667755559598931
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6696621275309043279}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0115281f66599a14587729a97b8204a3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &6971053789716758561
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TreeEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class TargetInteractor : MonoBehaviour
 {
@@ -21,13 +22,7 @@ public class TargetInteractor : MonoBehaviour
 
     public string currentWhere;
     public string goingWhere;
-
-
-    private void Start()
-    {
-        currentWhere = "flora"; // Cause alw starts in flora
-        goingWhere = "flurry";
-    }
+    public string previouslyWhere;
 
     /// <summary>
     /// Identifies the invidual gameobject elements and what to do with them
@@ -74,7 +69,6 @@ public class TargetInteractor : MonoBehaviour
         {
             if (goingWhere == "flurry")
             {
-                Debug.Log("huh");
                 LiquidAnimator.SetTrigger("waterToIce");
                 WaterObject.GetComponent<MeshCollider>().enabled = true;
             }
@@ -127,6 +121,16 @@ public class TargetInteractor : MonoBehaviour
         for (int i = 0; i < currentMaterials.Length; i++)
         {
 
+            if (goingWhere == "flurry")
+            {
+                currentMaterials[i].SetTexture("_SnowTex", snowTexture);
+            }
+
+            else if (goingWhere == "fyre")
+            {
+                currentMaterials[i].SetTexture("_SnowTex", fireTexture);
+            }
+
             // Target snowy properties of triplanar material
             var targetSlider = 0f;
             var targetLevel = 0f;
@@ -136,169 +140,186 @@ public class TargetInteractor : MonoBehaviour
             // Access each material instance
             var mat = currentMaterials[i];      
 
-            if (mat.name == "triplanarbricks (Instance)")
+            if ((goingWhere == "flurry") || (goingWhere == "fyre"))
             {
-                // Target snowy properties of triplanar material
-                targetSlider = -3.07f;
-                targetLevel = 1.61f;
-                targetDirection = new Vector3(0f, -5.43f, 0f);
-                targetSlide = 1.2f;
-                // Current triplanar properties
-                float currentSlider = mat.GetFloat("_Slider");
-                float currentTargetLevel = mat.GetFloat("_Level");
-                Vector3 currentTargetDirection = mat.GetVector("_Direction");
-                float currentSlide = mat.GetFloat("_Slide");
 
-                // Passing it to a function to lerp the respective properties
-                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                if (mat.name == "triplanarbricks (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = -3.07f;
+                    targetLevel = 1.61f;
+                    targetDirection = new Vector3(0f, -5.43f, 0f);
+                    targetSlide = 1.2f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                }
+
+                if (mat.name == "triplanarPillar (Instance)")
+                {
+                    targetSlider = -1.81f;
+                    targetLevel = -0.03f;
+                    targetDirection = new Vector3(-0.76f, 60.49f, 0.41f);
+                    targetSlide = 1.16f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                }
+
+                if (mat.name == "triplanarRoof (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = 0.67f;
+                    targetLevel = 2.27f;
+                    targetDirection = new Vector3(0.18f, 2.48f, 1.78f);
+                    targetSlide = 1.2f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+
+                }
+
+                if (mat.name == "triplanarRubble (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = -0.84f;
+                    targetLevel = -0.04f;
+                    targetDirection = new Vector3(47.03f, 95.3f, 12.35f);
+                    targetSlide = 2f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+
+                }
+
+                if (mat.name == "triplanarFloor 2 (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = 1.2f;
+                    targetLevel = 2.2f;
+                    targetDirection = new Vector3(4.38f, -71.1f, 21.6f);
+                    targetSlide = 2.9f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                }
+
+                if (mat.name == "triplanarFloor3 (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = 11.88f;
+                    targetLevel = 3.66f;
+                    targetDirection = new Vector3(5f, 5f, 5f);
+                    targetSlide = -2.1f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                }
+
+                if (mat.name == "triplanarPlane (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = 1.63f;
+                    targetLevel = 0.03f;
+                    targetDirection = new Vector3(6.92f, 95.3f, 36.1f);
+                    targetSlide = 2f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                }
+
+                if (mat.name == "triplanarSR (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = -0.1f;
+                    targetLevel = 2.15f;
+                    targetDirection = new Vector3(0f, -5.82f, 0f);
+                    targetSlide = 1.2f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                }
+
+                if (mat.name == "triplanarCliff (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = 5.24f;
+                    targetLevel = 39.59f;
+                    targetDirection = new Vector3(5f, 5f, 5f);
+                    targetSlide = -6.81f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                }
+
+                if (mat.name == "triplanarRock (Instance)")
+                {
+                    // Target snowy properties of triplanar material
+                    targetSlider = 5.24f;
+                    targetLevel = 5.8f;
+                    targetDirection = new Vector3(0.6f, 2.9f, 1f);
+                    targetSlide = 0f;
+                    // Current triplanar properties
+                    float currentSlider = mat.GetFloat("_Slider");
+                    float currentTargetLevel = mat.GetFloat("_Level");
+                    Vector3 currentTargetDirection = mat.GetVector("_Direction");
+                    float currentSlide = mat.GetFloat("_Slide");
+
+                    // Passing it to a function to lerp the respective properties
+                    StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
+                }
             }
 
-            if (mat.name == "triplanarPillar (Instance)")
+            else if (goingWhere == "flora")
             {
-                targetSlider = -1.81f;
-                targetLevel = -0.03f;
-                targetDirection = new Vector3(-0.76f, 60.49f, 0.41f);
-                targetSlide = 1.16f;
-                // Current triplanar properties
-                float currentSlider = mat.GetFloat("_Slider");
-                float currentTargetLevel = mat.GetFloat("_Level");
-                Vector3 currentTargetDirection = mat.GetVector("_Direction");
-                float currentSlide = mat.GetFloat("_Slide");
-
-                // Passing it to a function to lerp the respective properties
-                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
-            }
-
-            if (mat.name == "triplanarRoof (Instance)")
-            {
-                // Target snowy properties of triplanar material
-                targetSlider = 0.67f;
-                targetLevel = 2.27f;
-                targetDirection = new Vector3(0.18f, 2.48f, 1.78f);
-                targetSlide = 1.2f;
-                // Current triplanar properties
-                float currentSlider = mat.GetFloat("_Slider");
-                float currentTargetLevel = mat.GetFloat("_Level");
-                Vector3 currentTargetDirection = mat.GetVector("_Direction");
-                float currentSlide = mat.GetFloat("_Slide");
-
-                // Passing it to a function to lerp the respective properties
-                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
-
-            }
-
-            if (mat.name == "triplanarRubble (Instance)")
-            {
-                // Target snowy properties of triplanar material
-                targetSlider = -0.84f;
-                targetLevel = -0.04f;
-                targetDirection = new Vector3(47.03f, 95.3f, 12.35f);
-                targetSlide = 2f;
-                // Current triplanar properties
-                float currentSlider = mat.GetFloat("_Slider");
-                float currentTargetLevel = mat.GetFloat("_Level");
-                Vector3 currentTargetDirection = mat.GetVector("_Direction");
-                float currentSlide = mat.GetFloat("_Slide");
-
-                // Passing it to a function to lerp the respective properties
-                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
-
-            }
-
-            if (mat.name == "triplanarFloor 2 (Instance)")
-            {
-                // Target snowy properties of triplanar material
-                targetSlider = 1.2f;
-                targetLevel = 2.2f;
-                targetDirection = new Vector3(4.38f, -71.1f, 21.6f);
-                targetSlide = 2.9f;
-                // Current triplanar properties
-                float currentSlider = mat.GetFloat("_Slider");
-                float currentTargetLevel = mat.GetFloat("_Level");
-                Vector3 currentTargetDirection = mat.GetVector("_Direction");
-                float currentSlide = mat.GetFloat("_Slide");
-
-                // Passing it to a function to lerp the respective properties
-                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
-            }
-
-            if (mat.name == "triplanarFloor3 (Instance)")
-            {
-                // Target snowy properties of triplanar material
-                targetSlider = 11.88f;
-                targetLevel = 3.66f;
-                targetDirection = new Vector3(5f, 5f, 5f);
-                targetSlide = -2.1f;
-                // Current triplanar properties
-                float currentSlider = mat.GetFloat("_Slider");
-                float currentTargetLevel = mat.GetFloat("_Level");
-                Vector3 currentTargetDirection = mat.GetVector("_Direction");
-                float currentSlide = mat.GetFloat("_Slide");
-
-                // Passing it to a function to lerp the respective properties
-                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
-            }
-
-
-
-            if (mat.name == "triplanarPlane (Instance)")
-            {
-                // Target snowy properties of triplanar material
-                targetSlider = 1.63f;
-                targetLevel = 0.03f;
-                targetDirection = new Vector3(6.92f, 95.3f, 36.1f);
-                targetSlide = 2f;
-                // Current triplanar properties
-                float currentSlider = mat.GetFloat("_Slider");
-                float currentTargetLevel = mat.GetFloat("_Level");
-                Vector3 currentTargetDirection = mat.GetVector("_Direction");
-                float currentSlide = mat.GetFloat("_Slide");
-
-                // Passing it to a function to lerp the respective properties
-                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
-            }
-
-            if (mat.name == "triplanarSR (Instance)")
-            {
-                // Target snowy properties of triplanar material
-                targetSlider = -0.1f;
-                targetLevel = 2.15f;
-                targetDirection = new Vector3(0f, -5.82f, 0f);
-                targetSlide = 1.2f;
-                // Current triplanar properties
-                float currentSlider = mat.GetFloat("_Slider");
-                float currentTargetLevel = mat.GetFloat("_Level");
-                Vector3 currentTargetDirection = mat.GetVector("_Direction");
-                float currentSlide = mat.GetFloat("_Slide");
-
-                // Passing it to a function to lerp the respective properties
-                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
-            }
-
-
-            if (mat.name == "triplanarCliff (Instance)")
-            {
-                // Target snowy properties of triplanar material
-                targetSlider = 5.24f;
-                targetLevel = 39.59f;
-                targetDirection = new Vector3(5f, 5f, 5f);
-                targetSlide = -6.81f;
-                // Current triplanar properties
-                float currentSlider = mat.GetFloat("_Slider");
-                float currentTargetLevel = mat.GetFloat("_Level");
-                Vector3 currentTargetDirection = mat.GetVector("_Direction");
-                float currentSlide = mat.GetFloat("_Slide");
-
-                // Passing it to a function to lerp the respective properties
-                StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
-            }
-
-            if (mat.name == "triplanarRock (Instance)")
-            {
-                // Target snowy properties of triplanar material
-                targetSlider = 5.24f;
-                targetLevel = 5.8f;
-                targetDirection = new Vector3(0.6f, 2.9f, 1f);
+                targetSlider = 0f;
+                targetLevel = 0f;
+                targetDirection = new Vector3(0f, 0f, 0f);
                 targetSlide = 0f;
                 // Current triplanar properties
                 float currentSlider = mat.GetFloat("_Slider");
@@ -306,9 +327,9 @@ public class TargetInteractor : MonoBehaviour
                 Vector3 currentTargetDirection = mat.GetVector("_Direction");
                 float currentSlide = mat.GetFloat("_Slide");
 
-                // Passing it to a function to lerp the respective properties
                 StartCoroutine(LerpTriplanar(mat, currentSlider, targetSlider, currentTargetLevel, targetLevel, currentSlide, targetSlide, currentTargetDirection, targetDirection));
             }
+            
 
 
                                  
@@ -345,9 +366,10 @@ public class TargetInteractor : MonoBehaviour
     }
 
 
-    public void GoingWhere(string goingWheree)
+    public void GoingWhere(string goingWheree, string currentWheree)
     {
         goingWhere = goingWheree;
+        currentWhere = currentWheree;
     }
 
     public IEnumerator LerpTreeTransparency(Material treeMat, float currentTarget ,float finalTarget)

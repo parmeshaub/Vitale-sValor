@@ -87,14 +87,14 @@ Material:
     - Vector1_3ED71A56: 0.43
     - Vector1_5214E2BE: 0.02
     - Vector1_7B9C2379: 0.713
-    - Vector1_88114E4A: 0.05
+    - Vector1_88114E4A: 0
     - Vector1_A0F0BBF5: 0.504
     - Vector1_B70459B8: 0.15
     - Vector1_BDCBE303: 0
     - Vector1_C11943F1: 0.22
     - Vector1_DEBF9F77: 0.07
     - Vector1_E512B7AC: 1.89
-    - Vector1_E8E0DC8: 3.26
+    - Vector1_E8E0DC8: 4.73
     - Vector1_E97BF845: 0.501
     - Vector1_ECBD0369: 0
     - Vector1_EEB61C8: 0.07
@@ -106,7 +106,7 @@ Material:
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
-    - _Clip: 0.5
+    - _Clip: -10.13
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2

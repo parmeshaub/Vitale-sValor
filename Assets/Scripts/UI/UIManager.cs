@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
 
     private PlayerInputManager playerInputManager;
     private PlayerInput playerInput;
+    [SerializeField] private SoundManager soundManager;
+    [SerializeField] private PlayerSoundHolder playerSoundHolder;
 
     public bool isInOptions = false;
 
@@ -190,6 +192,7 @@ public class UIManager : MonoBehaviour
     }
 
     private void StartMenu() {
+        soundManager.PlaySFX(playerSoundHolder.menuOpen);
         //Debug.Log("Start");
         playerInputManager.SwitchToUIActionMap();
         Time.timeScale = 0.0f;
@@ -200,6 +203,7 @@ public class UIManager : MonoBehaviour
 
     public void EndMenu()
     {
+        soundManager.PlaySFX(playerSoundHolder.flipPage);
         //Debug.Log("End");
         playerInputManager.SwitchToGameplayActionMap();
         Time.timeScale = 1.0f;
@@ -234,6 +238,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void NextPage() {
+        soundManager.PlaySFX(playerSoundHolder.flipPage);
         if (isInOptions) return;
         pageCount++;
         if (pageCount > 4) pageCount = 0;
@@ -241,6 +246,8 @@ public class UIManager : MonoBehaviour
         SwitchPage();
     }
     public void PreviousPage() {
+        soundManager.PlaySFX(playerSoundHolder.flipPage);
+
         if (isInOptions) return;
         pageCount--;
         if (pageCount < 0) pageCount = 4;
@@ -280,6 +287,11 @@ public class UIManager : MonoBehaviour
                 Debug.LogWarning("Invalid pageCount value: " + pageCount);
                 break;
         }
+    }
+
+    public void ButtonClickSound() {
+        soundManager.PlaySFX(playerSoundHolder.click);
+
     }
 
 }

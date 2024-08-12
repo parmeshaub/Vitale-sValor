@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class ArrowScript : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
-            Debug.Log("Hit");
-        }
+    private Rigidbody rb;
+    [SerializeField] private float projectileSpeed;
+
+    private void Start() {
+        rb = GetComponent<Rigidbody>();
+    }
+    private void FixedUpdate() {
+        rb.velocity = transform.forward * projectileSpeed;
     }
 }

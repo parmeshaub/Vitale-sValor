@@ -645,6 +645,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8794699220914085243}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ButtonClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &140642668062670176
 GameObject:
   m_ObjectHideFlags: 0
@@ -8238,6 +8250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleSphereDetection: {fileID: 0}
+  soundManager: {fileID: 4722202410282089467}
+  playerSoundHolder: {fileID: 5515328980487407531}
   characterController: {fileID: 0}
   animator: {fileID: 0}
   playerStatsManager: {fileID: 1328162373626060710}
@@ -8280,6 +8294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
+  soundManager: {fileID: 4722202410282089467}
+  soundHolder: {fileID: 5515328980487407531}
   combustionObject: {fileID: 8141021022649038820}
   playerVisual: {fileID: 4153719216021069401}
   combustionEffect: {fileID: 3112730975269099011}
@@ -8294,6 +8310,7 @@ MonoBehaviour:
   wingsObject: {fileID: 2764430030937949323}
   maxJumpHeight: 3
   maxJumpTime: 0.75
+  isDashing: 0
   dashDuration: 0.23
   dashMultiplier: 3
   dashCoolDown: 0.7
@@ -8310,6 +8327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171f500866049a14fba4b7ee9775f06d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManager: {fileID: 4722202410282089467}
+  soundHolder: {fileID: 5515328980487407531}
   currentPlayerHealth: 100
   healthSlider: {fileID: 3330891623427018643}
   manaSlider: {fileID: 2419303835551225139}
@@ -10223,6 +10242,78 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1469237169761247711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2361484296689597779}
+  - component: {fileID: 5515328980487407531}
+  m_Layer: 0
+  m_Name: SoundHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2361484296689597779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469237169761247711}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3269545640120352134}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5515328980487407531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469237169761247711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14471f3b3de6fac4d9b2a0feac3b2264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sheathSword: {fileID: 8300000, guid: bd263342a6b644b429be1bb4d0dc7170, type: 3}
+  unsheathSword: {fileID: 8300000, guid: e052855f27519ee468b5c529cb54fc90, type: 3}
+  jumpLand: {fileID: 8300000, guid: 6956bd7194a0f38419e4c3d97f31fc69, type: 3}
+  hurtImpact: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: a5ccfe32373006a43a5e9fb9d20436b9, type: 3}
+  volleySound: {fileID: 8300000, guid: ab98ba9d2621b404f998d8f885f8b5c0, type: 3}
+  ablazeSound: {fileID: 8300000, guid: 5b7bcca07fb737d44a639510a398f0ef, type: 3}
+  judgementSound: {fileID: 8300000, guid: 3ea6be7412e177045adb025713d623f5, type: 3}
+  blistfulnessSound: {fileID: 8300000, guid: cf4d0b8bf2a205d45835dc5185e82e4c, type: 3}
+  glaciateSound: {fileID: 8300000, guid: e9006fc274763d94ab118360205bd0a1, type: 3}
+  razorFangSound: {fileID: 8300000, guid: 90407bba026f58648ae827f08847a324, type: 3}
+  WOC: {fileID: 8300000, guid: 6b198f18f28377c479c45deba64f2e1c, type: 3}
+  combustSound: {fileID: 8300000, guid: b5a407808d3af8144ac73b927f34cb3c, type: 3}
+  sanctSound: {fileID: 8300000, guid: b064763c5f3763243a906560849dbd2a, type: 3}
+  errorSound: {fileID: 8300000, guid: e0b42ee664140044d9e9ee919e0fe0f8, type: 3}
+  flipPage: {fileID: 8300000, guid: 7c73e28287e106347b9bfd7de736518e, type: 3}
+  menuOpen: {fileID: 8300000, guid: 7f3d00558383abd49b79531345fd26ce, type: 3}
+  click: {fileID: 8300000, guid: 1e5164f7d829d8744a53d9eacd68b839, type: 3}
+  attack_01: {fileID: 8300000, guid: 9e4ac954c4bba564cb1ec0163589e989, type: 3}
+  attack_02: {fileID: 8300000, guid: 4fff96c3396848146b479ba6901c455a, type: 3}
+  attack_03: {fileID: 8300000, guid: 4a8b371db99a43741bad1de82f36c539, type: 3}
+  attack_04: {fileID: 8300000, guid: bdb0566558f9cc747b6d8323cab8a5f4, type: 3}
+  hurt_01: {fileID: 8300000, guid: c022384047741384d9af498e6ad55b53, type: 3}
+  hurt_02: {fileID: 8300000, guid: 37f0862ecb89fbc44b8e4561a264a2aa, type: 3}
+  hurt_03: {fileID: 8300000, guid: 561d8674c58b9c147b465e09c55ffc9f, type: 3}
+  hurt_04: {fileID: 8300000, guid: 26119f22adb7bd14283b8c8b2f4adc49, type: 3}
+  death: {fileID: 8300000, guid: 2751e9870bea8194a832939c4c5a278d, type: 3}
+  dash: {fileID: 8300000, guid: 0c017535f03a55f4485b117d5a6abe70, type: 3}
 --- !u!1 &1479497259560331946
 GameObject:
   m_ObjectHideFlags: 0
@@ -11786,7 +11877,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977101670482930600}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.04309289, y: 0.77172536, z: -0.6323108, w: -0.052594163}
+  m_LocalRotation: {x: -0.04309246, y: 0.7717254, z: -0.63231075, w: -0.052593682}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15141,7 +15232,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3010648667505125469}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.044998385, y: 0.74794316, z: -0.6602711, w: -0.050973367}
+  m_LocalRotation: {x: -0.04499796, y: 0.7479433, z: -0.6602711, w: -0.050972905}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16084,6 +16175,18 @@ MonoBehaviour:
       - m_Target: {fileID: 5859736624640444752}
         m_TargetAssemblyTypeName: RuneManager, Assembly-CSharp
         m_MethodName: ChangeToFlurry
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8794699220914085243}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ButtonClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19099,6 +19202,7 @@ MonoBehaviour:
   heavyAttackCollider: {fileID: 8531456209134043909}
   shieldScript: {fileID: 8407759190622987748}
   playerCombat: {fileID: 2559696378656670443}
+  soundManager: {fileID: 0}
 --- !u!1 &4211371361719825381
 GameObject:
   m_ObjectHideFlags: 0
@@ -22811,8 +22915,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5384282791993139508}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12294891, y: 0.7366274, z: -0.6502817, w: 0.1392743}
-  m_LocalPosition: {x: -0.18254471, y: 5, z: 0.46548605}
+  m_LocalRotation: {x: 0.12294872, y: 0.7366275, z: -0.65028167, w: 0.13927414}
+  m_LocalPosition: {x: -0.18254471, y: 5, z: 0.46548653}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23328,6 +23432,18 @@ MonoBehaviour:
       - m_Target: {fileID: 5859736624640444752}
         m_TargetAssemblyTypeName: RuneManager, Assembly-CSharp
         m_MethodName: ChangeToFlora
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8794699220914085243}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ButtonClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24899,6 +25015,8 @@ MonoBehaviour:
   - {fileID: 8609171247774445953}
   - {fileID: 8677689090464596559}
   optionsUI: {fileID: 5567888313734165505}
+  soundManager: {fileID: 4722202410282089467}
+  playerSoundHolder: {fileID: 5515328980487407531}
   isInOptions: 0
 --- !u!1 &6314278622468590012
 GameObject:
@@ -29934,7 +30052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7888433875117526165}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.041312795, y: 0.7924086, z: -0.60618925, w: -0.054003913}
+  m_LocalRotation: {x: -0.04131276, y: 0.7924086, z: -0.60618925, w: -0.054003924}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -31688,6 +31806,7 @@ Transform:
   - {fileID: 2616241256158246581}
   - {fileID: 8081722978960550788}
   - {fileID: 2882993185920481218}
+  - {fileID: 2361484296689597779}
   m_Father: {fileID: 5612727115230358686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1615248419178639608

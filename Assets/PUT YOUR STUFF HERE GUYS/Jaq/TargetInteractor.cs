@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class TargetInteractor : MonoBehaviour
 {
+    public Texture2D snowTexture;
+    public Texture2D fireTexture;
+
     public Animator LiquidAnimator;
     public GameObject WaterObject;
 
@@ -49,7 +52,7 @@ public class TargetInteractor : MonoBehaviour
             }
         }
 
-        if (other.gameObject.name == "water")
+        if (other.gameObject.name == "waterDetector")
         {
             LiquidSwitcher(goingWhere);
         }
@@ -71,13 +74,15 @@ public class TargetInteractor : MonoBehaviour
         {
             if (goingWhere == "flurry")
             {
+                Debug.Log("huh");
                 LiquidAnimator.SetTrigger("waterToIce");
-                WaterObject.GetComponent<Collider>().isTrigger = false; // Make it able to walk on ice
+                WaterObject.GetComponent<MeshCollider>().enabled = true;
             }
 
             if (goingWhere == "fyre")
             {
                 LiquidAnimator.SetTrigger("waterToLava");
+                WaterObject.GetComponent<MeshCollider>().enabled = false;
             }
         }
 
@@ -86,13 +91,13 @@ public class TargetInteractor : MonoBehaviour
             if (goingWhere == "fyre")
             {
                 LiquidAnimator.SetTrigger("lavaToIce");
-                WaterObject.GetComponent<Collider>().isTrigger = false; // Make it able to walk on ice
+                WaterObject.GetComponent<MeshCollider>().enabled = false;
             }
 
             if (goingWhere == "flora")
             {
                 LiquidAnimator.SetTrigger("iceToWater");
-                WaterObject.GetComponent<Collider>().isTrigger = true; // Make it able to not walk on ice
+                WaterObject.GetComponent<MeshCollider>().enabled = false;
             }
         }
 
@@ -101,12 +106,13 @@ public class TargetInteractor : MonoBehaviour
             if (goingWhere == "flora")
             {
                 LiquidAnimator.SetTrigger("lavaToWater");
+                WaterObject.GetComponent<MeshCollider>().enabled = false;
             }
 
             if (goingWhere == "flurry")
             {
                 LiquidAnimator.SetTrigger("lavaToIce");
-                WaterObject.GetComponent<Collider>().isTrigger = false; // Make it able to walk on ice
+                WaterObject.GetComponent<MeshCollider>().enabled = true;
             }
 
         }      

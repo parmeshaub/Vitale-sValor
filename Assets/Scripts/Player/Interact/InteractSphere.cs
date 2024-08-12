@@ -6,7 +6,7 @@ public class InteractSphere : MonoBehaviour
 {
     private List<GameObject> interactablesInRange = new List<GameObject>();
     private PlayerInteract playerInteract;
-    private float duration = 2f;
+    private float duration = 0.6f;
 
     private void Awake() {
         playerInteract = GetComponentInParent<PlayerInteract>();
@@ -20,7 +20,10 @@ public class InteractSphere : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         interactablesInRange.Remove(other.gameObject);
         if (interactablesInRange.Count <= 0) {
-            playerInteract.currentInteractable = null;
+
+            StartCoroutine(DecreaseAlpha(playerInteract.currentInteractable));
+
+            playerInteract.currentInteractable = null;         
         }
     }
 
@@ -44,54 +47,76 @@ public class InteractSphere : MonoBehaviour
             }
         }
 
-
-        Debug.Log(closestInteractable);
-
         // Getting alpha of prompt to animate
-        Transform UICanvas = closestInteractable.transform.Find("Canvas");
-        CanvasGroup alphaSlider = UICanvas.GetComponent<CanvasGroup>();
-        StartCoroutine(IncreaseAlpha(alphaSlider, alphaSlider.alpha));
-
-
+        Debug.Log(closestInteractable);
+        StartCoroutine(IncreaseAlpha(closestInteractable));
         return closestInteractable;
     }
 
 
-
-
-
-    private IEnumerator IncreaseAlpha(CanvasGroup alphaSlider, float currentAlpha)
+    private IEnumerator IncreaseAlpha(GameObject closestInteractable)
     {
-        float elapsedTime = 0f;
+        Transform actual = null;
 
-        while (elapsedTime < duration)
+        // Finding UI
+        actual = closestInteractable.transform.Find("ArtemisPillar");
+
+        if (actual == null)
         {
-            yield return new WaitForSeconds(0.000000001f);
-            elapsedTime += Time.deltaTime;
-            alphaSlider.alpha = Mathf.Lerp(currentAlpha, 1f, elapsedTime / duration);
-            yield return null; // Wait for the next frame
+            actual = closestInteractable.transform.Find("AnimatorRunes");
         }
 
-        // Ensure the final value is set to the endValue
-        alphaSlider.alpha = 1f;
-    }
+        Transform UICanvas = actual.transform.Find("Canvas"); 
+        Canvas canvas = UICanvas.GetComponent<Canvas>();
+        CanvasGroup alphaSlider = canvas.GetComponent<CanvasGroup>();
 
-    private IEnumerator DecreaseAlpha(CanvasGroup alphaSlider, float currentAlpha)
-    {
+        Renderer renderer = actual.GetComponent<Renderer>();
+        Material artemisMat = renderer.material;
+
         float elapsedTime = 0f;
+        Color interactColor = new Color(Mathf.Clamp01(0.3962264f), Mathf.Clamp01(0.3962264f), Mathf.Clamp01(0.3962264f));
+        Color currentColor = artemisMat.GetColor("_FresnalEffect");
 
         while (elapsedTime < duration)
         {
             yield return new WaitForSeconds(0.000000001f);
             elapsedTime += Time.deltaTime;
-            alphaSlider.alpha = Mathf.Lerp(currentAlpha, 0f, elapsedTime / duration);
-            // Optionally, you can do something with currentValue here
+
+            alphaSlider.alpha = Mathf.Lerp(alphaSlider.alpha, 1f, elapsedTime / duration);
+            Color currentFresnalColor = Color.Lerp(currentColor, interactColor, elapsedTime / duration);
+            artemisMat.SetColor("_FresnalEffect", currentFresnalColor);
+
+            yield return null; // Wait for the next frame
+        }
+    }
+
+    private IEnumerator DecreaseAlpha(GameObject closestInteractable)
+    {
+        // Finding UI
+        Transform actual = closestInteractable.transform.Find("ArtemisPillar");
+        Transform UICanvas = actual.transform.Find("Canvas");
+        Canvas canvas = UICanvas.GetComponent<Canvas>();
+        CanvasGroup alphaSlider = canvas.GetComponent<CanvasGroup>();
+
+        Renderer renderer = actual.GetComponent<Renderer>();
+        Material artemisMat = renderer.material;
+
+        float elapsedTime = 0f;
+        Color originalColor = new Color(Mathf.Clamp01(0), Mathf.Clamp01(0), Mathf.Clamp01(0));
+        Color currentColor = artemisMat.GetColor("_FresnalEffect");
+
+        while (elapsedTime < duration)
+        {
+            yield return new WaitForSeconds(0.000000001f);
+            elapsedTime += Time.deltaTime;
+            alphaSlider.alpha = Mathf.Lerp(alphaSlider.alpha, 0f, elapsedTime / duration);
+            Color currentFresnalColor = Color.Lerp(currentColor, originalColor, elapsedTime / duration);
+            artemisMat.SetColor("_FresnalEffect", currentFresnalColor);
+
             yield return null; // Wait for the next frame
         }
 
         // Ensure the final value is set to the endValue
         alphaSlider.alpha = 0f;
-    }
-
-
+    }  
 }

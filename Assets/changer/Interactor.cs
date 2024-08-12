@@ -337,5 +337,11 @@ public class Interactor : MonoBehaviour
             currentMaterial.SetVector("_InfluencingObjectPos", influencingObject.position);
             currentMaterial.SetVector("_InfluencingObjectScale", influencingObject.localScale);  
         }
+
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            GoingFlurry();
+        }
     }    
 }

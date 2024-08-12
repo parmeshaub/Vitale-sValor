@@ -12,6 +12,8 @@ public class ArtemisPillar : Interactable
     public void ActivateArtemis()
     {
         artemisAnimator.SetTrigger("activated");
+
+
     }
 
     public override void Interact() {

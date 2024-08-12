@@ -6,7 +6,7 @@ public class InteractSphere : MonoBehaviour
 {
     private List<GameObject> interactablesInRange = new List<GameObject>();
     private PlayerInteract playerInteract;
-    private float duration = 0.6f;
+    private float duration = 2f;
 
     private void Awake() {
         playerInteract = GetComponentInParent<PlayerInteract>();
@@ -20,10 +20,7 @@ public class InteractSphere : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         interactablesInRange.Remove(other.gameObject);
         if (interactablesInRange.Count <= 0) {
-
-            StartCoroutine(DecreaseAlpha(playerInteract.currentInteractable));
-
-            playerInteract.currentInteractable = null;         
+            playerInteract.currentInteractable = null;
         }
     }
 
@@ -47,68 +44,54 @@ public class InteractSphere : MonoBehaviour
             }
         }
 
-        // Getting alpha of prompt to animate
+
         Debug.Log(closestInteractable);
-        StartCoroutine(IncreaseAlpha(closestInteractable));
+
+        // Getting alpha of prompt to animate
+        Transform UICanvas = closestInteractable.transform.Find("Canvas");
+        CanvasGroup alphaSlider = UICanvas.GetComponent<CanvasGroup>();
+        StartCoroutine(IncreaseAlpha(alphaSlider, alphaSlider.alpha));
+
+
         return closestInteractable;
     }
 
 
-    private IEnumerator IncreaseAlpha(GameObject closestInteractable)
+
+
+
+    private IEnumerator IncreaseAlpha(CanvasGroup alphaSlider, float currentAlpha)
     {
-        // Finding UI
-        Transform actual = closestInteractable.transform.Find("ArtemisPillar");
-        Transform UICanvas = actual.transform.Find("Canvas");
-        Canvas canvas = UICanvas.GetComponent<Canvas>();
-        CanvasGroup alphaSlider = canvas.GetComponent<CanvasGroup>();
-
-        Renderer renderer = actual.GetComponent<Renderer>();
-        Material artemisMat = renderer.material;
-
         float elapsedTime = 0f;
-        Color interactColor = new Color(Mathf.Clamp01(0.3962264f), Mathf.Clamp01(0.3962264f), Mathf.Clamp01(0.3962264f));
-        Color currentColor = artemisMat.GetColor("_FresnalEffect");
 
         while (elapsedTime < duration)
         {
             yield return new WaitForSeconds(0.000000001f);
             elapsedTime += Time.deltaTime;
-
-            alphaSlider.alpha = Mathf.Lerp(alphaSlider.alpha, 1f, elapsedTime / duration);
-            Color currentFresnalColor = Color.Lerp(currentColor, interactColor, elapsedTime / duration);
-            artemisMat.SetColor("_FresnalEffect", currentFresnalColor);
-
+            alphaSlider.alpha = Mathf.Lerp(currentAlpha, 1f, elapsedTime / duration);
             yield return null; // Wait for the next frame
         }
+
+        // Ensure the final value is set to the endValue
+        alphaSlider.alpha = 1f;
     }
 
-    private IEnumerator DecreaseAlpha(GameObject closestInteractable)
+    private IEnumerator DecreaseAlpha(CanvasGroup alphaSlider, float currentAlpha)
     {
-        // Finding UI
-        Transform actual = closestInteractable.transform.Find("ArtemisPillar");
-        Transform UICanvas = actual.transform.Find("Canvas");
-        Canvas canvas = UICanvas.GetComponent<Canvas>();
-        CanvasGroup alphaSlider = canvas.GetComponent<CanvasGroup>();
-
-        Renderer renderer = actual.GetComponent<Renderer>();
-        Material artemisMat = renderer.material;
-
         float elapsedTime = 0f;
-        Color originalColor = new Color(Mathf.Clamp01(0), Mathf.Clamp01(0), Mathf.Clamp01(0));
-        Color currentColor = artemisMat.GetColor("_FresnalEffect");
 
         while (elapsedTime < duration)
         {
             yield return new WaitForSeconds(0.000000001f);
             elapsedTime += Time.deltaTime;
-            alphaSlider.alpha = Mathf.Lerp(alphaSlider.alpha, 0f, elapsedTime / duration);
-            Color currentFresnalColor = Color.Lerp(currentColor, originalColor, elapsedTime / duration);
-            artemisMat.SetColor("_FresnalEffect", currentFresnalColor);
-
+            alphaSlider.alpha = Mathf.Lerp(currentAlpha, 0f, elapsedTime / duration);
+            // Optionally, you can do something with currentValue here
             yield return null; // Wait for the next frame
         }
 
         // Ensure the final value is set to the endValue
         alphaSlider.alpha = 0f;
-    }  
+    }
+
+
 }

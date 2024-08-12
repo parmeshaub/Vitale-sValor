@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     private bool isJumpAnimating = false;
 
     // Dash
-    private bool isDashing = false;
+    public bool isDashing = false;
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashMultiplier = 6f;
     [SerializeField] private float dashCoolDown = 1f;

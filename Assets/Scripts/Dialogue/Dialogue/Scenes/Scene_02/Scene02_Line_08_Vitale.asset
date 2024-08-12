@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c384236c3bc1e46b6c1b339a8a02c5, type: 3}
+  m_Name: Scene02_Line_08_Vitale
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  audioClip: {fileID: 8300000, guid: 80d341f19c5e6894d9132b0a0ee7b6ed, type: 3}
+  dialogueText: You are now in Flora, the land of nature and life.
+  nextDialogue: {fileID: 11400000, guid: 417ccb92e71b7074f80f02721c0dce91, type: 2}
+  speakerName: Vitale
+  speakerRole: Sword
+  parsingSpeed: 0
+  isPlayerSpeaking: 0
+  emotionEnum: 0
+  choices: []
+  dialogueExitTime: 0

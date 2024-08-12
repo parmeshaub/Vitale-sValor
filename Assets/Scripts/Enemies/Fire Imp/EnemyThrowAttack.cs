@@ -69,12 +69,6 @@ public class EnemyThrowAttack : MonoBehaviour
     }
 
     private void Update() {
-        // Keep tracking the target's historical positions for movement prediction
-        if (LastHistoryRecordedTime + HistoricalPositionInterval < Time.time) {
-            LastHistoryRecordedTime = Time.time;
-            HistoricalPositions.Dequeue();
-            HistoricalPositions.Enqueue(Target.position);
-        }
     }
 
     public void Throw(GameObject player) {

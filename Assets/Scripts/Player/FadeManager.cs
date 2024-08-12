@@ -4,7 +4,7 @@ using UnityEngine;
 public class FadeManager : MonoBehaviour
 {
     public static FadeManager instance;
-    [SerializeField] private CanvasGroup fadeCanvas;
+    [SerializeField] public CanvasGroup fadeCanvas;
     [SerializeField] public float defaultFadeDuration = 1.0f; // Default duration for fade in/out
 
     private void Awake() {

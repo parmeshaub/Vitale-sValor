@@ -336,7 +336,7 @@ public class Interactor : MonoBehaviour
     {
         StartCoroutine(GrowController("flora"));
         ControllerDetails("show", "flora");
-        terrainMeshAnimator.SetTrigger("Change");
+        terrainMeshAnimator.SetTrigger("flora");
 
 
         goingWhere = "flora";
@@ -360,22 +360,5 @@ public class Interactor : MonoBehaviour
             currentMaterial.SetVector("_InfluencingObjectPos", influencingObject.position);
             currentMaterial.SetVector("_InfluencingObjectScale", influencingObject.localScale);  
         }
-
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            GoingFyre();
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            GoingFlora();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            GoingFlurry();
-        }
-
     }    
 }

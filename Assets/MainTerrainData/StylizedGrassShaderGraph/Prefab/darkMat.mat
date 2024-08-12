@@ -168,12 +168,12 @@ Material:
     - _NoiseContrast: {r: 241.67, g: -160.12, b: 0.37, a: 1}
     - _SSSColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0.31038624, g: 0.60303116, b: 0.7075472, a: 1}
-    - _TopColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColorNear: {r: 0.25523427, g: 0.5377358, b: 0.24096651, a: 1}
+    - _TopColor: {r: 2, g: 2, b: 2, a: 1}
+    - _TopColorNear: {r: 0.6856111, g: 0.764151, b: 0.68124783, a: 1}
     - _TopColorNear_1: {r: 0, g: 0, b: 0, a: 0}
     - _TopColorNear_2: {r: 0, g: 0, b: 0, a: 0}
     - _TopColorNear_3: {r: 0, g: 0, b: 0, a: 0}
-    - _UVContrast: {r: 0, g: 0, b: 0.96, a: 0.37}
+    - _UVContrast: {r: 0, g: 0, b: 0.96, a: 0.7}
     - _WindNoiseColor: {r: 0.52156866, g: 0.86666673, b: 0.43529415, a: 1}
     - _WindNoiseTexScale: {r: 100, g: 100, b: 0, a: 0}
   m_BuildTextureStacks: []

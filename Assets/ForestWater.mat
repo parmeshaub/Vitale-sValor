@@ -84,6 +84,6 @@ Material:
     - _MainNormScale: {r: 100, g: 100, b: 0, a: 0}
     - _RefractionScale: {r: 5, g: 5, b: 0, a: 0}
     - _SecondNormScale: {r: 100, g: 100, b: 0, a: 0}
-    - _ShallowColor: {r: 0.06132078, g: 0.8106174, b: 1, a: 0.5176471}
+    - _ShallowColor: {r: 0.103462085, g: 0.58622444, b: 0.7075472, a: 0.5176471}
     - _WavesTiling: {r: 5, g: 5, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -15,6 +15,7 @@ public class RuneManager : MonoBehaviour
     [SerializeField] private float cooldownSeconds;
     [SerializeField] private GameObject coolDownText;
     private Coroutine coolDownCoroutine;
+    Interactor interactorScript ; // Finding interactor script from main terrain mesh
 
     private float fadeInTime = 0.1f;
     private float fadeOutTime = 0.1f;
@@ -25,7 +26,7 @@ public class RuneManager : MonoBehaviour
         playerInput = playerInputManager.playerInput;
 
         playerInput.Gameplay.ActivateRune.started += OpenRuneMenu;
-        playerInput.UI.Rune.started += OpenRuneMenu;
+        playerInput.UI.Rune.started += OpenRuneMenu;       
     }
 
     private void Start() {
@@ -34,6 +35,10 @@ public class RuneManager : MonoBehaviour
         runeCanvasGroup.alpha = 0; // makes sure the alpha is invisible.
         runeUIObject.SetActive(false);
         coolDownText.SetActive(false);
+
+
+        GameObject mainWorldMesh = GameObject.Find("MainworldMesh");
+        interactorScript = mainWorldMesh.GetComponent<Interactor>();
     }
 
     private void OpenRuneMenu(InputAction.CallbackContext context) {
@@ -62,7 +67,7 @@ public class RuneManager : MonoBehaviour
         //Check if already in Flora.
         if (worldEnum == CurrentWorld.Flora) return;
         worldEnum = CurrentWorld.Flora;
-        Debug.Log("Changing to Flora");
+        interactorScript.GoingFlora();
         coolDownCoroutine = StartCoroutine(StartCoolDown());
 
     }
@@ -72,7 +77,7 @@ public class RuneManager : MonoBehaviour
         //Check if already in Fyre.
         if (worldEnum == CurrentWorld.Fyre) return;
         worldEnum = CurrentWorld.Fyre;
-        Debug.Log("Changing to Fyre");
+        interactorScript.GoingFlurry();
         coolDownCoroutine = StartCoroutine(StartCoolDown());
 
     }
@@ -82,7 +87,7 @@ public class RuneManager : MonoBehaviour
         //Check if already in Flurry.
         if (worldEnum == CurrentWorld.Flurry) return;
         worldEnum = CurrentWorld.Flurry;
-        Debug.Log("Changing to Flurry");
+        interactorScript.GoingFyre();
         coolDownCoroutine = StartCoroutine(StartCoolDown());
 
     }

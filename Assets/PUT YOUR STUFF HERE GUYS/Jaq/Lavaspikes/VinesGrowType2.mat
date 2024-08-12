@@ -12,13 +12,15 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -54,20 +56,35 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 1
+    - _AlphaToMask: 1
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 1
+    - _CastShadows: 1
     - _Clip: 1
+    - _Cull: 0
+    - _DstBlend: 0
     - _EmissionIntensity: 0.68
     - _Float: 1.5
-    - _Grow: 0.97
+    - _Grow: 1
+    - _IntersectionDepth: 1
     - _Metallic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _RotationalDegree: 0
     - _Scale: 0
     - _Smoothness: 0
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _WorkflowMode: 1
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 0
     - _scale: 0.32
     m_Colors:
     - _Color: {r: 0.40392157, g: 0.6377357, b: 0.2250123, a: 1}
-    - _EmissionColor: {r: 15.896418, g: 3.117977, b: 2.4744427, a: 1}
+    - _EmissionColor: {r: 31.792835, g: 6.235954, b: 4.9488854, a: 1}
     - _Vector3: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6785443314075189074

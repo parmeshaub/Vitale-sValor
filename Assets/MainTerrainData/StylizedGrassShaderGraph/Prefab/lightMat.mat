@@ -174,7 +174,7 @@ Material:
     - _TopColorNear_1: {r: 0, g: 0, b: 0, a: 0}
     - _TopColorNear_2: {r: 0, g: 0, b: 0, a: 0}
     - _TopColorNear_3: {r: 0, g: 0, b: 0, a: 0}
-    - _UVContrast: {r: 0, g: 0, b: 0.96, a: 1.25}
+    - _UVContrast: {r: 0, g: 0, b: 0.96, a: 0.7}
     - _WindNoiseColor: {r: 0.52156866, g: 0.86666673, b: 0.43529415, a: 1}
     - _WindNoiseTexScale: {r: 20, g: 50, b: 0, a: 0}
   m_BuildTextureStacks: []

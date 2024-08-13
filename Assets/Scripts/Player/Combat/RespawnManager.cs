@@ -7,6 +7,7 @@ using UnityEngine;
 public class RespawnManager : MonoBehaviour
 {
     public Transform playerTransform; // Reference to the player's Transform
+    public Transform defaultRespawnPoint;
     private Transform respawnPoint;
     private List<GameObject> pillarList = new List<GameObject>();
     private PlayerHealthAndDamage playerHealth;
@@ -75,6 +76,14 @@ public class RespawnManager : MonoBehaviour
         // Find the closest respawn pillar
         GetClosestRespawnPillar();
 
+        // Use defaultRespawnPoint if respawnPoint is null
+        if (respawnPoint == null) {
+            GameObject defaultResPointObject = GameObject.FindGameObjectWithTag("DefaultRespawn");
+            defaultRespawnPoint = defaultResPointObject.transform;
+            respawnPoint = defaultRespawnPoint;
+            Debug.LogWarning("Respawn point was null. Using default respawn point.");
+        }
+
         // Ensure the respawn point is valid before moving the player
         if (respawnPoint != null) {
             this.transform.position = respawnPoint.position;
@@ -82,7 +91,7 @@ public class RespawnManager : MonoBehaviour
             Debug.Log("Player moved to respawn point: " + respawnPoint.position);
         }
         else {
-            Debug.LogError("Respawn point is null. Unable to respawn player.");
+            Debug.LogError("Both respawn point and default respawn point are null. Unable to respawn player.");
         }
 
         // Re-enable CharacterController after moving the player
@@ -99,5 +108,4 @@ public class RespawnManager : MonoBehaviour
 
         yield return null;
     }
-
 }

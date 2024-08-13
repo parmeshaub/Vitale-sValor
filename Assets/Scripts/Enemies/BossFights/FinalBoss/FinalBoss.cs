@@ -150,7 +150,7 @@ public class FinalBoss : EnemyBase
 
         yield return new WaitForSeconds(0.2f);  // Wait for the look-at to complete
 
-        int random = Random.Range(0, 5);
+        int random = Random.Range(0, 4);
         switch (random) {
             case 0:
                 animator.SetTrigger(attack01Hash);

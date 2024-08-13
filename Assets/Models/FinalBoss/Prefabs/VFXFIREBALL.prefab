@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7534857066008721384}
   - component: {fileID: 5207384438924243892}
-  - component: {fileID: 4530856399317968862}
   - component: {fileID: 1353801614664177783}
   - component: {fileID: 1929467017655434559}
+  - component: {fileID: -5199697276635943160}
   m_Layer: 0
   m_Name: VFXFIREBALL
   m_TagString: Untagged
@@ -66,21 +66,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4530856399317968862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3187677966868283215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db560a1c1d561ad4490343453d501b62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackCollider: {fileID: 1353801614664177783}
-  minDamage: 50
-  maxDamage: 100
 --- !u!65 &1353801614664177783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -100,7 +85,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1929467017655434559
 MonoBehaviour:
@@ -114,7 +99,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56134d979588171499b434145e7ab080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDisappear: 5
+  timeToDisappear: 7
+--- !u!114 &-5199697276635943160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3187677966868283215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a339fb13188b54387c516d3fbb275c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDamage: 50
+  maxDamage: 100
 --- !u!1 &5763748122247631702
 GameObject:
   m_ObjectHideFlags: 0

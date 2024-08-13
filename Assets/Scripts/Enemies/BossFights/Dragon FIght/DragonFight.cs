@@ -177,6 +177,12 @@ public class DragonBoss : MonoBehaviour
 
     private IEnumerator DragonDeath() {
         isDead = true;
+
+        Debug.Log("dead");
+        GameObject portalBack = GameObject.Find("PortalBackToWorld").transform.gameObject;
+        Transform childTransform = portalBack.transform.Find("Plane");
+        childTransform.gameObject.SetActive(true);
+
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }

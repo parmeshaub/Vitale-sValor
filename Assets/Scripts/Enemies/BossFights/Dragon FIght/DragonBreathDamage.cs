@@ -25,7 +25,6 @@ public class DragonBreathDamage : MonoBehaviour
 
     private float RandomizeDamage() {
         float damage = Random.Range(minDamage, maxDamage);
-
         return damage;
     }
 }

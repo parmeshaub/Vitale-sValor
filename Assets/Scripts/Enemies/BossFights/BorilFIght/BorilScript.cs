@@ -339,9 +339,15 @@ public class BorilScript : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// What happens the boar dies
+    /// </summary>
     private IEnumerator DeadState() {
         animator.SetTrigger(deathHash);
+
+        GameObject portalBack = GameObject.Find("PortalBackToWorld").transform.gameObject;
+        portalBack.SetActive(true);
+
         yield return new WaitForSeconds(4f);
         Destroy(gameObject);
     }

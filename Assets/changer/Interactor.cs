@@ -50,6 +50,7 @@ public class Interactor : MonoBehaviour
 
     public void Start()
     {
+        StartCoroutine(FindController());
         // Acknowledges materials assigned for texture blending
         Renderer renderer = this.GetComponent<Renderer>();
         Material[] materials = renderer.materials;
@@ -70,20 +71,29 @@ public class Interactor : MonoBehaviour
         }
 
         // Used for growing
-        initialScale = transform.localScale; // Store the initial scale
+        initialScale = transform.localScale; // Store the initial scale       
+    }
 
-        myScript = controller.GetComponent<TargetInteractor>();
+    public IEnumerator FindController()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        foreach (Transform child in player.transform)
+        {
+            Debug.Log(child.name);
+        }
+
+
+        controller = GameObject.Find("Controller").transform.gameObject;
+        influencingObject = GameObject.Find("Controller").transform;
+        myScript = influencingObject.GetComponent<TargetInteractor>();
+
         /// Im not going anywhere in the beginning
         goingWhere = null;
         currentlyWhere = "flora";
         myScript.GoingWhere(goingWhere, currentlyWhere);
-        FindController();
-    }
-
-    public void FindController()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        influencingObject = GameObject.Find("Controller").transform;
     }
 
 
@@ -92,7 +102,6 @@ public class Interactor : MonoBehaviour
     /// </summary>
     public IEnumerator GrowController(string goingWhere)
     {
-
         NodeTextureSwap(goingWhere, "set"); // Grows into what dimension
 
         timeElapsed = 0f;
@@ -366,8 +375,11 @@ public class Interactor : MonoBehaviour
         {
             Material currentMaterial = materialInstances[i];
 
-            currentMaterial.SetVector("_InfluencingObjectPos", influencingObject.position);
-            currentMaterial.SetVector("_InfluencingObjectScale", influencingObject.localScale);  
+            if (influencingObject != null)
+            {
+                currentMaterial.SetVector("_InfluencingObjectPos", influencingObject.position);
+                currentMaterial.SetVector("_InfluencingObjectScale", influencingObject.localScale);
+            }
         }
     }    
 }

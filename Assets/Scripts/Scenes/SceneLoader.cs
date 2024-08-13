@@ -9,6 +9,8 @@ public class SceneLoader : MonoBehaviour
     public Vector3 originalPos;
     public Quaternion originalRot;
 
+    private GameObject SceneLoaderObj;
+
     private void Awake() {
         // Implement Singleton pattern to ensure only one instance of SceneLoader exists
         if (Instance == null) {
@@ -18,6 +20,15 @@ public class SceneLoader : MonoBehaviour
         else {
             Destroy(gameObject);
         }
+
+
+    }
+
+    public void Start()
+    {
+        GameObject SceneLoaderObj = GameObject.FindGameObjectWithTag("SceneLoader");
+
+        
     }
 
     public void LoadDungeon(string sceneName, Transform exitTransform) {

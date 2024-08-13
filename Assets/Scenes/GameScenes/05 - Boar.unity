@@ -13013,6 +13013,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3753523372682410319, guid: 93a458a37262ecd40a1d5b4d5c15305b,
+        type: 3}
+      propertyPath: chargeSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8232836906397039117, guid: 93a458a37262ecd40a1d5b4d5c15305b,
         type: 3}
       propertyPath: m_Name

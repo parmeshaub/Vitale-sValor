@@ -6,11 +6,26 @@ public class WorldLoader : MonoBehaviour
 {
     [SerializeField] private string sceneName;
     private SceneLoader sceneLoader;
-    private void Awake() {
+
+    public void Start()
+    {
         sceneLoader = SceneLoader.Instance;
+
+        if (sceneLoader != null)
+        {
+            Debug.Log("able switch");
+        }
     }
+
     private void OnTriggerEnter(Collider other) {
-        sceneLoader.LoadToWorld(sceneName);
-        //GameManager.Instance.miniDungeonsCompleted++;
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (other.name == player.name)
+        {
+            Debug.Log("found");
+            sceneLoader.LoadToWorld(sceneName);
+            //GameManager.Instance.miniDungeonsCompleted++;
+        }
     }
 }

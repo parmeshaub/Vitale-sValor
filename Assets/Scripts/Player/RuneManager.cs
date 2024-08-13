@@ -79,7 +79,7 @@ public class RuneManager : MonoBehaviour
         //Check if already in Fyre.
         if (worldEnum == CurrentWorld.Fyre) return;
         worldEnum = CurrentWorld.Fyre;
-        interactorScript.GoingFlurry();
+        interactorScript.GoingFyre();
         coolDownCoroutine = StartCoroutine(StartCoolDown());
 
     }
@@ -89,7 +89,7 @@ public class RuneManager : MonoBehaviour
         //Check if already in Flurry.
         if (worldEnum == CurrentWorld.Flurry) return;
         worldEnum = CurrentWorld.Flurry;
-        interactorScript.GoingFyre();
+        interactorScript.GoingFlurry();
         coolDownCoroutine = StartCoroutine(StartCoolDown());
 
     }

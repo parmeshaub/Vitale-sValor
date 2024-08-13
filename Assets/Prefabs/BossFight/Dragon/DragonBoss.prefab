@@ -57,6 +57,7 @@ MonoBehaviour:
   swoopSpeed: 20
   tiredSpeed: 5
   hitsToDie: 3
+  isDead: 0
 --- !u!1001 &1802881601691436223
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -24,6 +24,11 @@ public class TargetInteractor : MonoBehaviour
     public string goingWhere;
     public string previouslyWhere;
 
+    public void Start()
+    {
+        FindObjects();
+    }
+
 
     public void FindObjects()
     {
@@ -32,7 +37,11 @@ public class TargetInteractor : MonoBehaviour
         LiquidAnimator = liquidParent.GetComponent<Animator>();
 
         // Game obj for water body
-        GameObject WaterObject = GameObject.Find("water");
+        WaterObject = GameObject.Find("water").transform.gameObject;
+        if (WaterObject != null )
+        {
+            Debug.Log("found");
+        }
     }
 
 

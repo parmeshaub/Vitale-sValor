@@ -12,6 +12,7 @@ TagManager:
   - Pillar
   - Dungeon Initialization
   - Enemy
+  - DefaultRespawn
   layers:
   - Default
   - TransparentFX

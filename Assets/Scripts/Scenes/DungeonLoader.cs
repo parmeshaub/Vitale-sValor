@@ -24,6 +24,7 @@ public class DungeonLoader : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
+        sceneLoader = SceneLoader.Instance;
         if (sceneLoader != null && other.CompareTag("Player")) {
             // Update world data based on the dungeon
             UpdateWorldData(sceneName);
@@ -65,6 +66,9 @@ public class DungeonLoader : MonoBehaviour
                 break;
             case "04 - Dragon":
                 worldDataStore.dragonBoss = true;
+                break;
+            case "05 - Boar":
+                worldDataStore.boarBoss = true;
                 break;
             default:
                 Debug.LogWarning("Unknown dungeon scene name: " + sceneName);

@@ -26,7 +26,6 @@ public class SceneLoader : MonoBehaviour
 
     public void Start()
     {
-        GameObject SceneLoaderObj = GameObject.FindGameObjectWithTag("SceneLoader");
 
         
     }

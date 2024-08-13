@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinalBoss : EnemyBase
 {
@@ -263,6 +264,8 @@ public class FinalBoss : EnemyBase
         yield return new WaitForSeconds(3f);
 
         Instantiate(smokeVFX, transform.position, transform.rotation);
+
+        SceneManager.LoadScene("01 - Main Menu");
 
         Destroy(gameObject);
     }

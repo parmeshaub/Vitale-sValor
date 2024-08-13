@@ -28,6 +28,8 @@ public class DragonBoss : MonoBehaviour
     public bool isDead = false;
     private CinemachineImpulseSource cinemachineImpulse;
 
+    public GameObject portal;
+
     void Start() {
         // Set the initial position of the dragon at the desired distance from the center point
         transform.position = new Vector3(centerPoint.position.x + circleRadius, transform.position.y, centerPoint.position.z);
@@ -179,9 +181,7 @@ public class DragonBoss : MonoBehaviour
         isDead = true;
 
         Debug.Log("dead");
-        GameObject portalBack = GameObject.Find("PortalBackToWorld").transform.gameObject;
-        Transform childTransform = portalBack.transform.Find("Plane");
-        childTransform.gameObject.SetActive(true);
+        portal.gameObject.SetActive(true) ;
 
         yield return new WaitForSeconds(3);
         Destroy(gameObject);

@@ -29,7 +29,7 @@ public class BorilScript : MonoBehaviour
     private bool isMoving = false;
     private bool isCharging = false;
     private bool canBeAttacked = false;
-    private int hitsDuringStun = 0;
+    private int hitsDuringStun = 6;
 
     //Animation Hashes
     private static readonly int isMovingHash = Animator.StringToHash("isMoving");
@@ -48,6 +48,8 @@ public class BorilScript : MonoBehaviour
     [SerializeField] private Material borilPhase3Material;
     [SerializeField] private GameObject borilBody;
     private Renderer borilBodyRenderer;
+
+    [SerializeField] public GameObject portalBack;
 
     //Coroutine
     private Coroutine currentCoroutine;
@@ -345,7 +347,6 @@ public class BorilScript : MonoBehaviour
     private IEnumerator DeadState() {
         animator.SetTrigger(deathHash);
 
-        GameObject portalBack = GameObject.Find("PortalBackToWorld").transform.gameObject;
         portalBack.SetActive(true);
 
         yield return new WaitForSeconds(4f);
@@ -423,16 +424,21 @@ public class BorilScript : MonoBehaviour
             currentPhase = BorilPhases.Phase_Three; // Example: Transition to Phase Three
             borilBodyRenderer.material = borilPhase3Material;
         }
-        else if(currentHits > maxTimesHit) {
-            //Death
-            StopCoroutine(currentCoroutine);
+        else if (currentHits > maxTimesHit) {
+            // Death
+            if (currentCoroutine != null) {
+                StopCoroutine(currentCoroutine);
+                currentCoroutine = null; // Optional: reset after stopping to avoid future issues
+            }
+
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
             currentState = BorilStates.Dead;
             TransitionToCoroutine();
         }
-        
+
+
 
     }
 }

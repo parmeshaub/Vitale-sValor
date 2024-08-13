@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WorldInitializer : MonoBehaviour
@@ -22,6 +23,8 @@ public class WorldInitializer : MonoBehaviour
     public ArtemisPillar animatorHolder4;
     public ArtemisPillar animatorHolder5;
     public ArtemisPillar animatorHolder6;
+
+    public GameObject finalBoss;
 
     private void Start() {
         StartCoroutine(LoadWorld());
@@ -55,7 +58,12 @@ public class WorldInitializer : MonoBehaviour
         if (worldData.volleyCompleted) animatorHolder5.ActivateArtemis();
         if (worldData.razorFangCompleted) animatorHolder6.ActivateArtemis();
     }
-    
+
     //Final Boss Entrance - Check if 2 boss has been completed.
     //Spawn the Entrance to final boss
+    private void FinalDungeon() {
+        if (worldData.boarBoss && worldData.dragonBoss) {
+            finalBoss.SetActive(true);
+        }
+    }
 }

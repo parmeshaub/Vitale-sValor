@@ -17,7 +17,7 @@ public class PlayerStatsManager : MonoBehaviour
     public float minHeavyAttackDamage;
 
     //Damage
-    public float damageReductionRate;
+    public float damageReductionRate = 4.4f;
 
     private void Awake()
     {

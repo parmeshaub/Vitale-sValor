@@ -39,7 +39,10 @@ public class PlayerHealthAndDamage : MonoBehaviour
     [SerializeField] private FadeManager fadeManager;
     [SerializeField] private RespawnManager respawnManager;
 
+    private PlayerCombat playerCombat;
+
     private void Start() {
+        playerCombat = GetComponent<PlayerCombat>();    
         cameraManager = CameraManager.instance;
         animator = GetComponentInChildren<Animator>();
         playerInputManager = PlayerInputManager.instance;
@@ -62,8 +65,16 @@ public class PlayerHealthAndDamage : MonoBehaviour
 
     public void TakeDamage(float damageDealt) {
         // Deal Damage
-        currentPlayerHealth -= damageDealt;
-        impulseSource.GenerateImpulse(impulseDirection);
+        if (playerCombat.isBlocking) {
+            damageDealt /= playerStatsManager.damageReductionRate;
+            currentPlayerHealth -= damageDealt;
+            impulseSource.GenerateImpulse(impulseDirection);
+        }
+        else {
+            currentPlayerHealth -= damageDealt;
+            impulseSource.GenerateImpulse(impulseDirection);
+        }
+        
 
         // Play a sound 1 out of 4 times
         int randomChance = Random.Range(0, 4);
